@@ -20,6 +20,9 @@ const applyConfig = (config) => {
   // Date format for EU
   config.settings.dateLocale = 'en-gb';
 
+  // Working-copy
+  config.settings.hasWorkingCopySupport = true;
+
   // Multi-lingual
   config.settings.isMultilingual = true;
   config.settings.defaultLanguage = 'en';
