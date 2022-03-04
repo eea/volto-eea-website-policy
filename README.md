@@ -15,11 +15,11 @@
 [![Duplicated Lines (%)](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-eea-website-policy-develop&metric=duplicated_lines_density)](https://sonarqube.eea.europa.eu/dashboard?id=volto-eea-website-policy-develop)
 
 
-[Volto](https://github.com/plone/volto) add-on
+EEA Main Website (Plone 6) [Volto](https://github.com/plone/volto) Frontend Policy
 
 ## Features
 
-Demo GIF
+* Policy Volto add-on for EEA Main Website
 
 ## Getting started
 
@@ -34,7 +34,7 @@ Demo GIF
 
 1. Start Plone backend
    ```
-   docker run -d --name plone -p 8080:8080 -e SITE=Plone -e PROFILES="profile-plone.restapi:blocks" plone
+   docker run -d --name plone -p 8080:8080 -e SITE=Plone eeacms/eea-website-backend
    ```
 
 1. Start Volto frontend
