@@ -20,8 +20,7 @@ const applyConfig = (config) => {
 
   // #137187 Keycloak integration
   config.settings.externalRoutes = [
-    { match: "/login" },
-    { match: "/logout" },
+{ match: "/login" }, { match: "/logout" },
   ];
 
   // TODO: Working-copy
