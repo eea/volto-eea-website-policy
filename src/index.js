@@ -18,6 +18,12 @@ const applyConfig = (config) => {
   // Date format for EU
   config.settings.dateLocale = 'en-gb';
 
+  // #137187 Keycloak integration
+  config.settings.externalRoutes = [
+    { match: "/login" },
+    { match: "/logout" },
+  ];
+
   // TODO: Working-copy
   // config.settings.hasWorkingCopySupport = true;
 
