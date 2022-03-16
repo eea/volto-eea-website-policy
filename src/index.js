@@ -19,7 +19,25 @@ const applyConfig = (config) => {
   config.settings.dateLocale = 'en-gb';
 
   // #137187 Keycloak integration
-  // config.settings.externalRoutes = [{ match: "/login" }, { match: "/logout" }];
+  if (!__DEVELOPMENT__) {
+    config.settings.externalRoutes = [
+      ...(config.settings.externalRoutes || []),
+      {
+        match: {
+          path: '/login',
+          exact: true,
+          strict: false,
+        },
+      },
+      {
+        match: {
+          path: '/logout',
+          exact: true,
+          strict: false,
+        },
+      }
+    ];
+  }
 
   // TODO: Working-copy
   // config.settings.hasWorkingCopySupport = true;
