@@ -19,7 +19,7 @@ const applyConfig = (config) => {
   config.settings.dateLocale = 'en-gb';
 
   // #137187 Keycloak integration
-   if (window.env.KEYCLOAK_ENABLED === 'Yes') {
+   if (process.env.RAZZLE_KEYCLOAK === 'Yes') {
     config.settings.externalRoutes = [
       ...(config.settings.externalRoutes || []),
       {
