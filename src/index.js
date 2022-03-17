@@ -1,3 +1,5 @@
+import { runtimeConfig } from '@plone/volto/runtime_config';
+
 const applyConfig = (config) => {
   // if (process.env.NODE_ENV === 'production') {
   //   // Restrict block-style to Layout only
@@ -19,7 +21,7 @@ const applyConfig = (config) => {
   config.settings.dateLocale = 'en-gb';
 
   // #137187 Keycloak integration
-   if (process.env.RAZZLE_KEYCLOAK === 'Yes') {
+  if (runtimeConfig['RAZZLE_KEYCLOAK'] === 'Yes') {
     config.settings.externalRoutes = [
       ...(config.settings.externalRoutes || []),
       {
