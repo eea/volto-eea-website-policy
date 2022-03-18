@@ -11,51 +11,26 @@ const applyConfig = (config) => {
 
   // Enable Title block
   config.blocks.blocksConfig.title.restricted = false;
+
   // Enable description block (also for cypress)
   config.blocks.blocksConfig.description.restricted = false;
   config.blocks.requiredBlocks = [];
 
   // Date format for EU
-  config.settings.dateLocale = "en-gb";
+  config.settings.dateLocale = 'en-gb';
 
-  // TODO: Working-copy
-  // config.settings.hasWorkingCopySupport = true;
+  // Working-copy
+  config.settings.hasWorkingCopySupport = true;
 
-  // TODO: Multi-lingual
-  // config.settings.isMultilingual = true;
-  // config.settings.defaultLanguage = 'en';
-  // config.settings.supportedLanguages = [
-  //   'en', // English
-  //   'sq', // Albanian
-  //   'bg', // Bulgarian
-  //   'bs', // Bosnian
-  //   'cs', // Czech
-  //   'hr', // Croatian
-  //   'da', // Danish
-  //   'nl', // Dutch
-  //   'el', // Greek
-  //   'et', // Estonian
-  //   'fi', // Finnish
-  //   'fr', // French
-  //   'de', // German
-  //   'hu', // Hungarian
-  //   'is', // Icelandic
-  //   'it', // Italian
-  //   'lv', // Latvian
-  //   'lt', // Lithuanian
-  //   'mk', // Macedonian
-  //   'mt', // Maltese
-  //   'no', // Norwegian
-  //   'pl', // Polish
-  //   'pt', // Portuguese
-  //   'ro', // Romanian
-  //   'sh', // Serbian
-  //   'sk', // Slovak
-  //   'sl', // Slovenian
-  //   'es', // Spanish
-  //   'sv', // Swedish
-  //   'tr', // Turkish
-  // ];
+  // Multi-lingual
+  config.settings.isMultilingual = true;
+  config.settings.defaultLanguage =
+    config.settings.eea?.defaultLanguage || 'en';
+  config.settings.supportedLanguages = config.settings.eea?.languages?.map(
+    (item) => item.code,
+  ) || ['en'];
+
+  // Done
   return config;
 };
 
