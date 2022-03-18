@@ -37,7 +37,7 @@ const applyConfig = (config) => {
           exact: true,
           strict: false,
         },
-      }
+      },
     ];
   }
 
