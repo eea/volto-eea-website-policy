@@ -1,3 +1,5 @@
+import { runtimeConfig } from '@plone/volto/runtime_config';
+
 const applyConfig = (config) => {
   // if (process.env.NODE_ENV === 'production') {
   //   // Restrict block-style to Layout only
@@ -18,6 +20,27 @@ const applyConfig = (config) => {
 
   // Date format for EU
   config.settings.dateLocale = 'en-gb';
+
+  // #137187 Keycloak integration
+  if (runtimeConfig['RAZZLE_KEYCLOAK'] === 'Yes') {
+    config.settings.externalRoutes = [
+      ...(config.settings.externalRoutes || []),
+      {
+        match: {
+          path: '/login',
+          exact: true,
+          strict: false,
+        },
+      },
+      {
+        match: {
+          path: '/logout',
+          exact: true,
+          strict: false,
+        },
+      },
+    ];
+  }
 
   // Working-copy
   config.settings.hasWorkingCopySupport = true;
