@@ -15,12 +15,12 @@ import SlateEditor from 'volto-slate/editor/SlateEditor';
 import { serializeNodesToText } from 'volto-slate/editor/render';
 import schema from './schema';
 
-let timer = [];
+// let timer = [];
 
-const debounce = (func, index, timeout = 200, ...args) => {
-  if (timer[index]) clearTimeout(timer[index]);
-  timer[index] = setTimeout(func, timeout, ...args);
-};
+// const debounce = (func, index, timeout = 200, ...args) => {
+//   if (timer[index]) clearTimeout(timer[index]);
+//   timer[index] = setTimeout(func, timeout, ...args);
+// };
 
 const messages = defineMessages({
   description: {
