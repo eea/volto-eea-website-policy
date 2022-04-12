@@ -1,4 +1,7 @@
 import { runtimeConfig } from '@plone/volto/runtime_config';
+import installCallout from 'volto-slate/editor/plugins/Callout';
+import installCustomDescription from '@eeacms/volto-eea-website-policy/components/manage/Blocks/Description';
+import DescriptionWidget from '@eeacms/volto-eea-website-policy/components/manage/Widgets/DescriptionWidget';
 
 const applyConfig = (config) => {
   // if (process.env.NODE_ENV === 'production') {
@@ -17,6 +20,9 @@ const applyConfig = (config) => {
   // Enable description block (also for cypress)
   config.blocks.blocksConfig.description.restricted = false;
   config.blocks.requiredBlocks = [];
+
+  // Custom widget for description
+  config.widgets.id.description = DescriptionWidget;
 
   // Date format for EU
   config.settings.dateLocale = 'en-gb';
@@ -54,7 +60,10 @@ const applyConfig = (config) => {
   ) || ['en'];
 
   // Done
-  return config;
+  return [installCallout, installCustomDescription].reduce(
+    (acc, apply) => apply(acc),
+    config,
+  );
 };
 
 export default applyConfig;
