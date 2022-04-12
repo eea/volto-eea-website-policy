@@ -16,8 +16,12 @@
     "type": "git",
     "url": "git@github.com:eea/volto-eea-website-policy.git"
   },
+  "addons": [
+    "volto-slate"
+  ],
   "dependencies": {
-    "@plone/scripts": "*"
+    "@plone/scripts": "*",
+    "volto-slate": "*"
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.9.5",
