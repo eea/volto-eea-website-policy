@@ -1,4 +1,5 @@
 import { runtimeConfig } from '@plone/volto/runtime_config';
+import installCallout from 'volto-slate/editor/plugins/Callout';
 
 const applyConfig = (config) => {
   // if (process.env.NODE_ENV === 'production') {
@@ -7,6 +8,14 @@ const applyConfig = (config) => {
   //   // Restrict slate metadata mentions to Layout only
   //   config.settings.layoutOnlySlateMetadataMentions = true;
   // }
+
+  // Callout slate button
+  config = installCallout(config);
+
+  // Remove blockquote slate button
+  config.settings.slate.toolbarButtons = config.settings.slate.toolbarButtons.filter(
+    (item) => item !== 'blockquote',
+  );
 
   // Disable tags on View
   config.settings.showTags = false;
