@@ -63,8 +63,45 @@ const applyConfig = (config) => {
     (item) => item.code,
   ) || ['en'];
 
+  // Block chooser
+  config.blocks.blocksConfig.image.mostUsed = false;
+  config.blocks.blocksConfig.video.mostUsed = false;
+
+  // Grid/Teaser block (kitconcept)
+  if (config.blocks.blocksConfig.__grid) {
+    config.blocks.blocksConfig.__grid.restricted = true;
+  }
+  if (config.blocks.blocksConfig.imagesGrid) {
+    config.blocks.blocksConfig.imagesGrid.restricted = true;
+  }
+  if (config.blocks.blocksConfig.teaser) {
+    config.blocks.blocksConfig.teaser.restricted = true;
+  }
+  if (config.blocks.blocksConfig.teaserGrid) {
+    config.blocks.blocksConfig.teaserGrid.title = 'Teaser (Cards)';
+  }
+
+  // Divider
+  if (config.blocks.blocksConfig.dividerBlock) {
+    config.blocks.blocksConfig.dividerBlock.mostUsed = true;
+  }
+
+  // Call to Action
+  if (config.blocks.blocksConfig.callToActionBlock) {
+    config.blocks.blocksConfig.callToActionBlock.mostUsed = true;
+  }
+
+  // Columns
+  if (config.blocks.blocksConfig.columnsBlock) {
+    config.blocks.blocksConfig.columnsBlock.mostUsed = true;
+  }
+
+  // Custom blocks
+  config = [installItemBlock].reduce((acc, apply) => apply(acc), config);
+  config.blocks.blocksConfig.item.mostUsed = true;
+
   // Done
-  return [installItemBlock].reduce((acc, apply) => apply(acc), config);
+  return config;
 };
 
 export default applyConfig;
