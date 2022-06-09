@@ -1,6 +1,6 @@
 import { runtimeConfig } from '@plone/volto/runtime_config';
 import installCallout from 'volto-slate/editor/plugins/Callout';
-import installItemBlock from '@eeacms/volto-eea-website-policy/Blocks/Item';
+import installItemBlock from '@eeacms/volto-eea-website-policy/components/Blocks/Item';
 
 const applyConfig = (config) => {
   // if (process.env.NODE_ENV === 'production') {
