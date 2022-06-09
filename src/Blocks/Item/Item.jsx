@@ -1,6 +1,6 @@
 import cx from 'classnames';
 import { Item as UiItem, Icon } from 'semantic-ui-react';
-import { serializeText } from '@eeacms/volto-quote-block/helpers';
+import { serializeText } from '@eeacms/volto-eea-website-policy/helpers';
 
 function Item({
   assetType,

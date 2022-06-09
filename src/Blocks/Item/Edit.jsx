@@ -6,7 +6,7 @@ import SlateEditor from 'volto-slate/editor/SlateEditor';
 import { handleKey } from 'volto-slate/blocks/Text/keyboard';
 import { uploadContent, saveSlateBlockSelection } from 'volto-slate/actions';
 
-import { createSlateParagraph } from '@eeacms/volto-quote-block/helpers';
+import { createSlateParagraph } from '@eeacms/volto-eea-website-policy/helpers';
 
 import Item from './Item';
 import getSchema from './schema';
