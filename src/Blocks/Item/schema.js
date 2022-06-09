@@ -32,6 +32,7 @@ export default ({ data }) => {
         title: 'Image size',
         choices: [
           ['mini', 'Mini'],
+          ['tile', 'Tile'],
           ['tiny', 'Tiny'],
           ['small', 'Small'],
           ['large', 'Large'],
@@ -39,6 +40,7 @@ export default ({ data }) => {
           ['huge', 'Huge'],
           ['massive', 'Massive'],
         ],
+        default: 'tile',
       },
       icon: {
         title: 'Icon name',
@@ -54,6 +56,7 @@ export default ({ data }) => {
           ['huge', 'Huge'],
           ['massive', 'Massive'],
         ],
+        default: 'huge',
       },
       iconTheme: {
         title: 'Icon theme',
