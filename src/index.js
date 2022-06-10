@@ -8,8 +8,7 @@ const applyConfig = (config) => {
   //   config.settings.layoutOnlyBlockStyles = true;
   //   // Restrict slate metadata mentions to Layout only
   //   config.settings.layoutOnlySlateMetadataMentions = true;
-  // }
-  
+  // } 
   // Callout slate button
   config = installCallout(config);
 
