@@ -9,7 +9,9 @@ const applyConfig = (config) => {
   //   // Restrict slate metadata mentions to Layout only
   //   config.settings.layoutOnlySlateMetadataMentions = true;
   // }
-
+  // set navigation depth to 4 because we have everything in /en otherwise
+  // 3 would have been enough
+  config.settings.navDepth = 4;
   // Callout slate button
   config = installCallout(config);
 
