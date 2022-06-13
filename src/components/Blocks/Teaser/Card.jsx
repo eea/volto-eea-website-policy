@@ -49,7 +49,9 @@ const TeaserCardTemplate = (props) => {
               </div>
             )}
             <div className="content">
-              {data?.head_title && <div class="meta">{data?.head_title}</div>}
+              {data?.head_title && (
+                <div className="meta">{data?.head_title}</div>
+              )}
               <div className="header">{data?.title}</div>
               {!data.hide_description && (
                 <p className="description">{data?.description}</p>
