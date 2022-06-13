@@ -77,9 +77,6 @@ const applyConfig = (config) => {
   if (config.blocks.blocksConfig.teaser) {
     config.blocks.blocksConfig.teaser.restricted = true;
   }
-  if (config.blocks.blocksConfig.teaserGrid) {
-    config.blocks.blocksConfig.teaserGrid.title = 'Teaser (Cards)';
-  }
 
   // Divider
   if (config.blocks.blocksConfig.dividerBlock) {

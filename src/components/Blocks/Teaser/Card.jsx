@@ -7,6 +7,7 @@ import { flattenToAppURL } from '@plone/volto/helpers';
 import { getTeaserImageURL } from './utils';
 import { MaybeWrap } from '@plone/volto/components';
 import { UniversalLink } from '@plone/volto/components';
+import cx from 'classnames';
 
 const messages = defineMessages({
   PleaseChooseContent: {
@@ -39,7 +40,7 @@ const TeaserCardTemplate = (props) => {
           href={href['@id']}
           target={data.openLinkInNewTab ? '_blank' : null}
         >
-          <div className="default ui fluid card">
+          <div className={cx('ui fluid card', data?.styles?.theme)}>
             {(href.hasPreviewImage || href.image_field || image) && (
               <div className="image">
                 <img
