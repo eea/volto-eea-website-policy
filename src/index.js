@@ -1,6 +1,7 @@
 import { runtimeConfig } from '@plone/volto/runtime_config';
 import installCallout from 'volto-slate/editor/plugins/Callout';
 import installItemBlock from '@eeacms/volto-eea-website-policy/components/Blocks/Item';
+import customizeTeaserBlock from '@eeacms/volto-eea-website-policy/components/Blocks/Teaser';
 
 const applyConfig = (config) => {
   // if (process.env.NODE_ENV === 'production') {
@@ -76,9 +77,6 @@ const applyConfig = (config) => {
   if (config.blocks.blocksConfig.teaser) {
     config.blocks.blocksConfig.teaser.restricted = true;
   }
-  if (config.blocks.blocksConfig.teaserGrid) {
-    config.blocks.blocksConfig.teaserGrid.title = 'Teaser (Cards)';
-  }
 
   // Divider
   if (config.blocks.blocksConfig.dividerBlock) {
@@ -95,8 +93,16 @@ const applyConfig = (config) => {
     config.blocks.blocksConfig.columnsBlock.mostUsed = true;
   }
 
+  // Listing
+  if (config.blocks.blocksConfig.listing) {
+    config.blocks.blocksConfig.listing.title = 'Listing (Content)';
+  }
+
   // Custom blocks
-  config = [installItemBlock].reduce((acc, apply) => apply(acc), config);
+  config = [installItemBlock, customizeTeaserBlock].reduce(
+    (acc, apply) => apply(acc),
+    config,
+  );
   config.blocks.blocksConfig.item.mostUsed = true;
 
   // Done
