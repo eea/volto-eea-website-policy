@@ -93,6 +93,11 @@ const applyConfig = (config) => {
     config.blocks.blocksConfig.columnsBlock.mostUsed = true;
   }
 
+  // Listing
+  if (config.blocks.blocksConfig.listing) {
+    config.blocks.blocksConfig.listing.title = 'Listing (Content)';
+  }
+
   // Custom blocks
   config = [installItemBlock, customizeTeaserBlock].reduce(
     (acc, apply) => apply(acc),
