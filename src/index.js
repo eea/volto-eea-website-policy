@@ -105,6 +105,11 @@ const applyConfig = (config) => {
   );
   config.blocks.blocksConfig.item.mostUsed = true;
 
+  // Disable some blocks
+  if (config.blocks.blocksConfig.imagecards) {
+    config.blocks.blocksConfig.imagecards.restricted = true;
+  }
+
   // Done
   return config;
 };
