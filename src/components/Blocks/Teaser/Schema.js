@@ -29,6 +29,14 @@ const messages = defineMessages({
     id: 'Tertiary',
     defaultMessage: 'Tertiary',
   },
+  Rounded: {
+    id: 'Rounded',
+    defaultMessage: 'Rounded',
+  },
+  RoundedHelp: {
+    id: 'Rounded Image',
+    defaultMessage: 'Rounded Image',
+  },
 });
 
 export const StylingSchema = ({ intl }) => ({
@@ -38,7 +46,7 @@ export const StylingSchema = ({ intl }) => ({
     {
       id: 'default',
       title: 'Default',
-      fields: ['theme'],
+      fields: ['theme', 'rounded'],
     },
   ],
   properties: {
@@ -51,6 +59,11 @@ export const StylingSchema = ({ intl }) => ({
         ['secondary', intl.formatMessage(messages.ThemeSecondary)],
         ['tertiary', intl.formatMessage(messages.ThemeTertiary)],
       ],
+    },
+    rounded: {
+      title: intl.formatMessage(messages.Rounded),
+      description: intl.formatMessage(messages.RoundedHelp),
+      type: 'boolean',
     },
   },
   required: [],
