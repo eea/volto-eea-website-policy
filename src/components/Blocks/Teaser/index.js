@@ -1,4 +1,5 @@
-import TeaserCardTemplate from './Card';
+import CardTemplate from './Card';
+import CardRoundedTemplate from './CardRounded';
 import { StylingSchema } from './Schema';
 
 export default (config) => {
@@ -9,8 +10,14 @@ export default (config) => {
       {
         id: 'card',
         isDefault: true,
-        title: 'Card (top image)',
-        template: TeaserCardTemplate,
+        title: 'Card',
+        template: CardTemplate,
+      },
+      {
+        id: 'cardRounded',
+        isDefault: false,
+        title: 'Card (Rounded)',
+        template: CardRoundedTemplate,
       },
     ];
     config.blocks.blocksConfig.teaser.enableStyling = true;
