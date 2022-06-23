@@ -40,7 +40,13 @@ const TeaserCardTemplate = (props) => {
           href={href['@id']}
           target={data.openLinkInNewTab ? '_blank' : null}
         >
-          <div className={cx('ui fluid card', data?.styles?.theme)}>
+          <div
+            className={cx(
+              'ui fluid card',
+              data?.styles?.theme,
+              data?.styles?.rounded ? 'rounded big' : '',
+            )}
+          >
             {(href.hasPreviewImage || href.image_field || image) && (
               <div className="image">
                 <img
