@@ -31,10 +31,11 @@ export default ({ data }) => {
       imageSize: {
         title: 'Image size',
         choices: [
-          ['mini', 'Mini'],
-          ['tile', 'Tile'],
-          ['tiny', 'Tiny'],
-          ['small', 'Small'],
+          // commented as they were too small to use as item icons
+          // ['mini', 'Mini'],
+          // ['tile', 'Tile'],
+          // ['tiny', 'Tiny'],
+          // ['small', 'Small'],
           ['large', 'Large'],
           ['big', 'Big'],
           ['huge', 'Huge'],
@@ -63,6 +64,7 @@ export default ({ data }) => {
         choices: [
           ['primary', 'Primary'],
           ['secondary', 'Secondary'],
+          ['tertiary', 'Tertiary'],
         ],
       },
     },
@@ -86,6 +88,7 @@ export const stylingSchema = ({ intl }) => ({
       choices: [
         ['primary', 'Primary'],
         ['secondary', 'Secondary'],
+        ['tertiary', 'Tertiary'],
       ],
     },
     verticalAlign: {
