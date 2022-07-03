@@ -12,7 +12,13 @@ export default ({ data }) => {
         ? [{ id: 'image', title: 'Image', fields: ['image', 'imageSize'] }]
         : []),
       ...(assetType === 'icon'
-        ? [{ id: 'icon', title: 'Icon', fields: ['icon', 'iconSize'] }]
+        ? [
+            {
+              id: 'icon',
+              title: 'Icon',
+              fields: ['icon', 'iconSize', 'iconTheme'],
+            },
+          ]
         : []),
     ],
     properties: {
