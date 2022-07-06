@@ -12,7 +12,13 @@ export default ({ data }) => {
         ? [{ id: 'image', title: 'Image', fields: ['image', 'imageSize'] }]
         : []),
       ...(assetType === 'icon'
-        ? [{ id: 'icon', title: 'Icon', fields: ['icon', 'iconSize'] }]
+        ? [
+            {
+              id: 'icon',
+              title: 'Icon',
+              fields: ['icon', 'iconSize', 'iconTheme'],
+            },
+          ]
         : []),
     ],
     properties: {
@@ -31,10 +37,11 @@ export default ({ data }) => {
       imageSize: {
         title: 'Image size',
         choices: [
-          ['mini', 'Mini'],
-          ['tile', 'Tile'],
-          ['tiny', 'Tiny'],
-          ['small', 'Small'],
+          // commented as they were too small to use as item icons
+          // ['mini', 'Mini'],
+          // ['tile', 'Tile'],
+          // ['tiny', 'Tiny'],
+          // ['small', 'Small'],
           ['large', 'Large'],
           ['big', 'Big'],
           ['huge', 'Huge'],
@@ -63,6 +70,7 @@ export default ({ data }) => {
         choices: [
           ['primary', 'Primary'],
           ['secondary', 'Secondary'],
+          ['tertiary', 'Tertiary'],
         ],
       },
     },
@@ -86,6 +94,7 @@ export const stylingSchema = ({ intl }) => ({
       choices: [
         ['primary', 'Primary'],
         ['secondary', 'Secondary'],
+        ['tertiary', 'Tertiary'],
       ],
     },
     verticalAlign: {
