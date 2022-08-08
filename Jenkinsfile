@@ -8,7 +8,7 @@ pipeline {
         DEPENDENCIES = ""
         PROFILES = "eea.website.policy:default plone.app.multilingual:default eea.kitkat:testing"
         ADDONS = "eea.website.policy"
-        VOLTO = "alpha"
+        VOLTO = "16.0.0-alpha.14"
     }
 
   stages {
