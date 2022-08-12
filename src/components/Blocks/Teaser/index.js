@@ -1,5 +1,6 @@
 import TeaserCardTemplate from './Card';
 import { StylingSchema } from './Schema';
+import { UniversalCard } from '@eeacms/volto-listing-block';
 
 export default (config) => {
   // Teaser
@@ -11,6 +12,7 @@ export default (config) => {
         isDefault: true,
         title: 'Card (top image)',
         template: TeaserCardTemplate,
+        schemaEnhancer: UniversalCard.schemaEnhancer,
       },
     ];
     config.blocks.blocksConfig.teaser.enableStyling = true;
