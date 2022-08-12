@@ -17,11 +17,31 @@ const messages = defineMessages({
   },
 });
 
+const CardImage = (props) => {
+  const { data } = props;
+  const href = data.href?.[0];
+  const image = data.preview_image?.[0];
+  return href.hasPreviewImage || href.image_field || image ? (
+    <div className="image">
+      <img src={flattenToAppURL(getTeaserImageURL(href, image))} alt="a" />
+    </div>
+  ) : null;
+};
+
+const CardHeadTitle = ({ data }) =>
+  data?.head_title ? <div className="meta">{data?.head_title}</div> : null;
+
+const CardDescription = ({ data }) =>
+  !data.hide_description ? (
+    <p className="description">{data?.description}</p>
+  ) : null;
+
+const CardTitle = ({ data }) => <div className="header">{data?.title}</div>;
+
 const TeaserCardTemplate = (props) => {
   const { data, isEditMode } = props;
   const intl = useIntl();
   const href = data.href?.[0];
-  const image = data.preview_image?.[0];
 
   return (
     <>
@@ -47,22 +67,11 @@ const TeaserCardTemplate = (props) => {
               data?.styles?.rounded ? 'rounded big' : '',
             )}
           >
-            {(href.hasPreviewImage || href.image_field || image) && (
-              <div className="image">
-                <img
-                  src={flattenToAppURL(getTeaserImageURL(href, image))}
-                  alt="a"
-                />
-              </div>
-            )}
+            <CardImage {...props} />
             <div className="content">
-              {data?.head_title && (
-                <div className="meta">{data?.head_title}</div>
-              )}
-              <div className="header">{data?.title}</div>
-              {!data.hide_description && (
-                <p className="description">{data?.description}</p>
-              )}
+              <CardHeadTitle {...props} />
+              <CardTitle {...props} />
+              <CardDescription {...props} />
             </div>
           </div>
         </MaybeWrap>
