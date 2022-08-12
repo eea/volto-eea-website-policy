@@ -30,6 +30,7 @@ const TeaserCardTemplate = (props) => {
       )}
       {item && (
         <UniversalCard
+          {...data}
           item={{ ...item, ...data }}
           cardModel={data.cardModel || {}}
         />
