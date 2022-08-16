@@ -1,6 +1,6 @@
 import { compose } from 'redux';
 import TeaserCardTemplate from './Card';
-import { StylingSchema, makeTitleFieldRequired } from './Schema';
+import { StylingSchema, adjustTeaserSchema } from './Schema';
 import { UniversalCard } from '@eeacms/volto-listing-block';
 
 export default (config) => {
@@ -14,7 +14,7 @@ export default (config) => {
         title: 'Card (top image)',
         template: TeaserCardTemplate,
         schemaEnhancer: compose(
-          makeTitleFieldRequired,
+          adjustTeaserSchema,
           UniversalCard.schemaEnhancer,
         ),
       },

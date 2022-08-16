@@ -69,13 +69,15 @@ export const StylingSchema = ({ intl }) => ({
   required: [],
 });
 
-export const makeTitleFieldRequired = (schema) => {
+export const adjustTeaserSchema = (schema) => {
   // const fieldset = schema.fieldsets.find(({fields}) => fields?.indexOf('title') > -1);
 
   // make the title required for accessility reasons
   if (schema.properties?.title && schema.required?.indexOf('title') === -1) {
     schema.required.push('title');
   }
+
+  schema.properties.href.selectedItemAttrs.push('Subject');
 
   return schema;
 };
