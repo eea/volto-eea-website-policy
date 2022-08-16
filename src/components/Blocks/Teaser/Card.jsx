@@ -18,26 +18,21 @@ const TeaserCardTemplate = (props) => {
   const intl = useIntl();
   const item = data.href?.[0];
 
-  return (
-    <>
-      {!item && isEditMode && (
-        <Message>
-          <div className="grid-teaser-item placeholder">
-            <img src={imageBlockSVG} alt="" />
-            <p>{intl.formatMessage(messages.PleaseChooseContent)}</p>
-          </div>
-        </Message>
-      )}
-      {item && (
-        <UniversalCard
-          isEditMode={isEditMode}
-          {...data}
-          item={{ ...item, ...data }}
-          cardModel={data.cardModel || {}}
-        />
-      )}
-    </>
-  );
+  return item ? (
+    <UniversalCard
+      isEditMode={isEditMode}
+      {...data}
+      item={{ ...item, ...data }}
+      cardModel={data.cardModel || {}}
+    />
+  ) : isEditMode ? (
+    <Message>
+      <div className="grid-teaser-item placeholder">
+        <img src={imageBlockSVG} alt="" />
+        <p>{intl.formatMessage(messages.PleaseChooseContent)}</p>
+      </div>
+    </Message>
+  ) : null;
 };
 
 TeaserCardTemplate.propTypes = {
