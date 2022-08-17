@@ -7,7 +7,7 @@ export default (config) => {
   // Teaser
   if (config.blocks.blocksConfig.teaser) {
     config.blocks.blocksConfig.teaser.variations = [
-      ...(config.blocks.blocksConfig.teaser.variations || []),
+      // ...(config.blocks.blocksConfig.teaser.variations || []),
       {
         id: 'card',
         isDefault: true,

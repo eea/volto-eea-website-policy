@@ -4,6 +4,7 @@ import { Message } from 'semantic-ui-react';
 import { defineMessages, useIntl } from 'react-intl';
 import imageBlockSVG from '@plone/volto/components/manage/Blocks/Image/block-image.svg';
 import { UniversalCard } from '@eeacms/volto-listing-block';
+import { omit } from 'lodash';
 
 const messages = defineMessages({
   PleaseChooseContent: {
@@ -22,7 +23,7 @@ const TeaserCardTemplate = (props) => {
     <UniversalCard
       isEditMode={isEditMode}
       {...data}
-      item={{ ...item, ...data }}
+      item={{ ...(item || {}), ...omit(data, ['@type']) }}
       cardModel={data.cardModel || {}}
     />
   ) : isEditMode ? (
