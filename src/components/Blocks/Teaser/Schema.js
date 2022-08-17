@@ -79,6 +79,8 @@ export const adjustTeaserSchema = (schema) => {
 
   schema.properties.href.selectedItemAttrs.push('Subject');
   schema.properties.href.selectedItemAttrs.push('@type');
+  schema.properties.href.selectedItemAttrs.push('EffectiveDate');
+  schema.properties.href.selectedItemAttrs.push('ExpirationDate');
 
   return schema;
 };
