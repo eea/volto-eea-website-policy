@@ -125,6 +125,7 @@ class ContentTypeLayout extends Component {
     this.onCancel = this.onCancel.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onEnableBlocks = this.onEnableBlocks.bind(this);
+    this.onEnableBlocksBehavior = this.onEnableBlocksBehavior.bind(this);
     this.onDisableBlocksBehavior = this.onDisableBlocksBehavior.bind(this);
     this.form = React.createRef();
   }
@@ -290,6 +291,18 @@ class ContentTypeLayout extends Component {
   onDisableBlocksBehavior() {
     this.props.updateControlpanel(this.props.controlpanel['@id'], {
       [this.state.readOnlyBehavior]: false,
+      'volto.blocks.editable.layout': true,
+    });
+  }
+
+  /**
+   * Enable Blocks behavior handler
+   * @method onEnableBlocksBehavior
+   * @returns {undefined}
+   */
+  onEnableBlocksBehavior() {
+    this.props.updateControlpanel(this.props.controlpanel['@id'], {
+      'volto.blocks.editable.layout': true,
     });
   }
 
@@ -331,7 +344,7 @@ class ContentTypeLayout extends Component {
             <div className="ui divider"></div>
             <Button
               primary
-              onClick={this.onEnableBlocks}
+              onClick={this.onEnableBlocksBehavior}
               content={this.props.intl.formatMessage(messages.enable)}
             />
           </Segment>
