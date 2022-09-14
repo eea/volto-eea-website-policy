@@ -102,7 +102,6 @@ const applyConfig = (config) => {
     (acc, apply) => apply(acc),
     config,
   );
-  config.blocks.blocksConfig.item.mostUsed = true;
 
   // Disable some blocks
   if (config.blocks.blocksConfig.imagecards) {
