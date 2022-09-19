@@ -1,7 +1,5 @@
 import { runtimeConfig } from '@plone/volto/runtime_config';
 import installCallout from 'volto-slate/editor/plugins/Callout';
-import installItemBlock from '@eeacms/volto-eea-website-policy/components/Blocks/Item';
-import customizeTeaserBlock from '@eeacms/volto-eea-website-policy/components/Blocks/Teaser';
 import installContextNavigationBlock from '@eeacms/volto-eea-website-policy/components/Blocks/ContextNavigation';
 
 const applyConfig = (config) => {
@@ -100,12 +98,10 @@ const applyConfig = (config) => {
   }
 
   // Custom blocks
-  config = [
-    installItemBlock,
-    installContextNavigationBlock,
-    customizeTeaserBlock,
-  ].reduce((acc, apply) => apply(acc), config);
-  config.blocks.blocksConfig.item.mostUsed = true;
+  config = [installContextNavigationBlock].reduce(
+    (acc, apply) => apply(acc),
+    config,
+  );
 
   // Disable some blocks
   if (config.blocks.blocksConfig.imagecards) {
