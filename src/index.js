@@ -92,6 +92,11 @@ const applyConfig = (config) => {
     config.blocks.blocksConfig.columnsBlock.mostUsed = true;
   }
 
+  // Accordion
+  if (config.blocks.blocksConfig.accordion) {
+    config.blocks.blocksConfig.accordion.mostUsed = true;
+  }
+
   // Listing
   if (config.blocks.blocksConfig.listing) {
     config.blocks.blocksConfig.listing.title = 'Listing (Content)';
