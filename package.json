@@ -1,6 +1,6 @@
 {
   "name": "@eeacms/volto-eea-website-policy",
-  "version": "0.4.2",
+  "version": "1.0.0",
   "description": "@eeacms/volto-eea-website-policy: Volto add-on",
   "main": "src/index.js",
   "author": "European Environment Agency: IDM2 A-Team",
@@ -16,15 +16,11 @@
     "type": "git",
     "url": "git@github.com:eea/volto-eea-website-policy.git"
   },
-  "addons": [
-    "volto-slate"
-  ],
-  "dependencies": {
-    "@plone/scripts": "*",
-    "volto-slate": "*"
-  },
+  "addons": [],
+  "dependencies": {},
   "devDependencies": {
-    "@cypress/code-coverage": "^3.9.5",
+    "@plone/scripts": "*",
+    "@cypress/code-coverage": "^3.10.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "md5": "^2.3.0"
   },

@@ -1,5 +1,5 @@
 import { runtimeConfig } from '@plone/volto/runtime_config';
-import installCallout from 'volto-slate/editor/plugins/Callout';
+import installCallout from '@plone/volto-slate/editor/plugins/Callout';
 import installContextNavigationBlock from '@eeacms/volto-eea-website-policy/components/Blocks/ContextNavigation';
 
 const applyConfig = (config) => {
