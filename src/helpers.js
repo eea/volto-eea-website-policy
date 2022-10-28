@@ -1,6 +1,6 @@
 import { isArray } from 'lodash';
 import config from '@plone/volto/registry';
-import { serializeNodes } from 'volto-slate/editor/render';
+import { serializeNodes } from '@plone/volto-slate/editor/render';
 
 export const createSlateParagraph = (text) => {
   return isArray(text) ? text : config.settings.slate.defaultValue();
