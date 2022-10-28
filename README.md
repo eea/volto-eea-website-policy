@@ -23,28 +23,6 @@ EEA Main Website (Plone 6) [Volto](https://github.com/plone/volto) Frontend Poli
 
 ## Getting started
 
-### Try volto-eea-website-policy with Docker
-
-1. Get the latest Docker images
-
-   ```
-   docker pull plone
-   docker pull plone/volto
-   ```
-
-1. Start Plone backend
-   ```
-   docker run -d --name plone -p 8080:8080 -e SITE=Plone eeacms/eea-website-backend
-   ```
-
-1. Start Volto frontend
-
-   ```
-   docker run -it --rm -p 3000:3000 --link plone -e ADDONS="@eeacms/volto-eea-website-policy" plone/volto
-   ```
-
-1. Go to http://localhost:3000
-
 ### Add volto-eea-website-policy to your Volto project
 
 1. Make sure you have a [Plone backend](https://plone.org/download) up-and-running at http://localhost:8080/Plone
