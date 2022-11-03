@@ -1,10 +1,11 @@
 import { cloneDeep } from 'lodash';
-import imageFitSVG from '@eeacms/volto-eea-website-policy/components/Blocks/icons/image-narrow.svg';
+import imageNarrowSVG from '@eeacms/volto-eea-website-policy/components/Blocks/icons/image-narrow.svg';
+import imageFitSVG from '@plone/volto/icons/image-fit.svg';
 import imageWideSVG from '@plone/volto/icons/image-wide.svg';
 import imageFullSVG from '@plone/volto/icons/image-full.svg';
 
 const ALIGN_INFO_MAP = {
-  narrow_width: [imageFitSVG, 'Narrow width'],
+  narrow_width: [imageNarrowSVG, 'Narrow width'],
   container_width: [imageFitSVG, 'Container width'],
   wide_width: [imageWideSVG, 'Wide width'],
   full: [imageFullSVG, 'Full width'],

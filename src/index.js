@@ -88,6 +88,11 @@ const applyConfig = (config) => {
     config.blocks.blocksConfig.callToActionBlock.mostUsed = true;
   }
 
+  // Group
+  if (config.blocks.blocksConfig.group) {
+    config.blocks.blocksConfig.group.schemaEnhancer = addStylingFieldsetSchemaEnhancer;
+  }
+
   // Columns
   if (config.blocks.blocksConfig.columnsBlock) {
     config.blocks.blocksConfig.columnsBlock.mostUsed = true;
