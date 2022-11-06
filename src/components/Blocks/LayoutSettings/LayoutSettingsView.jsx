@@ -4,10 +4,12 @@ import { getVoltoStyles } from '../schema-utils';
 import cx from 'classnames';
 
 const LayoutSettingsView = (props) => {
-  const classNames = React.useMemo(() => getVoltoStyles(props.data), [
-    props.data,
-  ]);
+  const classNames = getVoltoStyles(props.data);
   return <BodyClass className={cx(classNames)} />;
 };
 
-export default LayoutSettingsView;
+function propsAreEqual(prevProps, nextProps) {
+  return prevProps.data === nextProps.data;
+}
+
+export default React.memo(LayoutSettingsView, propsAreEqual);
