@@ -1,7 +1,7 @@
 import React from 'react';
-import { EditSchema } from './schema';
+import { EditSchema } from '@eeacms/volto-eea-website-policy/components/Blocks/LayoutSettings/schema';
 import { BlockDataForm, SidebarPortal } from '@plone/volto/components';
-import LayoutSettingsView from './LayoutSettingsView';
+import LayoutSettingsView from '@eeacms/volto-eea-website-policy/components/Blocks/LayoutSettings/LayoutSettingsView';
 
 const LayoutSettingsEdit = (props) => {
   const schema = EditSchema();

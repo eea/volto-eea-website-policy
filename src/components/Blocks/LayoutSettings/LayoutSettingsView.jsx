@@ -1,6 +1,6 @@
 import React from 'react';
 import { BodyClass } from '@plone/volto/helpers';
-import { getVoltoStyles } from '../schema-utils';
+import { getVoltoStyles } from '@eeacms/volto-eea-website-policy/components/Blocks/schema-utils';
 import cx from 'classnames';
 
 const LayoutSettingsView = (props) => {

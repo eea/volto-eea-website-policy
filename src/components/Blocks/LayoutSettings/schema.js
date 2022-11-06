@@ -2,7 +2,7 @@ import imageNarrowSVG from '@eeacms/volto-eea-website-policy/components/Blocks/i
 import imageFitSVG from '@plone/volto/icons/image-fit.svg';
 import imageWideSVG from '@plone/volto/icons/image-wide.svg';
 
-const ALIGN_INFO_MAP = {
+export const ALIGN_INFO_MAP = {
   narrow_view: [imageNarrowSVG, 'Narrow width'],
   container_view: [imageFitSVG, 'Container width'],
   wide_view: [imageWideSVG, 'Wide width'],
