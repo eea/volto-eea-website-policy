@@ -1,6 +1,7 @@
 import { runtimeConfig } from '@plone/volto/runtime_config';
 import installCallout from '@plone/volto-slate/editor/plugins/Callout';
 import installContextNavigationBlock from '@eeacms/volto-eea-website-policy/components/Blocks/ContextNavigation';
+import installLayoutSettingsBlock from '@eeacms/volto-eea-website-policy/components/Blocks/LayoutSettings';
 import { addStylingFieldsetSchemaEnhancer } from '@eeacms/volto-eea-website-policy/components/Blocks/schema';
 
 const applyConfig = (config) => {
@@ -110,7 +111,14 @@ const applyConfig = (config) => {
   }
 
   // Custom blocks
+  // context navigation
   config = [installContextNavigationBlock].reduce(
+    (acc, apply) => apply(acc),
+    config,
+  );
+
+  // layout settings
+  config = [installLayoutSettingsBlock].reduce(
     (acc, apply) => apply(acc),
     config,
   );
