@@ -1,6 +1,7 @@
 import { runtimeConfig } from '@plone/volto/runtime_config';
 import installCallout from '@plone/volto-slate/editor/plugins/Callout';
 import installContextNavigationBlock from '@eeacms/volto-eea-website-policy/components/Blocks/ContextNavigation';
+import { addStylingFieldsetSchemaEnhancer } from '@eeacms/volto-eea-website-policy/components/Blocks/schema';
 
 const applyConfig = (config) => {
   // if (process.env.NODE_ENV === 'production') {
@@ -87,9 +88,15 @@ const applyConfig = (config) => {
     config.blocks.blocksConfig.callToActionBlock.mostUsed = true;
   }
 
+  // Group
+  if (config.blocks.blocksConfig.group) {
+    config.blocks.blocksConfig.group.schemaEnhancer = addStylingFieldsetSchemaEnhancer;
+  }
+
   // Columns
   if (config.blocks.blocksConfig.columnsBlock) {
     config.blocks.blocksConfig.columnsBlock.mostUsed = true;
+    config.blocks.blocksConfig.columnsBlock.schemaEnhancer = addStylingFieldsetSchemaEnhancer;
   }
 
   // Accordion
