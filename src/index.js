@@ -108,6 +108,7 @@ const applyConfig = (config) => {
   // Listing
   if (config.blocks.blocksConfig.listing) {
     config.blocks.blocksConfig.listing.title = 'Listing (Content)';
+    config.blocks.blocksConfig.listing.schemaEnhancer = addStylingFieldsetSchemaEnhancer;
   }
 
   // Custom blocks
