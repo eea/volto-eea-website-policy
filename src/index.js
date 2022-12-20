@@ -21,7 +21,8 @@ const applyConfig = (config) => {
 
   // Disable tags on View
   config.settings.showTags = false;
-
+  config.settings.eea.hasLanguageDropdown =
+    config.settings.supportedLanguages.length > 1;
   // Enable Title block
   config.blocks.blocksConfig.title.restricted = false;
 
