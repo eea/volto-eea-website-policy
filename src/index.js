@@ -21,8 +21,6 @@ const applyConfig = (config) => {
 
   // Disable tags on View
   config.settings.showTags = false;
-  config.settings.eea.hasLanguageDropdown =
-    config.settings.supportedLanguages.length > 1;
   // Enable Title block
   config.blocks.blocksConfig.title.restricted = false;
 
@@ -64,6 +62,9 @@ const applyConfig = (config) => {
   config.settings.supportedLanguages = config.settings.eea?.languages?.map(
     (item) => item.code,
   ) || ['en'];
+  if (config.settings.eea)
+    config.settings.eea.hasLanguageDropdown =
+      config.settings.supportedLanguages.length > 1;
 
   // Block chooser
   config.blocks.blocksConfig.image.mostUsed = false;
