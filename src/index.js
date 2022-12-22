@@ -60,9 +60,11 @@ const applyConfig = (config) => {
   config.settings.isMultilingual = true;
   config.settings.defaultLanguage =
     config.settings.eea?.defaultLanguage || 'en';
-  config.settings.supportedLanguages = config.settings.eea?.languages?.map(
-    (item) => item.code,
-  ) || ['en'];
+  config.settings.supportedLanguages = ['en'];
+  // Disable languages #158616
+  // config.settings.eea?.languages?.map(
+  //   (item) => item.code,
+  // ) || ['en'];
 
   // Block chooser
   config.blocks.blocksConfig.image.mostUsed = false;
