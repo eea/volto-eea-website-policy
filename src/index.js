@@ -14,6 +14,11 @@ const applyConfig = (config) => {
   // Callout slate button
   config = installCallout(config);
 
+  // Insert scripts on Error pages
+  if (config.settings?.serverConfig?.extractScripts) {
+    config.settings.serverConfig.extractScripts.errorPages = true;
+  }
+
   // Remove blockquote slate button
   config.settings.slate.toolbarButtons = config.settings.slate.toolbarButtons.filter(
     (item) => item !== 'blockquote',
