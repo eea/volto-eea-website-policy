@@ -1,0 +1,29 @@
+h1,
+h2,
+h3,
+h4 {
+  &:hover {
+    a.anchor {
+      svg {
+        visibility: unset;
+      }
+    }
+  }
+
+  a.anchor {
+    margin-left: -1ch;
+    float: left;
+
+    svg {
+      width: 1ch;
+      transform: rotate(45deg);
+      visibility: hidden;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  svg {
+    visibility: unset !important;
+  }
+}

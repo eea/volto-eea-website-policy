@@ -3,6 +3,7 @@ import installCallout from '@plone/volto-slate/editor/plugins/Callout';
 import installContextNavigationBlock from '@eeacms/volto-eea-website-policy/components/Blocks/ContextNavigation';
 import installLayoutSettingsBlock from '@eeacms/volto-eea-website-policy/components/Blocks/LayoutSettings';
 import { addStylingFieldsetSchemaEnhancer } from '@eeacms/volto-eea-website-policy/components/Blocks/schema';
+import { renderLinkElement } from './helpers';
 
 const applyConfig = (config) => {
   // if (process.env.NODE_ENV === 'production') {
@@ -24,6 +25,13 @@ const applyConfig = (config) => {
     (item) => item !== 'blockquote',
   );
 
+  config.settings.slate.elements = {
+    ...config.settings.slate.elements,
+    h1: renderLinkElement('h1'),
+    h2: renderLinkElement('h2'),
+    h3: renderLinkElement('h3'),
+    h4: renderLinkElement('h4'),
+  };
   // Disable tags on View
   config.settings.showTags = false;
 
