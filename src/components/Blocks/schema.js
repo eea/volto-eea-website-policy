@@ -4,7 +4,7 @@ import imageFitSVG from '@plone/volto/icons/image-fit.svg';
 import imageWideSVG from '@plone/volto/icons/image-wide.svg';
 import imageFullSVG from '@plone/volto/icons/image-full.svg';
 
-const ALIGN_INFO_MAP = {
+export const ALIGN_INFO_MAP = {
   narrow_width: [imageNarrowSVG, 'Narrow width'],
   container_width: [imageFitSVG, 'Container width'],
   wide_width: [imageWideSVG, 'Wide width'],
