@@ -1,42 +1,9 @@
 import { runtimeConfig } from '@plone/volto/runtime_config';
-import installCallout from '@plone/volto-slate/editor/plugins/Callout';
 import installContextNavigationBlock from '@eeacms/volto-eea-website-policy/components/Blocks/ContextNavigation';
 import installLayoutSettingsBlock from '@eeacms/volto-eea-website-policy/components/Blocks/LayoutSettings';
 import { addStylingFieldsetSchemaEnhancer } from '@eeacms/volto-eea-website-policy/components/Blocks/schema';
 
 const applyConfig = (config) => {
-  // if (process.env.NODE_ENV === 'production') {
-  //   // Restrict block-style to Layout only
-  //   config.settings.layoutOnlyBlockStyles = true;
-  //   // Restrict slate metadata mentions to Layout only
-  //   config.settings.layoutOnlySlateMetadataMentions = true;
-  // }
-  // Callout slate button
-  config = installCallout(config);
-
-  // Insert scripts on Error pages
-  if (config.settings?.serverConfig?.extractScripts) {
-    config.settings.serverConfig.extractScripts.errorPages = true;
-  }
-
-  // Remove blockquote slate button
-  config.settings.slate.toolbarButtons = config.settings.slate.toolbarButtons.filter(
-    (item) => item !== 'blockquote',
-  );
-
-  // Disable tags on View
-  config.settings.showTags = false;
-
-  // Enable Title block
-  config.blocks.blocksConfig.title.restricted = false;
-
-  // Enable description block (also for cypress)
-  config.blocks.blocksConfig.description.restricted = false;
-  config.blocks.requiredBlocks = [];
-
-  // Date format for EU
-  config.settings.dateLocale = 'en-gb';
-
   // #137187 Keycloak integration
   if (runtimeConfig['RAZZLE_KEYCLOAK'] === 'Yes') {
     config.settings.externalRoutes = [
@@ -135,6 +102,14 @@ const applyConfig = (config) => {
   if (config.blocks.blocksConfig.imagecards) {
     config.blocks.blocksConfig.imagecards.restricted = true;
   }
+
+  config.settings.apiExpanders = [
+    ...config.settings.apiExpanders,
+    {
+      match: '',
+      GET_CONTENT: ['subsite'],
+    },
+  ];
 
   // Done
   return config;
