@@ -103,6 +103,14 @@ const applyConfig = (config) => {
     config.blocks.blocksConfig.imagecards.restricted = true;
   }
 
+  config.settings.apiExpanders = [
+    ...config.settings.apiExpanders,
+    {
+      match: '',
+      GET_CONTENT: ['subsite'],
+    },
+  ];
+
   // Done
   return config;
 };
