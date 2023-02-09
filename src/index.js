@@ -4,6 +4,12 @@ import installLayoutSettingsBlock from '@eeacms/volto-eea-website-policy/compone
 import { addStylingFieldsetSchemaEnhancer } from '@eeacms/volto-eea-website-policy/components/Blocks/schema';
 
 const applyConfig = (config) => {
+  // IMS
+  config.settings.externalRoutes = [
+    ...(config.settings.externalRoutes || []),
+    { match: '/ims' },
+  ];
+
   // #137187 Keycloak integration
   if (runtimeConfig['RAZZLE_KEYCLOAK'] === 'Yes') {
     config.settings.externalRoutes = [
