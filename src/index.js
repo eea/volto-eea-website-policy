@@ -1,4 +1,5 @@
 import { runtimeConfig } from '@plone/volto/runtime_config';
+import { NotFound } from '@plone/volto/components';
 import installContextNavigationBlock from '@eeacms/volto-eea-website-policy/components/Blocks/ContextNavigation';
 import installLayoutSettingsBlock from '@eeacms/volto-eea-website-policy/components/Blocks/LayoutSettings';
 import { addStylingFieldsetSchemaEnhancer } from '@eeacms/volto-eea-website-policy/components/Blocks/schema';
@@ -24,6 +25,19 @@ const applyConfig = (config) => {
       },
     ];
   }
+
+  //disable contact-form route in eea website
+  config.addonRoutes = [
+    ...(config.addonRoutes || []),
+    {
+      path: '**/contact-form',
+      component: (props) => (
+        <div id="view">
+          <NotFound {...props} />
+        </div>
+      ),
+    },
+  ];
 
   // Working-copy
   config.settings.hasWorkingCopySupport = true;
