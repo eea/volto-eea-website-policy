@@ -34,6 +34,11 @@ const applyConfig = (config) => {
   // Working-copy
   config.settings.hasWorkingCopySupport = true;
 
+  config.settings.purgeRoutes = [
+    '/contact-form',
+    `/${config.settings?.supportedLanguages.join('|')}/contact-form`,
+  ];
+
   // Multi-lingual
   config.settings.isMultilingual = true;
   config.settings.defaultLanguage =
