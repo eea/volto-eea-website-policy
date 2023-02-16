@@ -4,11 +4,19 @@ import installLayoutSettingsBlock from '@eeacms/volto-eea-website-policy/compone
 import { addStylingFieldsetSchemaEnhancer } from '@eeacms/volto-eea-website-policy/components/Blocks/schema';
 
 const applyConfig = (config) => {
-  // IMS
-  config.settings.externalRoutes = [
-    ...(config.settings.externalRoutes || []),
-    { match: '/ims' },
-  ];
+  // #158717#note-25 any path that isn't static, en or controlpanel is treated as external
+  if (!config.settings.publicURL.includes('localhost')) {
+    const notInEN = /^(?!.*(\/en|\/static|\/controlpanel|\/cypress)).*$/;
+    config.settings.externalRoutes = [
+      {
+        match: {
+          path: notInEN,
+          exact: false,
+          strict: false,
+        },
+      },
+    ];
+  }
 
   // #137187 Keycloak integration
   if (runtimeConfig['RAZZLE_KEYCLOAK'] === 'Yes') {
