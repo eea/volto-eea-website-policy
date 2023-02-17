@@ -5,18 +5,17 @@ import { addStylingFieldsetSchemaEnhancer } from '@eeacms/volto-eea-website-poli
 
 const applyConfig = (config) => {
   // #158717#note-25 any path that isn't static, en or controlpanel is treated as external
-  if (!config.settings.publicURL.includes('localhost')) {
-    const notInEN = /^(?!.*(\/en|\/static|\/controlpanel|\/cypress)).*$/;
-    config.settings.externalRoutes = [
-      {
-        match: {
-          path: notInEN,
-          exact: false,
-          strict: false,
-        },
+  const notInEN = /^(?!.*(\/en|\/static|\/controlpanel|\/cypress)).*$/;
+  config.settings.externalRoutes = [
+    ...(config.settings.externalRoutes || []),
+    {
+      match: {
+        path: notInEN,
+        exact: false,
+        strict: false,
       },
-    ];
-  }
+    },
+  ];
 
   // #137187 Keycloak integration
   if (runtimeConfig['RAZZLE_KEYCLOAK'] === 'Yes') {
@@ -51,6 +50,11 @@ const applyConfig = (config) => {
   // config.settings.eea?.languages?.map(
   //   (item) => item.code,
   // ) || ['en'];
+
+  // Logo URL
+  if (config.settings.eea) {
+    config.settings.eea.logoTargetUrl = '/en';
+  }
 
   // Block chooser
   config.blocks.blocksConfig.image.mostUsed = false;
