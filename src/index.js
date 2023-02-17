@@ -8,6 +8,7 @@ const applyConfig = (config) => {
   if (!config.settings.publicURL.includes('localhost')) {
     const notInEN = /^(?!.*(\/en|\/static|\/controlpanel|\/cypress)).*$/;
     config.settings.externalRoutes = [
+      ...(config.settings.externalRoutes || []),
       {
         match: {
           path: notInEN,
