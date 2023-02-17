@@ -44,7 +44,7 @@ class LinkView extends Component {
   componentDidMount() {
     if (!this.props.token) {
       const { remoteUrl } = this.props.content;
-      if (isInternalURL(remoteUrl)) {
+      if (isInternalURL(remoteUrl) && remoteUrl.includes('/en/')) {
         this.props.history.replace(flattenToAppURL(remoteUrl));
       } else if (!__SERVER__) {
         window.location.replace(flattenToAppURL(remoteUrl));
