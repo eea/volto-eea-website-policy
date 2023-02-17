@@ -47,7 +47,7 @@ class LinkView extends Component {
       if (isInternalURL(remoteUrl)) {
         this.props.history.replace(flattenToAppURL(remoteUrl));
       } else if (!__SERVER__) {
-        window.location.href = flattenToAppURL(remoteUrl);
+        window.location.replace(flattenToAppURL(remoteUrl));
       }
     }
   }
