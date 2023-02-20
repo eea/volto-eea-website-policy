@@ -30,7 +30,7 @@ export const addStylingFieldsetSchemaEnhancer = ({ schema }) => {
           {
             id: 'default',
             title: 'Default',
-            fields: ['size'],
+            fields: ['size', 'class'],
           },
         ],
         properties: {
@@ -39,6 +39,10 @@ export const addStylingFieldsetSchemaEnhancer = ({ schema }) => {
             title: 'Section size',
             actions: Object.keys(ALIGN_INFO_MAP),
             actionsInfoMap: ALIGN_INFO_MAP,
+          },
+          class: {
+            title: 'Css class',
+            description: 'Css classname applied to wrapper element',
           },
         },
         required: [],
