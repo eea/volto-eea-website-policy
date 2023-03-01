@@ -4,7 +4,7 @@ pipeline {
   environment {
         GIT_NAME = "volto-eea-website-policy"
         NAMESPACE = "@eeacms"
-        SONARQUBE_TAGS = "volto.eea.europa.eu,demo-www.eea.europa.eu,prod-www.eea.europa.eu"
+        SONARQUBE_TAGS = "volto.eea.europa.eu,demo-www.eea.europa.eu,prod-www.eea.europa.eu,www.eea.europa.eu-en"
         DEPENDENCIES = ""
         VOLTO = ""
     }
