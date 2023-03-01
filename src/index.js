@@ -1,7 +1,13 @@
 import { runtimeConfig } from '@plone/volto/runtime_config';
 import installContextNavigationBlock from '@eeacms/volto-eea-website-policy/components/Blocks/ContextNavigation';
 import installLayoutSettingsBlock from '@eeacms/volto-eea-website-policy/components/Blocks/LayoutSettings';
-import { addStylingFieldsetSchemaEnhancer } from '@eeacms/volto-eea-website-policy/components/Blocks/schema';
+import {
+  addStylingFieldsetSchemaEnhancer,
+  groupBlockSchemaEnhancer,
+} from '@eeacms/volto-eea-website-policy/components/Blocks/schema';
+import { composeSchema } from '@eeacms/volto-eea-website-policy/components/Blocks/schema-utils';
+import ItemGroupFlex from '@eeacms/volto-eea-website-policy/components/Blocks/GroupBlockTemplate/ItemGroupFlex';
+import ItemsWidget from '@eeacms/volto-eea-website-policy/components/Blocks/GroupBlockTemplate/Widgets/ItemsWidget';
 
 const applyConfig = (config) => {
   // #158717#note-25 any path that isn't static, en or controlpanel is treated as external
@@ -59,6 +65,8 @@ const applyConfig = (config) => {
     config.settings.eea.logoTargetUrl = '/en';
   }
 
+  config.widgets.type.items = ItemsWidget;
+
   // Block chooser
   config.blocks.blocksConfig.image.mostUsed = false;
   config.blocks.blocksConfig.video.mostUsed = false;
@@ -84,11 +92,6 @@ const applyConfig = (config) => {
     config.blocks.blocksConfig.callToActionBlock.mostUsed = true;
   }
 
-  // Group
-  if (config.blocks.blocksConfig.group) {
-    config.blocks.blocksConfig.group.schemaEnhancer = addStylingFieldsetSchemaEnhancer;
-  }
-
   // Columns
   if (config.blocks.blocksConfig.columnsBlock) {
     config.blocks.blocksConfig.columnsBlock.mostUsed = true;
@@ -98,6 +101,23 @@ const applyConfig = (config) => {
   // Accordion
   if (config.blocks.blocksConfig.accordion) {
     config.blocks.blocksConfig.accordion.mostUsed = true;
+  }
+
+  //Group block flex variation
+  if (config.blocks.blocksConfig.group) {
+    config.blocks.blocksConfig.group.variations.push({
+      id: 'item group',
+      isDefault: false,
+      title: 'Item Group',
+      template: ItemGroupFlex,
+      //schemaEnhancer: groupBlockSchemaEnhancer
+    });
+
+    config.blocks.blocksConfig.group.schemaEnhancer = composeSchema(
+      config.blocks.blocksConfig.group.schemaEnhancer,
+      groupBlockSchemaEnhancer,
+      addStylingFieldsetSchemaEnhancer,
+    );
   }
 
   // Listing

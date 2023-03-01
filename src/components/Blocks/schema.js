@@ -3,6 +3,14 @@ import imageNarrowSVG from '@eeacms/volto-eea-website-policy/components/Blocks/i
 import imageFitSVG from '@plone/volto/icons/image-fit.svg';
 import imageWideSVG from '@plone/volto/icons/image-wide.svg';
 import imageFullSVG from '@plone/volto/icons/image-full.svg';
+import { defineMessages } from 'react-intl';
+
+const messages = defineMessages({
+  Items: {
+    id: 'Add Item',
+    defaultMessage: 'Add Item',
+  },
+});
 
 export const ALIGN_INFO_MAP = {
   narrow_width: [imageNarrowSVG, 'Narrow width'],
@@ -47,5 +55,41 @@ export const addStylingFieldsetSchemaEnhancer = ({ schema }) => {
     return resSchema;
   }
 
+  return schema;
+};
+
+export const ItemSchema = {
+  title: 'Item',
+  fieldsets: [
+    {
+      id: 'item',
+      title: 'Item',
+      fields: ['item_title'],
+    },
+  ],
+  properties: {
+    item_title: {
+      title: 'Item title',
+    },
+  },
+  required: [],
+};
+export const groupBlockSchemaEnhancer = (props) => {
+  const {
+    schema,
+    intl,
+    formData: { variation },
+  } = props;
+  const resSchema = cloneDeep(schema);
+  if (variation === 'item group') {
+    resSchema.fieldsets[0].fields.push('add_item');
+    resSchema.properties.add_item = {
+      title: intl.formatMessage(messages.Items),
+      type: 'items',
+      schema: ItemSchema,
+      ...props.formData,
+    };
+    return resSchema;
+  }
   return schema;
 };
