@@ -32,18 +32,15 @@ const ItemsWidget = (props) => {
             }
             onClick={() => {
               const { blocks, blocks_layout } = emptyBlocksForm();
-              onChange(block, {
+              onChange(id, {
                 ...value,
-                ...data,
                 blocks: {
                   ...value.blocks,
-                  ...data.blocks,
                   ...blocks,
                 },
                 blocks_layout: {
                   ...value?.blocks_layout,
-                  ...data.blocks_layout,
-                  items: [...data.blocks_layout.items, ...blocks_layout.items],
+                  items: [...value.blocks_layout.items, ...blocks_layout.items],
                 },
               });
             }}

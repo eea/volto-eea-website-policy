@@ -1,19 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import cx from 'classnames';
+import { Item as UiItem, Button } from 'semantic-ui-react';
 import { defineMessages, injectIntl } from 'react-intl';
-import { isArray } from 'lodash';
+import { isArray, omit, without } from 'lodash';
 import config from '@plone/volto/registry';
-import { BlockDataForm, SidebarPortal } from '@plone/volto/components';
+import { BlockDataForm, SidebarPortal, Icon } from '@plone/volto/components';
 import SlateEditor from '@plone/volto-slate/editor/SlateEditor';
 import { handleKey } from '@plone/volto-slate/blocks/Text/keyboard';
 import {
   uploadContent,
   saveSlateBlockSelection,
 } from '@plone/volto-slate/actions';
+import EditBlockWrapper from '@eeacms/volto-group-block/components/manage/Blocks/Group/EditBlockWrapper';
+import trashSVG from '@plone/volto/icons/delete.svg';
 
 import Item from './Item';
 import Schema from './Schema';
 import { getItems } from './utils';
+import './editor.less';
 
 export const createSlateParagraph = (text) => {
   return isArray(text) ? text : config.settings.slate.defaultValue();
@@ -75,7 +80,10 @@ const ItemGroupFlex = (props) => {
     [setSelectedBlock],
   );
   return (
-    <>
+    <UiItem.Group
+      unstackable
+      className={cx('row', 'flex-items-wrapper', 'item-group')}
+    >
       {items.map(([uid, item], index) => (
         <>
           <Item
@@ -84,36 +92,75 @@ const ItemGroupFlex = (props) => {
             className="flex-items-wrapper"
             description={getValueFromSlate(uid)}
           >
-            <SlateEditor
-              index={index}
-              properties={properties}
-              extensions={slate.textblockExtensions}
-              renderExtensions={[withBlockProperties]}
-              value={getValueFromSlate(uid)}
-              onChange={(description) => {
-                onChangeBlock(block, {
-                  ...data,
-                  data: {
-                    ...data.data,
-                    blocks: {
-                      ...data.data.blocks,
-                      [uid]: {
-                        ...item,
-                        value: description,
+            <div
+              role="presentation"
+              className={cx('block slate', {
+                selected: selected && selectedBlock === uid,
+              })}
+            >
+              <SlateEditor
+                index={index}
+                properties={properties}
+                extensions={slate.textblockExtensions}
+                renderExtensions={[withBlockProperties]}
+                value={getValueFromSlate(uid)}
+                onChange={(description) => {
+                  onChangeBlock(block, {
+                    ...data,
+                    data: {
+                      ...data.data,
+                      blocks: {
+                        ...data.data.blocks,
+                        [uid]: {
+                          ...item,
+                          value: description,
+                        },
                       },
                     },
-                  },
-                });
-              }}
-              block={uid}
-              // onFocus={() => handleFocus(uid)}
-              onClick={() => handleFocus(uid)}
-              selected={selected && selectedBlock === uid}
-              onKeyDown={handleKey}
-              placeholder="Add item description..."
-              slateSettings={slate}
-            />
+                  });
+                }}
+                block={uid}
+                // onFocus={() => handleFocus(uid)}
+                onClick={() => handleFocus(uid)}
+                selected={selected && selectedBlock === uid}
+                onKeyDown={handleKey}
+                placeholder="Add item description..."
+                slateSettings={slate}
+              />
+              {isEditMode && selected && selectedBlock === uid ? (
+                <div className={`block-editor-${data['@type']}`}>
+                  <div className="block-toolbar">
+                    <Button
+                      icon
+                      basic
+                      title="Remove block"
+                      onClick={() => {
+                        const newFormData = {
+                          ...data.data,
+                          blocks: omit({ ...data.data.blocks }, [uid]),
+                          blocks_layout: {
+                            ...data.data.blocks_layout,
+                            items: without(
+                              [...data.data.blocks_layout?.items],
+                              uid,
+                            ),
+                          },
+                        };
+                        onChangeBlock(uid, newFormData);
+                      }}
+                      className="delete-button-group-block"
+                      // aria-label={intl.formatMessage(messages.delete)}
+                    >
+                      <Icon name={trashSVG} size="19px" />
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                ''
+              )}
+            </div>
           </Item>
+
           <SidebarPortal selected={selected && selectedBlock === uid}>
             <BlockDataForm
               block={uid}
@@ -139,7 +186,7 @@ const ItemGroupFlex = (props) => {
           </SidebarPortal>
         </>
       ))}
-    </>
+    </UiItem.Group>
   );
 };
 

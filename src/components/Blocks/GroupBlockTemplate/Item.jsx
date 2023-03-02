@@ -19,34 +19,30 @@ function Item({
   className = '',
 }) {
   return (
-    <UiItem.Group unstackable className={cx('row', className)}>
-      <UiItem className={cx(theme)}>
-        {assetType === 'image' && image && (
-          <UiItem.Image
-            src={`${image}/@@images/image/${imageSize}`}
-            className={cx('ui', imageSize, verticalAlign, 'aligned')}
-            alt={header || 'Item image'}
-          />
+    <UiItem className={cx(theme)}>
+      {assetType === 'image' && image && (
+        <UiItem.Image
+          src={`${image}/@@images/image/${imageSize}`}
+          className={cx('ui', imageSize, verticalAlign, 'aligned')}
+          alt={header || 'Item image'}
+        />
+      )}
+      {assetType === 'icon' && icon && (
+        <Icon
+          className={cx(icon, theme, verticalAlign, 'aligned')}
+          size={iconSize}
+        />
+      )}
+      <UiItem.Content verticalAlign={verticalAlign}>
+        {header && <UiItem.Header>{header}</UiItem.Header>}
+        {meta && <UiItem.Meta>{meta}</UiItem.Meta>}
+        {description && !isEditMode && (
+          <UiItem.Description>{serializeNodes(description)}</UiItem.Description>
         )}
-        {assetType === 'icon' && icon && (
-          <Icon
-            className={cx(icon, theme, verticalAlign, 'aligned')}
-            size={iconSize}
-          />
-        )}
-        <UiItem.Content verticalAlign={verticalAlign}>
-          {header && <UiItem.Header>{header}</UiItem.Header>}
-          {meta && <UiItem.Meta>{meta}</UiItem.Meta>}
-          {description && !isEditMode && (
-            <UiItem.Description>
-              {serializeNodes(description)}
-            </UiItem.Description>
-          )}
-          {isEditMode && children}
-          {extra && <UiItem.Extra>{extra}</UiItem.Extra>}
-        </UiItem.Content>
-      </UiItem>
-    </UiItem.Group>
+        {isEditMode && children}
+        {extra && <UiItem.Extra>{extra}</UiItem.Extra>}
+      </UiItem.Content>
+    </UiItem>
   );
 }
 

@@ -82,8 +82,8 @@ export const groupBlockSchemaEnhancer = (props) => {
   } = props;
   const resSchema = cloneDeep(schema);
   if (variation === 'item group') {
-    resSchema.fieldsets[0].fields.push('add_item');
-    resSchema.properties.add_item = {
+    resSchema.fieldsets[0].fields.push('data');
+    resSchema.properties.data = {
       title: intl.formatMessage(messages.Items),
       type: 'items',
       schema: ItemSchema,
