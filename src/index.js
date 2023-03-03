@@ -6,8 +6,9 @@ import {
   groupBlockSchemaEnhancer,
 } from '@eeacms/volto-eea-website-policy/components/Blocks/schema';
 import { composeSchema } from '@eeacms/volto-eea-website-policy/components/Blocks/schema-utils';
-import ItemGroupFlex from '@eeacms/volto-eea-website-policy/components/Blocks/GroupBlockTemplate/ItemGroupFlex';
-import ItemsWidget from '@eeacms/volto-eea-website-policy/components/Blocks/GroupBlockTemplate/Widgets/ItemsWidget';
+import ItemGroupFlex from '@eeacms/volto-eea-website-policy/components/Blocks/GroupBlockTemplate/ItemGroup/ItemGroupFlex';
+import FlexGroup from '@eeacms/volto-eea-website-policy/components/Blocks/GroupBlockTemplate/FlexGroup/FlexGroup';
+import ItemsWidget from '@eeacms/volto-eea-website-policy/components/Blocks/GroupBlockTemplate/ItemGroup/Widgets/ItemsWidget';
 
 const applyConfig = (config) => {
   // #158717#note-25 any path that isn't static, en or controlpanel is treated as external
@@ -105,13 +106,23 @@ const applyConfig = (config) => {
 
   //Group block flex variation
   if (config.blocks.blocksConfig.group) {
-    config.blocks.blocksConfig.group.variations.push({
-      id: 'item group',
-      isDefault: false,
-      title: 'Item Group',
-      template: ItemGroupFlex,
-      //schemaEnhancer: groupBlockSchemaEnhancer
-    });
+    config.blocks.blocksConfig.group.variations = [
+      ...config.blocks.blocksConfig.group.variations,
+      {
+        id: 'item group',
+        isDefault: false,
+        title: 'Item Group',
+        template: ItemGroupFlex,
+        //schemaEnhancer: groupBlockSchemaEnhancer
+      },
+      {
+        id: 'flex group',
+        isDefault: false,
+        title: 'Flex Group',
+        template: FlexGroup,
+        //schemaEnhancer: groupBlockSchemaEnhancer
+      },
+    ];
 
     config.blocks.blocksConfig.group.schemaEnhancer = composeSchema(
       config.blocks.blocksConfig.group.schemaEnhancer,

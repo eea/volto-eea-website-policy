@@ -12,7 +12,7 @@ import {
   uploadContent,
   saveSlateBlockSelection,
 } from '@plone/volto-slate/actions';
-import EditBlockWrapper from '@eeacms/volto-group-block/components/manage/Blocks/Group/EditBlockWrapper';
+//import EditBlockWrapper from '@eeacms/volto-group-block/components/manage/Blocks/Group/EditBlockWrapper';
 import trashSVG from '@plone/volto/icons/delete.svg';
 
 import Item from './Item';
