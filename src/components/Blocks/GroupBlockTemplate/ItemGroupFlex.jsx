@@ -146,7 +146,10 @@ const ItemGroupFlex = (props) => {
                             ),
                           },
                         };
-                        onChangeBlock(uid, newFormData);
+                        onChangeBlock(block, {
+                          ...data,
+                          data: newFormData,
+                        });
                       }}
                       className="delete-button-group-block"
                       // aria-label={intl.formatMessage(messages.delete)}
