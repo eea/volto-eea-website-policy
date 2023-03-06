@@ -2,10 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
 import { Item as UiItem, Button } from 'semantic-ui-react';
+import { doesNodeContainClick } from 'semantic-ui-react/dist/commonjs/lib';
 import { defineMessages, injectIntl } from 'react-intl';
-import { isArray, omit, without } from 'lodash';
+import { isArray, omit, without, keys } from 'lodash';
 import config from '@plone/volto/registry';
 import { BlockDataForm, SidebarPortal, Icon } from '@plone/volto/components';
+import { blockHasValue, emptyBlocksForm } from '@plone/volto/helpers';
 import SlateEditor from '@plone/volto-slate/editor/SlateEditor';
 import { handleKey } from '@plone/volto-slate/blocks/Text/keyboard';
 import {
@@ -14,6 +16,7 @@ import {
 } from '@plone/volto-slate/actions';
 //import EditBlockWrapper from '@eeacms/volto-group-block/components/manage/Blocks/Group/EditBlockWrapper';
 import trashSVG from '@plone/volto/icons/delete.svg';
+import addSVG from '@plone/volto/icons/circle-plus.svg';
 
 import Item from './Item';
 import Schema from './Schema';
@@ -47,12 +50,52 @@ const ItemGroupFlex = (props) => {
     isEditMode,
   } = props;
 
+  const [addNewBlockOpened, setnewBlockOpened] = React.useState(false);
+  let blockNode = React.createRef();
+
+  const handleClickOutside = React.useCallback(
+    (e) => {
+      if (blockNode.current && doesNodeContainClick(blockNode.current, e))
+        return;
+
+      if (addNewBlockOpened) {
+        setnewBlockOpened(false);
+        return true;
+      }
+    },
+    [addNewBlockOpened, blockNode],
+  );
+
+  React.useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside, false);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [handleClickOutside]);
+
   const getSchema = React.useCallback(
     (blockId) => {
       return Schema(data.data.blocks[blockId]);
     },
     [data.data.blocks],
   );
+
+  const onAddItem = React.useCallback(() => {
+    const { blocks, blocks_layout } = emptyBlocksForm();
+    onChangeBlock(block, {
+      ...data,
+      data: {
+        ...data.data,
+        blocks: {
+          ...data.data.blocks,
+          ...blocks,
+        },
+        blocks_layout: {
+          ...data.data?.blocks_layout,
+          items: [...data.data.blocks_layout.items, ...blocks_layout.items],
+        },
+      },
+    });
+    setSelectedBlock(keys(blocks)[0]);
+  }, [block, data, onChangeBlock, setSelectedBlock]);
 
   const itemsData = childBlocksForm || data.data;
   const items = getItems(itemsData);
@@ -123,33 +166,57 @@ const ItemGroupFlex = (props) => {
                 // onFocus={() => handleFocus(uid)}
                 onClick={() => handleFocus(uid)}
                 selected={selected && selectedBlock === uid}
-                onKeyDown={handleKey}
+                onKeyDown={({ editor, event }) => {
+                  if (event.key === 'Enter') {
+                    onAddItem();
+                    event.preventDefault();
+                    event.stopPropagation();
+                  }
+                }}
                 placeholder="Add item description..."
                 slateSettings={slate}
               />
               {isEditMode && selected && selectedBlock === uid ? (
-                <div className={`block-editor-${data['@type']}`}>
+                <div
+                  ref={blockNode}
+                  className={`block-editor-${data['@type']}`}
+                >
                   <div className="block-toolbar">
+                    {!blockHasValue(data?.data?.blocks[uid]) && (
+                      <Button
+                        icon
+                        basic
+                        title="Add new Item"
+                        onClick={() => {
+                          onAddItem();
+                        }}
+                        className="group-block-add-button"
+                      >
+                        <Icon name={addSVG} className="" size="19px" />
+                      </Button>
+                    )}
                     <Button
                       icon
                       basic
                       title="Remove block"
                       onClick={() => {
-                        const newFormData = {
-                          ...data.data,
-                          blocks: omit({ ...data.data.blocks }, [uid]),
-                          blocks_layout: {
-                            ...data.data.blocks_layout,
-                            items: without(
-                              [...data.data.blocks_layout?.items],
-                              uid,
-                            ),
-                          },
-                        };
-                        onChangeBlock(block, {
-                          ...data,
-                          data: newFormData,
-                        });
+                        if (keys(data?.data?.blocks).length > 1) {
+                          const newFormData = {
+                            ...data.data,
+                            blocks: omit({ ...data.data.blocks }, [uid]),
+                            blocks_layout: {
+                              ...data.data.blocks_layout,
+                              items: without(
+                                [...data.data.blocks_layout?.items],
+                                uid,
+                              ),
+                            },
+                          };
+                          onChangeBlock(block, {
+                            ...data,
+                            data: newFormData,
+                          });
+                        }
                       }}
                       className="delete-button-group-block"
                       // aria-label={intl.formatMessage(messages.delete)}

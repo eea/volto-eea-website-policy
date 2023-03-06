@@ -57,39 +57,3 @@ export const addStylingFieldsetSchemaEnhancer = ({ schema }) => {
 
   return schema;
 };
-
-export const ItemSchema = {
-  title: 'Item',
-  fieldsets: [
-    {
-      id: 'item',
-      title: 'Item',
-      fields: ['item_title'],
-    },
-  ],
-  properties: {
-    item_title: {
-      title: 'Item title',
-    },
-  },
-  required: [],
-};
-export const groupBlockSchemaEnhancer = (props) => {
-  const {
-    schema,
-    intl,
-    formData: { variation },
-  } = props;
-  const resSchema = cloneDeep(schema);
-  if (variation === 'item group') {
-    resSchema.fieldsets[0].fields.push('data');
-    resSchema.properties.data = {
-      title: intl.formatMessage(messages.Items),
-      type: 'items',
-      schema: ItemSchema,
-      ...props.formData,
-    };
-    return resSchema;
-  }
-  return schema;
-};

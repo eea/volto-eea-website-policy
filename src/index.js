@@ -1,14 +1,10 @@
 import { runtimeConfig } from '@plone/volto/runtime_config';
 import installContextNavigationBlock from '@eeacms/volto-eea-website-policy/components/Blocks/ContextNavigation';
 import installLayoutSettingsBlock from '@eeacms/volto-eea-website-policy/components/Blocks/LayoutSettings';
-import {
-  addStylingFieldsetSchemaEnhancer,
-  groupBlockSchemaEnhancer,
-} from '@eeacms/volto-eea-website-policy/components/Blocks/schema';
+import { addStylingFieldsetSchemaEnhancer } from '@eeacms/volto-eea-website-policy/components/Blocks/schema';
 import { composeSchema } from '@eeacms/volto-eea-website-policy/components/Blocks/schema-utils';
 import ItemGroupFlex from '@eeacms/volto-eea-website-policy/components/Blocks/GroupBlockTemplate/ItemGroup/ItemGroupFlex';
 import FlexGroup from '@eeacms/volto-eea-website-policy/components/Blocks/GroupBlockTemplate/FlexGroup/FlexGroup';
-import ItemsWidget from '@eeacms/volto-eea-website-policy/components/Blocks/GroupBlockTemplate/ItemGroup/Widgets/ItemsWidget';
 
 const applyConfig = (config) => {
   // #158717#note-25 any path that isn't static, en or controlpanel is treated as external
@@ -65,8 +61,6 @@ const applyConfig = (config) => {
   if (config.settings.eea) {
     config.settings.eea.logoTargetUrl = '/en';
   }
-
-  config.widgets.type.items = ItemsWidget;
 
   // Block chooser
   config.blocks.blocksConfig.image.mostUsed = false;
@@ -126,7 +120,6 @@ const applyConfig = (config) => {
 
     config.blocks.blocksConfig.group.schemaEnhancer = composeSchema(
       config.blocks.blocksConfig.group.schemaEnhancer,
-      groupBlockSchemaEnhancer,
       addStylingFieldsetSchemaEnhancer,
     );
   }
