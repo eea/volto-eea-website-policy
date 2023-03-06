@@ -2,14 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
 import { Item as UiItem, Button } from 'semantic-ui-react';
-import { doesNodeContainClick } from 'semantic-ui-react/dist/commonjs/lib';
-import { defineMessages, injectIntl } from 'react-intl';
+import { defineMessages } from 'react-intl';
 import { isArray, omit, without, keys } from 'lodash';
 import config from '@plone/volto/registry';
 import { BlockDataForm, SidebarPortal, Icon } from '@plone/volto/components';
 import { blockHasValue, emptyBlocksForm } from '@plone/volto/helpers';
 import SlateEditor from '@plone/volto-slate/editor/SlateEditor';
-import { handleKey } from '@plone/volto-slate/blocks/Text/keyboard';
 import {
   uploadContent,
   saveSlateBlockSelection,
@@ -43,33 +41,12 @@ const ItemGroupFlex = (props) => {
     properties,
     onChangeBlock,
     selectedBlock,
-    onSelectBlock,
+    //onSelectBlock,
     intl,
     setSelectedBlock,
     childBlocksForm,
     isEditMode,
   } = props;
-
-  const [addNewBlockOpened, setnewBlockOpened] = React.useState(false);
-  let blockNode = React.createRef();
-
-  const handleClickOutside = React.useCallback(
-    (e) => {
-      if (blockNode.current && doesNodeContainClick(blockNode.current, e))
-        return;
-
-      if (addNewBlockOpened) {
-        setnewBlockOpened(false);
-        return true;
-      }
-    },
-    [addNewBlockOpened, blockNode],
-  );
-
-  React.useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside, false);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [handleClickOutside]);
 
   const getSchema = React.useCallback(
     (blockId) => {
@@ -177,10 +154,7 @@ const ItemGroupFlex = (props) => {
                 slateSettings={slate}
               />
               {isEditMode && selected && selectedBlock === uid ? (
-                <div
-                  ref={blockNode}
-                  className={`block-editor-${data['@type']}`}
-                >
+                <div className={`block-editor-${data['@type']}`}>
                   <div className="block-toolbar">
                     {!blockHasValue(data?.data?.blocks[uid]) && (
                       <Button
