@@ -1,10 +1,18 @@
-.flex-items-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.flex-items-wrapper [data-rbd-droppable-id] {
-  width: 50%;
+.flex-blocks-form {
+  .item-wrapper {
+    width: 100%;
+  }
+  .block-toolbar {
+    position: absolute;
+    z-index: 4;
+    right: -9px;
+    display: flex;
+    border: none;
+    border: 1px solid rgba(120, 192, 215, 0.75);
+    border-bottom: 1px solid #ffffff;
+    margin-top: -45px;
+    background-color: #ffffff;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+  }
 }

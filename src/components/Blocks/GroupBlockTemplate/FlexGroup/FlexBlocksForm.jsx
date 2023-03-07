@@ -17,7 +17,7 @@ import {
   nextBlockId,
   previousBlockId,
 } from '@plone/volto/helpers';
-import EditBlockWrapper from '@plone/volto/components/manage/Blocks/Block/EditBlockWrapper';
+import EditBlockWrapper from './EditBlockWrapper';
 import { setSidebarTab } from '@plone/volto/actions';
 import { useDispatch } from 'react-redux';
 import { useDetectClickOutside, useEvent } from '@plone/volto/helpers';
@@ -198,71 +198,98 @@ const BlocksForm = (props) => {
     );
   });
 
+  React.useEffect(() => {
+    const queryAttr = 'data-rbd-droppable-id';
+    const draggedDOM = document.querySelector(
+      `.flex-blocks-form [${queryAttr}]`,
+    );
+    const isChildren = document.querySelector(
+      '.flex-blocks-form .flex-items-wrapper',
+    );
+    if (!isChildren) {
+      const div = document.createElement('div');
+      // Refer to https://eea.github.io/volto-kitkat-frontend/?path=/docs/components-item-item-group-with-icons--flex-group#flex-group
+      div.classList.add('ui', 'items', 'row', 'flex-items-wrapper');
+
+      if (draggedDOM) {
+        const DOMchildren = draggedDOM.children;
+        Array.from(DOMchildren || []).forEach((child) =>
+          div.appendChild(child),
+        );
+        draggedDOM.appendChild(div);
+      }
+    } else {
+      const div = document.querySelector('.flex-items-wrapper');
+      if (draggedDOM) {
+        const DOMchildren = draggedDOM.children;
+        Array.from(DOMchildren || [])
+          .filter((child) => child.className === 'item')
+          .forEach((child) => div.appendChild(child));
+        draggedDOM.appendChild(div);
+      }
+    }
+  }, []);
+
   return (
     <div className="blocks-form" ref={ref}>
       <fieldset className="invisible" disabled={!editable}>
-        <div className="flex-items-wrapper">
-          <DragDropList
-            childList={blockList}
-            onMoveItem={(result) => {
-              const { source, destination } = result;
-              if (!destination) {
-                return;
-              }
-              const newFormData = moveBlock(
-                properties,
-                source.index,
-                destination.index,
-              );
-              onChangeFormData(newFormData);
-              return true;
-            }}
-            data-flex="flex"
-          >
-            {(dragProps) => {
-              const { child, childId, index } = dragProps;
-              const blockProps = {
-                allowedBlocks,
-                showRestricted,
-                block: childId,
-                data: child,
-                handleKeyDown,
-                id: childId,
-                formTitle: title,
-                formDescription: description,
-                index,
-                manage,
-                onAddBlock,
-                onInsertBlock,
-                onChangeBlock,
-                onChangeField,
-                onChangeFormData,
-                onDeleteBlock,
-                onFocusNextBlock,
-                onFocusPreviousBlock,
-                onMoveBlock,
-                onMutateBlock,
-                onSelectBlock,
-                pathname,
-                metadata,
-                properties,
-                blocksConfig,
-                selected: selectedBlock === childId,
-                multiSelected: multiSelected?.includes(childId),
-                type: child['@type'],
-                editable,
-                showBlockChooser: selectedBlock === childId,
-              };
-              return editBlockWrapper(
-                dragProps,
-
-                <EditBlock key={childId} {...blockProps} />,
-
-                blockProps,
-              );
-            }}
-          </DragDropList>
-        </div>
+        <DragDropList
+          childList={blockList}
+          onMoveItem={(result) => {
+            const { source, destination } = result;
+            if (!destination) {
+              return;
+            }
+            const newFormData = moveBlock(
+              properties,
+              source.index,
+              destination.index,
+            );
+            onChangeFormData(newFormData);
+            return true;
+          }}
+        >
+          {(dragProps) => {
+            const { child, childId, index } = dragProps;
+            const blockProps = {
+              allowedBlocks,
+              showRestricted,
+              block: childId,
+              data: child,
+              handleKeyDown,
+              id: childId,
+              formTitle: title,
+              formDescription: description,
+              index,
+              manage,
+              onAddBlock,
+              onInsertBlock,
+              onChangeBlock,
+              onChangeField,
+              onChangeFormData,
+              onDeleteBlock,
+              onFocusNextBlock,
+              onFocusPreviousBlock,
+              onMoveBlock,
+              onMutateBlock,
+              onSelectBlock,
+              pathname,
+              metadata,
+              properties,
+              blocksConfig,
+              selected: selectedBlock === childId,
+              multiSelected: multiSelected?.includes(childId),
+              type: child['@type'],
+              editable,
+              showBlockChooser: selectedBlock === childId,
+            };
+            return editBlockWrapper(
+              dragProps,
+              <EditBlock key={childId} {...blockProps} />,
+              blockProps,
+            );
+          }}
+        </DragDropList>
       </fieldset>
     </div>
   );
