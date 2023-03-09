@@ -1,10 +1,11 @@
 import { Button, Item as UiItem } from 'semantic-ui-react';
 import { isEmpty } from 'lodash';
 import cx from 'classnames';
-import { Icon, RenderBlocks } from '@plone/volto/components';
+import { Icon } from '@plone/volto/components';
 import FlexBlocksForm from './FlexBlocksForm';
 import { emptyBlocksForm } from '@plone/volto/helpers';
 import EditBlockWrapper from './EditBlockWrapper';
+import RenderBlocks from './RenderBlocks';
 
 import helpSVG from '@plone/volto/icons/help.svg';
 import './editor-flex.less';
@@ -67,6 +68,8 @@ const FlexGroup = (props) => {
           }
         }}
         pathname={pathname}
+        groupBlockData={data}
+        groupBlock={block}
       >
         {({ draginfo }, editBlock, blockProps) => (
           <EditBlockWrapper
@@ -101,7 +104,7 @@ const FlexGroup = (props) => {
     </div>
   ) : (
     <div className="ui items row flex-items-wrapper">
-      <RenderBlocks {...props} metadata={metadata} content={data?.data || {}} />
+      <RenderBlocks metadata={metadata} content={data?.data || {}} />
     </div>
   );
 };

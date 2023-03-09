@@ -42,6 +42,8 @@ const BlocksForm = (props) => {
     isMainForm = true,
     blocksConfig = config.blocks.blocksConfig,
     editable = true,
+    groupBlockData,
+    groupBlock,
   } = props;
 
   const blockList = getBlocks(properties);
@@ -199,6 +201,8 @@ const BlocksForm = (props) => {
   });
 
   React.useEffect(() => {
+    const groupItems = groupBlockData.data.blocks_layout;
+
     const queryAttr = 'data-rbd-droppable-id';
     const draggedDOM = document.querySelector(
       `.flex-blocks-form [${queryAttr}]`,
@@ -228,7 +232,7 @@ const BlocksForm = (props) => {
         draggedDOM.appendChild(div);
       }
     }
-  }, [properties.blocks_layout]);
+  }, [groupBlockData.data.blocks_layout]);
 
   return (
     <div className="blocks-form" ref={ref}>
