@@ -100,7 +100,9 @@ const FlexGroup = (props) => {
       </FlexBlocksForm>
     </div>
   ) : (
-    <RenderBlocks {...props} metadata={metadata} content={data?.data || {}} />
+    <div className="ui items row flex-items-wrapper">
+      <RenderBlocks {...props} metadata={metadata} content={data?.data || {}} />
+    </div>
   );
 };
 

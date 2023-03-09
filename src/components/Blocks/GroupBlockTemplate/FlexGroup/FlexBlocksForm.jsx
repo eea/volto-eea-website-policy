@@ -228,7 +228,7 @@ const BlocksForm = (props) => {
         draggedDOM.appendChild(div);
       }
     }
-  }, []);
+  }, [properties.blocks_layout]);
 
   return (
     <div className="blocks-form" ref={ref}>
