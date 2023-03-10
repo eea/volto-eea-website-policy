@@ -1,9 +1,7 @@
-import { Button, Item as UiItem } from 'semantic-ui-react';
-import { isEmpty } from 'lodash';
-import cx from 'classnames';
+import React from 'react';
+import { Button } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
 import FlexBlocksForm from './FlexBlocksForm';
-import { emptyBlocksForm } from '@plone/volto/helpers';
 import EditBlockWrapper from './EditBlockWrapper';
 import RenderBlocks from './RenderBlocks';
 
@@ -33,7 +31,6 @@ const FlexGroup = (props) => {
   if (!instructions || instructions === '<p><br/></p>') {
     instructions = formDescription;
   }
-
   return isEditMode ? (
     <div className="flex-blocks-form">
       <FlexBlocksForm

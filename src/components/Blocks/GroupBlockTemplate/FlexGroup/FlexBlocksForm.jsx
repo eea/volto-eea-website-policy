@@ -1,7 +1,7 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import EditBlock from '@plone/volto/components/manage/Blocks/Block/Edit';
-import { DragDropList } from '@plone/volto/components';
+import DragDropList from './DragDropList';
 import {
   getBlocks,
   getBlocksFieldname,
@@ -42,8 +42,6 @@ const BlocksForm = (props) => {
     isMainForm = true,
     blocksConfig = config.blocks.blocksConfig,
     editable = true,
-    groupBlockData,
-    groupBlock,
   } = props;
 
   const blockList = getBlocks(properties);
@@ -199,40 +197,6 @@ const BlocksForm = (props) => {
       onAddBlock(config.settings.defaultBlockType, blockList.length),
     );
   });
-
-  React.useEffect(() => {
-    const groupItems = groupBlockData.data.blocks_layout;
-
-    const queryAttr = 'data-rbd-droppable-id';
-    const draggedDOM = document.querySelector(
-      `.flex-blocks-form [${queryAttr}]`,
-    );
-    const isChildren = document.querySelector(
-      '.flex-blocks-form .flex-items-wrapper',
-    );
-    if (!isChildren) {
-      const div = document.createElement('div');
-      // Refer to https://eea.github.io/volto-kitkat-frontend/?path=/docs/components-item-item-group-with-icons--flex-group#flex-group
-      div.classList.add('ui', 'items', 'row', 'flex-items-wrapper');
-
-      if (draggedDOM) {
-        const DOMchildren = draggedDOM.children;
-        Array.from(DOMchildren || []).forEach((child) =>
-          div.appendChild(child),
-        );
-        draggedDOM.appendChild(div);
-      }
-    } else {
-      const div = document.querySelector('.flex-items-wrapper');
-      if (draggedDOM) {
-        const DOMchildren = draggedDOM.children;
-        Array.from(DOMchildren || [])
-          .filter((child) => child.className === 'item')
-          .forEach((child) => div.appendChild(child));
-        draggedDOM.appendChild(div);
-      }
-    }
-  }, [groupBlockData.data.blocks_layout]);
 
   return (
     <div className="blocks-form" ref={ref}>

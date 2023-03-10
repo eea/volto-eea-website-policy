@@ -172,7 +172,7 @@ const ItemGroupFlex = (props) => {
                     <Button
                       icon
                       basic
-                      title="Remove block"
+                      title="Remove item"
                       onClick={() => {
                         if (keys(data?.data?.blocks).length > 1) {
                           const newFormData = {
