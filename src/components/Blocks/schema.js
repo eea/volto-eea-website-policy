@@ -3,14 +3,6 @@ import imageNarrowSVG from '@eeacms/volto-eea-website-policy/components/Blocks/i
 import imageFitSVG from '@plone/volto/icons/image-fit.svg';
 import imageWideSVG from '@plone/volto/icons/image-wide.svg';
 import imageFullSVG from '@plone/volto/icons/image-full.svg';
-import { defineMessages } from 'react-intl';
-
-const messages = defineMessages({
-  Items: {
-    id: 'Add Item',
-    defaultMessage: 'Add Item',
-  },
-});
 
 export const ALIGN_INFO_MAP = {
   narrow_width: [imageNarrowSVG, 'Narrow width'],
