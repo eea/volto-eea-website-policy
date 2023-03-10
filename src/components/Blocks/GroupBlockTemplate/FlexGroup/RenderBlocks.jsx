@@ -23,14 +23,7 @@ const messages = defineMessages({
 });
 
 const RenderBlocks = (props) => {
-  const {
-    content,
-    intl,
-    location,
-    metadata,
-    groupBlockData,
-    groupBlock,
-  } = props;
+  const { content, intl, location, metadata } = props;
   const blocksFieldname = getBlocksFieldname(content);
   const blocksLayoutFieldname = getBlocksLayoutFieldname(content);
   const blocksConfig = props.blocksConfig || config.blocks.blocksConfig;
