@@ -105,7 +105,7 @@ const ItemGroupFlex = (props) => {
       className={cx('row', 'flex-items-wrapper', 'item-group')}
     >
       {items.map(([uid, item], index) => (
-        <>
+        <React.Fragment key={index}>
           <Item
             {...data.data.blocks[uid]}
             isEditMode={isEditMode}
@@ -228,7 +228,7 @@ const ItemGroupFlex = (props) => {
               formData={data.data.blocks[uid]}
             />
           </SidebarPortal>
-        </>
+        </React.Fragment>
       ))}
     </UiItem.Group>
   );
