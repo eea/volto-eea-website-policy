@@ -62,6 +62,18 @@ const applyConfig = (config) => {
   // Block chooser
   config.blocks.blocksConfig.image.mostUsed = false;
   config.blocks.blocksConfig.video.mostUsed = false;
+  //Embed Visualization Block
+  // if (config.blocks.blocksConfig.embed_visualization) {
+  //   config.blocks.blocksConfig.embed_visualization.restricted = true;
+  // }
+  // //Plotly Chart Block
+  // if (config.blocks.blocksConfig.connected_plotly_chart) {
+  //   config.blocks.blocksConfig.connected_plotly_chart.restricted = true;
+  // }
+  // //Tree Map Chart Block
+  // if (config.blocks.blocksConfig.connected_plotly_chart) {
+  //   config.blocks.blocksConfig.treemapChart.restricted = true;
+  // }
 
   // Grid/Teaser block (kitconcept)
   if (config.blocks.blocksConfig.__grid) {
