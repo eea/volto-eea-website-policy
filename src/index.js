@@ -1,7 +1,5 @@
 import { runtimeConfig } from '@plone/volto/runtime_config';
 import installContextNavigationBlock from '@eeacms/volto-eea-website-policy/components/Blocks/ContextNavigation';
-import installLayoutSettingsBlock from '@eeacms/volto-eea-website-policy/components/Blocks/LayoutSettings';
-import { addStylingFieldsetSchemaEnhancer } from '@eeacms/volto-eea-website-policy/components/Blocks/schema';
 
 const applyConfig = (config) => {
   // #158717#note-25 any path that isn't static, en or controlpanel is treated as external
@@ -63,17 +61,6 @@ const applyConfig = (config) => {
   config.blocks.blocksConfig.image.mostUsed = false;
   config.blocks.blocksConfig.video.mostUsed = false;
 
-  // Grid/Teaser block (kitconcept)
-  if (config.blocks.blocksConfig.__grid) {
-    config.blocks.blocksConfig.__grid.restricted = true;
-  }
-  if (config.blocks.blocksConfig.imagesGrid) {
-    config.blocks.blocksConfig.imagesGrid.restricted = true;
-  }
-  if (config.blocks.blocksConfig.teaser) {
-    config.blocks.blocksConfig.teaser.restricted = true;
-  }
-
   // Divider
   if (config.blocks.blocksConfig.dividerBlock) {
     config.blocks.blocksConfig.dividerBlock.mostUsed = true;
@@ -84,37 +71,14 @@ const applyConfig = (config) => {
     config.blocks.blocksConfig.callToActionBlock.mostUsed = true;
   }
 
-  // Group
-  if (config.blocks.blocksConfig.group) {
-    config.blocks.blocksConfig.group.schemaEnhancer = addStylingFieldsetSchemaEnhancer;
-  }
-
-  // Columns
-  if (config.blocks.blocksConfig.columnsBlock) {
-    config.blocks.blocksConfig.columnsBlock.mostUsed = true;
-    config.blocks.blocksConfig.columnsBlock.schemaEnhancer = addStylingFieldsetSchemaEnhancer;
-  }
-
   // Accordion
   if (config.blocks.blocksConfig.accordion) {
     config.blocks.blocksConfig.accordion.mostUsed = true;
   }
 
-  // Listing
-  if (config.blocks.blocksConfig.listing) {
-    config.blocks.blocksConfig.listing.title = 'Listing (Content)';
-    config.blocks.blocksConfig.listing.schemaEnhancer = addStylingFieldsetSchemaEnhancer;
-  }
-
   // Custom blocks
   // context navigation
   config = [installContextNavigationBlock].reduce(
-    (acc, apply) => apply(acc),
-    config,
-  );
-
-  // layout settings
-  config = [installLayoutSettingsBlock].reduce(
     (acc, apply) => apply(acc),
     config,
   );
