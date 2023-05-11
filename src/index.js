@@ -57,25 +57,6 @@ const applyConfig = (config) => {
     config.settings.eea.logoTargetUrl = '/en';
   }
 
-  // Block chooser
-  config.blocks.blocksConfig.image.mostUsed = false;
-  config.blocks.blocksConfig.video.mostUsed = false;
-
-  // Divider
-  if (config.blocks.blocksConfig.dividerBlock) {
-    config.blocks.blocksConfig.dividerBlock.mostUsed = true;
-  }
-
-  // Call to Action
-  if (config.blocks.blocksConfig.callToActionBlock) {
-    config.blocks.blocksConfig.callToActionBlock.mostUsed = true;
-  }
-
-  // Accordion
-  if (config.blocks.blocksConfig.accordion) {
-    config.blocks.blocksConfig.accordion.mostUsed = true;
-  }
-
   // Custom blocks
   // context navigation
   config = [installContextNavigationBlock].reduce(
