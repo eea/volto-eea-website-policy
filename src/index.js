@@ -68,6 +68,13 @@ const applyConfig = (config) => {
   if (config.blocks.blocksConfig.imagecards) {
     config.blocks.blocksConfig.imagecards.restricted = true;
   }
+  
+  if (config.blocks.blocksConfig.embed_eea_tableau_block) {
+    config.blocks.blocksConfig.embed_eea_tableau_block.restricted = true;
+  }
+  if (config.blocks.blocksConfig.embed_eea_map_block) {
+    config.blocks.blocksConfig.embed_eea_map_block.restricted = true;
+  }
 
   config.settings.apiExpanders = [
     ...config.settings.apiExpanders,
