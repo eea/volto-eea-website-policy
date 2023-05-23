@@ -1,6 +1,20 @@
 import { runtimeConfig } from '@plone/volto/runtime_config';
 import installContextNavigationBlock from '@eeacms/volto-eea-website-policy/components/Blocks/ContextNavigation';
 
+const restrictedBlocks = [
+  'imagecards',
+  'embed_eea_tableau_block',
+  'embed_eea_map_block',
+  // TODO: use what is needed from volto-datablocks after clean-up
+  'conditionalDataBlock',
+  'countryFlag',
+  'custom_connected_block',
+  'data_connected_embed',
+  'dataqueryfilter',
+  'dottedTableChart',
+  'simpleDataConnectedTable',
+];
+
 const applyConfig = (config) => {
   // #158717#note-25 any path that isn't static, en or controlpanel is treated as external
   const notInEN = /^(?!.*(#|\/en|\/static|\/controlpanel|\/cypress|\/login|\/logout|\/contact-form)).*$/;
@@ -65,16 +79,11 @@ const applyConfig = (config) => {
   );
 
   // Disable some blocks
-  if (config.blocks.blocksConfig.imagecards) {
-    config.blocks.blocksConfig.imagecards.restricted = true;
-  }
-
-  if (config.blocks.blocksConfig.embed_eea_tableau_block) {
-    config.blocks.blocksConfig.embed_eea_tableau_block.restricted = true;
-  }
-  if (config.blocks.blocksConfig.embed_eea_map_block) {
-    config.blocks.blocksConfig.embed_eea_map_block.restricted = true;
-  }
+  restrictedBlocks.forEach((block) => {
+    if (config.blocks.blocksConfig[block]) {
+      config.blocks.blocksConfig[block].restricted = true;
+    }
+  });
 
   config.settings.apiExpanders = [
     ...config.settings.apiExpanders,
