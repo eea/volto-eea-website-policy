@@ -22,7 +22,7 @@ const applyConfig = (config) => {
     ...(config.settings.externalRoutes || []),
     {
       match: {
-        path: notInEN,
+        path: notInEN.source,
         exact: false,
         strict: false,
       },
