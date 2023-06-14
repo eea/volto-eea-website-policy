@@ -18,7 +18,7 @@ const restrictedBlocks = [
 const applyConfig = (config) => {
   // #158717#note-25 any path that isn't static, en or controlpanel is treated as external
   const notInEN =
-    '**/!(en|static|controlpanel|cypress|login|logout|contact-form)';
+    '!/en/!(login*|logout*|static*|controlpanel*|cypress*|contact-form*)';
   config.settings.externalRoutes = [
     ...(config.settings.externalRoutes || []),
     {
