@@ -9,3 +9,21 @@ export const createSlateParagraph = (text) => {
 export const serializeText = (text) => {
   return isArray(text) ? serializeNodes(text) : text;
 };
+
+export const appendGroup = (config, id, title) => {
+  const groupExists =
+    config.blocks.groupBlocksOrder.filter((group) => group.id === id).length >
+    0;
+
+  if (!groupExists) {
+    config.blocks.groupBlocksOrder = [
+      ...config.blocks.groupBlocksOrder,
+      {
+        id,
+        title,
+      },
+    ];
+  }
+
+  return config.blocks.groupBlocksOrder;
+};
