@@ -1,10 +1,9 @@
 import { runtimeConfig } from '@plone/volto/runtime_config';
 import installContextNavigationBlock from '@eeacms/volto-eea-website-policy/components/Blocks/ContextNavigation';
+import { appendGroup } from './helpers';
 
 const restrictedBlocks = [
   'imagecards',
-  'embed_eea_tableau_block',
-  'embed_eea_map_block',
   // TODO: use what is needed from volto-datablocks after clean-up
   'conditionalDataBlock',
   'countryFlag',
@@ -14,6 +13,21 @@ const restrictedBlocks = [
   'dottedTableChart',
   'simpleDataConnectedTable',
 ];
+
+const overrideBlocks = {
+  embed_tableau_visualization: {
+    group: 'data_visualizations',
+  },
+  tableau_block: {
+    group: 'data_visualizations',
+  },
+  embed_eea_map_block: {
+    group: 'data_visualizations',
+  },
+  dataFigure: {
+    group: 'data_visualizations',
+  },
+};
 
 const applyConfig = (config) => {
   // #158717#note-25 any path that isn't static, en or controlpanel is treated as external
@@ -78,10 +92,27 @@ const applyConfig = (config) => {
     config,
   );
 
+  // Add groups
+  config.blocks.groupBlocksOrder = appendGroup(
+    config,
+    'data_visualizations',
+    'Data Visualizations (Beta)',
+  );
+
   // Disable some blocks
   restrictedBlocks.forEach((block) => {
     if (config.blocks.blocksConfig[block]) {
       config.blocks.blocksConfig[block].restricted = true;
+    }
+  });
+
+  // Override blocks config
+  Object.keys(overrideBlocks).forEach((block) => {
+    if (config.blocks.blocksConfig[block]) {
+      config.blocks.blocksConfig[block] = {
+        ...config.blocks.blocksConfig[block],
+        ...overrideBlocks[block],
+      };
     }
   });
 
