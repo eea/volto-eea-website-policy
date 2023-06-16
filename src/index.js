@@ -24,6 +24,9 @@ const overrideBlocks = {
   embed_eea_map_block: {
     group: 'data_visualizations',
   },
+  dataFigure: {
+    group: 'data_visualizations',
+  },
 };
 
 const applyConfig = (config) => {
