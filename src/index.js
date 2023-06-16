@@ -16,13 +16,13 @@ const restrictedBlocks = [
 
 const overrideBlocks = {
   embed_tableau_visualization: {
-    group: 'plotly',
+    group: 'data_visualizations',
   },
   tableau_block: {
-    group: 'plotly',
+    group: 'data_visualizations',
   },
   embed_eea_map_block: {
-    group: 'plotly',
+    group: 'data_visualizations',
   },
 };
 
@@ -91,7 +91,7 @@ const applyConfig = (config) => {
 
   // Add groups
   config.blocks.groupBlocksOrder = appendGroup(
-    'plotly',
+    'data_visualizations',
     'Data Visualizations (Beta)',
   );
 
