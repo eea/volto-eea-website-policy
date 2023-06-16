@@ -104,7 +104,7 @@ const applyConfig = (config) => {
   });
 
   // Override blocks config
-  overrideBlocks.forEach((block) => {
+  Object.keys(overrideBlocks).forEach((block) => {
     if (config.blocks.blocksConfig[block]) {
       config.blocks.blocksConfig[block] = {
         ...config.blocks.blocksConfig[block],
