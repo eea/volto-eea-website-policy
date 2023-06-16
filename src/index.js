@@ -91,6 +91,7 @@ const applyConfig = (config) => {
 
   // Add groups
   config.blocks.groupBlocksOrder = appendGroup(
+    config,
     'data_visualizations',
     'Data Visualizations (Beta)',
   );
