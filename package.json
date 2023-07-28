@@ -16,7 +16,12 @@
     "type": "git",
     "url": "git@github.com:eea/volto-eea-website-policy.git"
   },
-  "addons": [],
+  "addons": [
+    "@eeacms/volto-widget-dataprovenance"
+  ],
+  "dependencies": {
+    "@eeacms/volto-widget-dataprovenance": "*"
+  },
   "devDependencies": {
     "@cypress/code-coverage": "^3.10.0",
     "@plone/scripts": "*",
