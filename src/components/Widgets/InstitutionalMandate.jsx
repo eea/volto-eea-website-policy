@@ -1,6 +1,5 @@
-// import React from 'react';
-// import RichTextWidget from '@plone/volto-slate/widgets/RichTextWidget';
+import RichTextWidget from '@plone/volto-slate/widgets/RichTextWidget';
 
-export const InstitutionalMandate = () =>
-  // <RichTextWidget {...props} readOnly={true} />
-  ' Institutional Mandate ';
+export const InstitutionalMandate = (props) => {
+  return <RichTextWidget {...props} readOnly={true} />;
+};
