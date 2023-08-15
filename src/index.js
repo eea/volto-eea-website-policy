@@ -2,8 +2,6 @@ import { runtimeConfig } from '@plone/volto/runtime_config';
 import installContextNavigationBlock from '@eeacms/volto-eea-website-policy/components/Blocks/ContextNavigation';
 import { appendGroup } from './helpers';
 import { FrequencyOfDissemination } from '@eeacms/volto-eea-website-policy/components/Widgets/FrequencyOfDissemination';
-import { DataProvenance } from '@eeacms/volto-eea-website-policy/components/Widgets/DataProvenance';
-import { InstitutionalMandate } from '@eeacms/volto-eea-website-policy/components/Widgets/InstitutionalMandate';
 
 const restrictedBlocks = [
   'imagecards',
@@ -120,8 +118,6 @@ const applyConfig = (config) => {
   });
 
   // Custom widgets
-  config.widgets.id.data_provenance = DataProvenance;
-  config.widgets.id.institutional_mandate = InstitutionalMandate;
   config.widgets.views.id.frequency_of_dissemination = FrequencyOfDissemination;
 
   // Subsite
