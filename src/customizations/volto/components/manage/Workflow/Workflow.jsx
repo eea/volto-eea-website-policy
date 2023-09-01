@@ -5,6 +5,7 @@
 
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { uniqBy } from 'lodash';
@@ -180,9 +181,10 @@ class Workflow extends Component {
     getContent: PropTypes.func.isRequired,
     getWorkflow: PropTypes.func.isRequired,
     transitionWorkflow: PropTypes.func.isRequired,
+    workflowLoaded: PropTypes.func.isRequired,
     loaded: PropTypes.bool.isRequired,
     pathname: PropTypes.string.isRequired,
-    history: PropTypes.arrayOf(
+    contentHistory: PropTypes.arrayOf(
       PropTypes.shape({
         review_state: PropTypes.string,
       }),
@@ -205,6 +207,10 @@ class Workflow extends Component {
     transitions: [],
   };
 
+  state = {
+    selectedOption: this.props.currentStateValue,
+  };
+
   componentDidMount() {
     this.props.getWorkflow(this.props.pathname);
   }
@@ -223,6 +229,13 @@ class Workflow extends Component {
       this.props.getWorkflow(nextProps.pathname);
       this.props.getContent(nextProps.pathname);
     }
+    if (!this.props.workflowLoaded && nextProps.workflowLoaded) {
+      this.props.getContent(nextProps.pathname);
+      // #153145 - Redirect to the newly created version
+      if (this.state?.selectedOption?.value === 'createNewVersion') {
+        this.props.history.push(`${nextProps.pathname}.1`);
+      }
+    }
   }
 
   /**
@@ -233,6 +246,7 @@ class Workflow extends Component {
    */
   transition = (selectedOption) => {
     this.props.transitionWorkflow(flattenToAppURL(selectedOption.url));
+    this.setState({ selectedOption });
     toast.success(
       <Toast
         success
@@ -292,6 +306,18 @@ class Workflow extends Component {
   render() {
     const { Placeholder } = this.props.reactSelect.components;
     const Select = this.props.reactSelect.default;
+    // Remove markForDeletion transition if item is published
+    // in order not to un-publish items by mistake. This transition
+    // can still be executed from /contents - refs #256563, #153145
+    const transitions = this.props.transitions.filter((transition) => {
+      if (
+        transition?.['@id']?.endsWith('markForDeletion') &&
+        this.props?.content?.review_state === 'published'
+      ) {
+        return false;
+      }
+      return true;
+    });
 
     return (
       <FormFieldWrapper
@@ -304,13 +330,10 @@ class Workflow extends Component {
           className="react-select-container"
           classNamePrefix="react-select"
           isDisabled={
-            !this.props.content.review_state ||
-            this.props.transitions.length === 0
+            !this.props.content.review_state || transitions.length === 0
           }
           options={uniqBy(
-            this.props.transitions.map((transition) =>
-              getWorkflowOptions(transition),
-            ),
+            transitions.map((transition) => getWorkflowOptions(transition)),
             'label',
           ).concat(this.props.currentStateValue)}
           styles={customSelectStyles}
@@ -342,11 +365,13 @@ class Workflow extends Component {
 export default compose(
   injectIntl,
   injectLazyLibs(['reactSelect']),
+  withRouter,
   connect(
     (state) => ({
       loaded: state.workflow.transition.loaded,
       content: state.content.data,
-      history: state.workflow.history,
+      workflowLoaded: state.workflow.get?.loaded,
+      contentHistory: state.workflow.history,
       transitions: state.workflow.transitions,
       currentStateValue: getCurrentStateMapping(state.workflow.currentState),
     }),
