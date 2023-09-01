@@ -181,7 +181,7 @@ class Workflow extends Component {
     getContent: PropTypes.func.isRequired,
     getWorkflow: PropTypes.func.isRequired,
     transitionWorkflow: PropTypes.func.isRequired,
-    workflowLoaded: PropTypes.func.isRequired,
+    workflowLoaded: PropTypes.func,
     loaded: PropTypes.bool.isRequired,
     pathname: PropTypes.string.isRequired,
     contentHistory: PropTypes.arrayOf(
