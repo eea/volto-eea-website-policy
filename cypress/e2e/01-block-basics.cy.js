@@ -25,5 +25,11 @@ describe('Blocks Tests', () => {
     // then the page view should contain our changes
     cy.contains('My Add-on Page');
     cy.get('.block.image');
+
+    cy.get('#toolbar-more').click();
+    cy.get('.state-select .react-select-container')
+      .click()
+      .contains('Publish')
+      .click({ force: true });
   });
 });
