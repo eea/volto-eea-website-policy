@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FrequencyOfDissemination renders "Every 2 years" when value is 2 1`] = `
+<span
+  class="text widget"
+>
+  Every 2 years
+</span>
+`;
+
+exports[`FrequencyOfDissemination renders "Once a year" when value is 1 1`] = `
+<span
+  class="text widget"
+>
+  Once a year
+</span>
+`;
+
+exports[`FrequencyOfDissemination renders custom text when children prop is provided 1`] = `
+<span
+  class="text widget"
+>
+  Frequency: Every 3 years
+</span>
+`;
+
+exports[`FrequencyOfDissemination renders nothing when value is falsy 1`] = ``;
