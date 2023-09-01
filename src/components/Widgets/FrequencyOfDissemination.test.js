@@ -17,7 +17,7 @@ describe('FrequencyOfDissemination', () => {
     const { getByText } = render(
       <FrequencyOfDissemination value={3}>
         {(text) => `Frequency: ${text}`}
-      </FrequencyOfDissemination>
+      </FrequencyOfDissemination>,
     );
     expect(getByText('Frequency: Every 3 years')).toMatchSnapshot();
   });
