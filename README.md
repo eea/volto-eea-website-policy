@@ -50,7 +50,7 @@ Go to http://localhost:3000
    ],
 
    "dependencies": {
-       "@eeacms/volto-eea-website-policy": "^1.0.0"
+       "@eeacms/volto-eea-website-policy": "*"
    }
    ```
 
@@ -58,7 +58,7 @@ Go to http://localhost:3000
 
    ```
    npm install -g yo @plone/generator-volto
-   yo @plone/volto my-volto-project --addon @eeacms/volto-eea-website-policy
+   yo @plone/volto my-volto-project --canary --addon @eeacms/volto-eea-website-policy
    cd my-volto-project
    ```
 
