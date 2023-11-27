@@ -16,15 +16,19 @@ const restrictedBlocks = [
 ];
 
 const overrideBlocks = {
+  embed_visualization: {
+    group: 'data_visualizations',
+  },
   embed_tableau_visualization: {
     group: 'data_visualizations',
-    restricted: true,
   },
-  tableau_block: {
+  embed_maps: {
     group: 'data_visualizations',
-    restricted: true,
   },
   embed_eea_map_block: {
+    group: 'data_visualizations',
+  },
+  tableau_block: {
     group: 'data_visualizations',
     restricted: true,
   },
