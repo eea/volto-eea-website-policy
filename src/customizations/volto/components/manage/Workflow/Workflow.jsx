@@ -35,6 +35,10 @@ const messages = defineMessages({
     id: 'Workflow updated.',
     defaultMessage: 'Workflow updated.',
   },
+  notAllowedToUpdateWorkflow: {
+    id: 'notAllowedToUpdateWorkflow',
+    defaultMessage: 'Please fill out all the required fields',
+  },
   messageNoWorkflow: {
     id: 'No workflow',
     defaultMessage: 'No workflow',
@@ -44,6 +48,21 @@ const messages = defineMessages({
     defaultMessage: 'State',
   },
 });
+
+const filter_remaining_steps = (values, key) => {
+  return values.filter((value) => {
+    const is_not_ready = !value.is_ready;
+    if (!is_not_ready) {
+      return false;
+    }
+    const states = value.states;
+    const required_for_all = states?.indexOf('all') !== -1;
+    return (
+      (is_not_ready && required_for_all) ||
+      (is_not_ready && states?.indexOf(key) !== -1)
+    );
+  });
+};
 
 const SingleValue = injectLazyLibs('reactSelect')(({ children, ...props }) => {
   const stateDecorator = {
@@ -184,6 +203,7 @@ class Workflow extends Component {
     workflowLoaded: PropTypes.func,
     loaded: PropTypes.bool.isRequired,
     pathname: PropTypes.string.isRequired,
+
     contentHistory: PropTypes.arrayOf(
       PropTypes.shape({
         review_state: PropTypes.string,
@@ -245,15 +265,27 @@ class Workflow extends Component {
    * @returns {undefined}
    */
   transition = (selectedOption) => {
-    this.props.transitionWorkflow(flattenToAppURL(selectedOption.url));
-    this.setState({ selectedOption });
-    toast.success(
-      <Toast
-        success
-        title={this.props.intl.formatMessage(messages.messageUpdated)}
-        content=""
-      />,
-    );
+    if (filter_remaining_steps(this.props.editingProgressSteps).length === 0) {
+      this.props.transitionWorkflow(flattenToAppURL(selectedOption.url));
+      this.setState({ selectedOption });
+      toast.success(
+        <Toast
+          success
+          title={this.props.intl.formatMessage(messages.messageUpdated)}
+          content=""
+        />,
+      );
+    } else {
+      toast.error(
+        <Toast
+          error
+          title={this.props.intl.formatMessage(
+            messages.notAllowedToUpdateWorkflow,
+          )}
+          content=""
+        />,
+      );
+    }
   };
 
   selectValue = (option) => {
@@ -367,13 +399,17 @@ export default compose(
   injectLazyLibs(['reactSelect']),
   withRouter,
   connect(
-    (state) => ({
+    (state, props) => ({
       loaded: state.workflow.transition.loaded,
       content: state.content.data,
       workflowLoaded: state.workflow.get?.loaded,
       contentHistory: state.workflow.history,
       transitions: state.workflow.transitions,
       currentStateValue: getCurrentStateMapping(state.workflow.currentState),
+      editingProgressSteps:
+        state?.editingProgress?.editing?.loaded === true
+          ? state?.editingProgress?.result?.steps
+          : [],
     }),
     { getContent, getWorkflow, transitionWorkflow },
   ),
