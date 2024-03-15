@@ -3,7 +3,7 @@ import ContextNavigationEdit from './ContextNavigationEdit';
 import ContextNavigationView from './ContextNavigationView';
 import BlockSettingsSchema from '@plone/volto/components/manage/Blocks/Block/Schema';
 
-export default (config) => {
+const config = (config) => {
   config.blocks.blocksConfig.contextNavigation = {
     id: 'contextNavigation',
     title: 'Navigation',
@@ -24,3 +24,5 @@ export default (config) => {
 
   return config;
 };
+
+export default config;
