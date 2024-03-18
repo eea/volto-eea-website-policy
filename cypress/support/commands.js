@@ -447,7 +447,7 @@ Cypress.Commands.add('toolbarSave', () => {
 
   // Save
   cy.get('#toolbar-save').click();
- cy.waitForResourceToLoad('');
+  cy.waitForResourceToLoad('');
   cy.url().should('eq', Cypress.config().baseUrl + '/cypress/my-page');
 });
 

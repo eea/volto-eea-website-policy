@@ -39,7 +39,6 @@ export const slateBeforeEach = (contentType = 'Document') => {
   cy.visit('/cypress/my-page');
   cy.wait('@content')
   cy.navigate('/cypress/my-page/edit');
-
 };
 
 export const slateAfterEach = () => {
