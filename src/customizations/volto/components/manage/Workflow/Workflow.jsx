@@ -287,9 +287,7 @@ class Workflow extends Component {
           title={this.props.intl.formatMessage(
             messages.notAllowedToUpdateWorkflow,
           )}
-          content={this.props.intl.formatMessage(
-            messages.notAllowedToUpdateWorkflow,
-          )}
+          content=""
         />,
       );
     }
