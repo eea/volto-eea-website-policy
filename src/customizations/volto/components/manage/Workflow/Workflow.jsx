@@ -421,5 +421,3 @@ export default compose(
     { getContent, getWorkflow, transitionWorkflow },
   ),
 )(Workflow);
-
-
