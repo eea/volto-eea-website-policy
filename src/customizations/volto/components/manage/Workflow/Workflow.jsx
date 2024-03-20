@@ -265,7 +265,12 @@ class Workflow extends Component {
    * @returns {undefined}
    */
   transition = (selectedOption) => {
-    if (filter_remaining_steps(this.props.editingProgressSteps).length === 0) {
+    if (
+      filter_remaining_steps(
+        this.props.editingProgressSteps,
+        this.props?.content?.review_state || '',
+      ).length === 0
+    ) {
       this.props.transitionWorkflow(flattenToAppURL(selectedOption.url));
       this.setState({ selectedOption });
       toast.success(
@@ -282,7 +287,9 @@ class Workflow extends Component {
           title={this.props.intl.formatMessage(
             messages.notAllowedToUpdateWorkflow,
           )}
-          content=""
+          content={this.props.intl.formatMessage(
+            messages.notAllowedToUpdateWorkflow,
+          )}
         />,
       );
     }
@@ -414,3 +421,5 @@ export default compose(
     { getContent, getWorkflow, transitionWorkflow },
   ),
 )(Workflow);
+
+
