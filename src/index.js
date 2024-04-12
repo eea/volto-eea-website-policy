@@ -92,11 +92,13 @@ const applyConfig = (config) => {
   // Logo URL
   if (config.settings.eea) {
     config.settings.eea.logoTargetUrl = '/en';
-  } else {
-    // #268249 - only allow managers to change layout from more menu
-    config.settings.eea = {};
-    config.settings.eea.rolesWhoCanChangeLayout = ['Manager'];
   }
+  // #268249 - only allow managers to change layout from more menu
+  config.settings.eea = {
+    ...config.settings.eea,
+    rolesWhoCanChangeLayout: ['Manager'],
+  };
+  // config.settings.eea.rolesWhoCanChangeLayout = ['Manager'];
 
   // Custom blocks
   // context navigation
