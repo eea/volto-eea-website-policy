@@ -162,7 +162,7 @@ class DisplaySelect extends Component {
     },
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     if (!this.props.rolesWhoCanChangeLayout.length) {
       this.props.rolesWhoCanChangeLayout.push(
         ...(config?.settings?.eea?.rolesWhoCanChangeLayout || []),
