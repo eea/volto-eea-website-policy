@@ -89,6 +89,9 @@ const applyConfig = (config) => {
   //   (item) => item.code,
   // ) || ['en'];
 
+  // #268249 - only allow managers to change layout from more menu
+  config.settings.eea.rolesWhoCanChangeLayout = ['Manager'];
+
   // Logo URL
   if (config.settings.eea) {
     config.settings.eea.logoTargetUrl = '/en';

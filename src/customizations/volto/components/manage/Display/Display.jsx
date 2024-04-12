@@ -4,7 +4,13 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { injectLazyLibs } from '@plone/volto/helpers/Loadable/Loadable';
 
-import { getSchema, updateContent, getContent } from '@plone/volto/actions';
+import jwtDecode from 'jwt-decode';
+import {
+  getSchema,
+  getUser,
+  updateContent,
+  getContent,
+} from '@plone/volto/actions';
 import { getLayoutFieldname } from '@plone/volto/helpers';
 import { FormFieldWrapper, Icon } from '@plone/volto/components';
 import { defineMessages, injectIntl } from 'react-intl';
@@ -139,9 +145,11 @@ class DisplaySelect extends Component {
   static defaultProps = {
     layouts: [],
     layout: '',
+    rolesWhoCanChangeLayout: [],
   };
 
   state = {
+    hasMatchingRole: false,
     selectedOption: {
       value: this.props.layout,
       label:
@@ -153,8 +161,25 @@ class DisplaySelect extends Component {
     },
   };
 
-  componentDidMount() {
-    this.props.getSchema(this.props.type);
+  componentWillMount() {
+    if (!this.props.rolesWhoCanChangeLayout.length) {
+      this.props.rolesWhoCanChangeLayout.push(
+        ...(config?.settings?.eea?.rolesWhoCanChangeLayout || []),
+      );
+    }
+    if (!this.props.layouts.length) {
+      this.props.getSchema(this.props.type);
+    }
+    if (Object.keys(this.props.user).length === 0) {
+      this.props.getUser(this.props.userId);
+    } else {
+      const hasMatchingRole = this.props.user.roles.some((role) =>
+        this.props.rolesWhoCanChangeLayout.includes(role),
+      );
+      if (hasMatchingRole !== this.state.hasMatchingRole) {
+        this.setState({ hasMatchingRole });
+      }
+    }
   }
 
   /**
@@ -169,6 +194,15 @@ class DisplaySelect extends Component {
     }
     if (!this.props.loaded && nextProps.loaded) {
       this.props.getContent(nextProps.pathname);
+    }
+
+    if (Object.keys(nextProps.user).length !== 0) {
+      const hasMatchingRole = nextProps.user.roles.some((role) =>
+        this.props.rolesWhoCanChangeLayout.includes(role),
+      );
+      if (hasMatchingRole !== this.state.hasMatchingRole) {
+        this.setState({ hasMatchingRole });
+      }
     }
   }
 
@@ -199,6 +233,9 @@ class DisplaySelect extends Component {
   );
 
   render() {
+    if (!this.state.hasMatchingRole) {
+      return null;
+    }
     const { selectedOption } = this.state;
     const Select = this.props.reactSelect.default;
     const layoutsNames = config.views.layoutViewsNamesMapping;
@@ -254,7 +291,11 @@ export default compose(
         ? getLayoutFieldname(state.content.data)
         : '',
       type: state.content.data ? state.content.data['@type'] : '',
+      user: state.users.user,
+      userId: state.userSession.token
+        ? jwtDecode(state.userSession.token).sub
+        : '',
     }),
-    { getSchema, updateContent, getContent },
+    { getSchema, getUser, updateContent, getContent },
   ),
 )(DisplaySelect);
