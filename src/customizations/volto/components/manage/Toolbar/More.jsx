@@ -341,7 +341,7 @@ class More extends Component {
                   <div className="pastanaga-menu-list">
                     <ul>
                       {pluggables.map((p) => (
-                        <>{p()}</>
+                        <React.Fragment key={p.id}>{p()}</React.Fragment>
                       ))}
                     </ul>
                   </div>
