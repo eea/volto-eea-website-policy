@@ -3,20 +3,20 @@
  * @module components/manage/Workflow/Workflow
  */
 
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { uniqBy } from 'lodash';
-import { toast } from 'react-toastify';
-import { defineMessages, injectIntl } from 'react-intl';
 import { FormFieldWrapper, Icon, Toast } from '@plone/volto/components';
 import {
   flattenToAppURL,
   getCurrentStateMapping,
   getWorkflowOptions,
 } from '@plone/volto/helpers';
+import { uniqBy } from 'lodash';
+import PropTypes from 'prop-types';
+import { Component, Fragment } from 'react';
+import { defineMessages, injectIntl } from 'react-intl';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { compose } from 'redux';
 
 import { injectLazyLibs } from '@plone/volto/helpers/Loadable/Loadable';
 
@@ -26,9 +26,9 @@ import {
   transitionWorkflow,
 } from '@plone/volto/actions';
 
+import checkSVG from '@plone/volto/icons/check.svg';
 import downSVG from '@plone/volto/icons/down-key.svg';
 import upSVG from '@plone/volto/icons/up-key.svg';
-import checkSVG from '@plone/volto/icons/check.svg';
 
 const messages = defineMessages({
   messageUpdated: {
@@ -200,7 +200,7 @@ class Workflow extends Component {
     getContent: PropTypes.func.isRequired,
     getWorkflow: PropTypes.func.isRequired,
     transitionWorkflow: PropTypes.func.isRequired,
-    workflowLoaded: PropTypes.func,
+    workflowLoaded: PropTypes.bool,
     loaded: PropTypes.bool.isRequired,
     pathname: PropTypes.string.isRequired,
 
