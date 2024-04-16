@@ -231,6 +231,10 @@ class Workflow extends Component {
     selectedOption: this.props.currentStateValue,
   };
 
+  componentDidMount() {
+    this.props.getWorkflow(this.props.pathname);
+  }
+
   /**
    * Component will receive props
    * @method componentWillReceiveProps
