@@ -39,7 +39,8 @@ const overrideBlocks = {
 
 const applyConfig = (config) => {
   // #158717#note-25 any path that isn't static, en or controlpanel is treated as external
-  const notInEN = /^(?!(#|\/en|\/login-authomatic|\/fallback_login|\/static|\/controlpanel|\/cypress|\/login|\/logout|\/contact-form|\/passwordreset)).*$/;
+  const notInEN =
+    /^(?!(#|\/en|\/login-authomatic|\/fallback_login|\/static|\/controlpanel|\/cypress|\/login|\/logout|\/contact-form|\/passwordreset)).*$/;
   config.settings.externalRoutes = [
     ...(config.settings.externalRoutes || []),
     {
@@ -92,6 +93,12 @@ const applyConfig = (config) => {
   if (config.settings.eea) {
     config.settings.eea.logoTargetUrl = '/en';
   }
+  // #268249 - only allow managers to change layout from more menu
+  config.settings.eea = {
+    ...config.settings.eea,
+    rolesWhoCanChangeLayout: ['Manager'],
+  };
+  // config.settings.eea.rolesWhoCanChangeLayout = ['Manager'];
 
   // Custom blocks
   // context navigation

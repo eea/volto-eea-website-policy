@@ -82,8 +82,7 @@ const messages = defineMessages({
     defaultMessage: 'Changes applied',
   },
   workingCopyAppliedBy: {
-    id:
-      'Made by {creator} on {date}. This is not a working copy anymore, but the main content.',
+    id: 'Made by {creator} on {date}. This is not a working copy anymore, but the main content.',
     defaultMessage:
       'Made by {creator} on {date}. This is not a working copy anymore, but the main content.',
   },
@@ -342,7 +341,7 @@ class More extends Component {
                   <div className="pastanaga-menu-list">
                     <ul>
                       {pluggables.map((p) => (
-                        <>{p()}</>
+                        <React.Fragment key={p.id}>{p()}</React.Fragment>
                       ))}
                     </ul>
                   </div>
