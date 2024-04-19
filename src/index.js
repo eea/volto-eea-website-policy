@@ -3,7 +3,9 @@ import installContextNavigationBlock from '@eeacms/volto-eea-website-policy/comp
 import { appendGroup } from './helpers';
 import { FrequencyOfDissemination } from '@eeacms/volto-eea-website-policy/components/Widgets/FrequencyOfDissemination';
 import Login from '@plone-collective/volto-authomatic/components/Login/Login.jsx';
+import Logout from '@plone-collective/volto-authomatic/components/Logout/Logout.jsx';
 import { Login as VoltoLogin } from '@plone/volto/components';
+
 const restrictedBlocks = [
   'imagecards',
   // TODO: use what is needed from volto-datablocks after clean-up
@@ -55,7 +57,8 @@ const applyConfig = (config) => {
   //Make azure login to be at route azure_login, and ldap login to be at /login
 
   config.addonRoutes = config.addonRoutes.filter(
-    (route) => !route.path.includes('/login'),
+    (route) =>
+      !route.path.includes('/login') && !route.path.includes('/logout'),
   );
 
   config.addonRoutes.push(
@@ -66,6 +69,8 @@ const applyConfig = (config) => {
     { path: '/**/azure_login', component: Login },
     { path: '/login', component: VoltoLogin },
     { path: '/**/login', component: VoltoLogin },
+    { path: '/logout', component: Logout },
+    { path: '/**/logout', component: Logout },
   );
 
   // #160689 Redirect contact-form to contact-us
