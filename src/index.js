@@ -2,7 +2,8 @@ import { runtimeConfig } from '@plone/volto/runtime_config';
 import installContextNavigationBlock from '@eeacms/volto-eea-website-policy/components/Blocks/ContextNavigation';
 import { appendGroup } from './helpers';
 import { FrequencyOfDissemination } from '@eeacms/volto-eea-website-policy/components/Widgets/FrequencyOfDissemination';
-
+import Login from '@plone-collective/volto-authomatic/components/Login/Login.jsx';
+import { Login as VoltoLogin } from '@plone/volto/components';
 const restrictedBlocks = [
   'imagecards',
   // TODO: use what is needed from volto-datablocks after clean-up
@@ -39,8 +40,7 @@ const overrideBlocks = {
 
 const applyConfig = (config) => {
   // #158717#note-25 any path that isn't static, en or controlpanel is treated as external
-  const notInEN =
-    /^(?!(#|\/en|\/login-authomatic|\/fallback_login|\/static|\/controlpanel|\/cypress|\/login|\/logout|\/contact-form|\/passwordreset)).*$/;
+  const notInEN = /^(?!(#|\/en|\/login-authomatic|\/fallback_login|\/static|\/controlpanel|\/cypress|\/login|\/logout|\/contact-form|\/passwordreset)).*$/;
   config.settings.externalRoutes = [
     ...(config.settings.externalRoutes || []),
     {
@@ -51,6 +51,22 @@ const applyConfig = (config) => {
       },
     },
   ];
+
+  //Make azure login to be at route azure_login, and ldap login to be at /login
+
+  config.addonRoutes = config.addonRoutes.filter(
+    (route) => !route.path.includes('/login'),
+  );
+
+  config.addonRoutes.push(
+    {
+      path: '/**/azure_login',
+      component: Login,
+    },
+    { path: '/**/azure_login', component: Login },
+    { path: '/login', component: VoltoLogin },
+    { path: '/**/login', component: VoltoLogin },
+  );
 
   // #160689 Redirect contact-form to contact-us
   config.settings.contactForm = '/en/about/contact-us';
