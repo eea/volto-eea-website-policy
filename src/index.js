@@ -2,7 +2,7 @@ import { runtimeConfig } from '@plone/volto/runtime_config';
 import installContextNavigationBlock from '@eeacms/volto-eea-website-policy/components/Blocks/ContextNavigation';
 import { appendGroup } from './helpers';
 import { FrequencyOfDissemination } from '@eeacms/volto-eea-website-policy/components/Widgets/FrequencyOfDissemination';
-import Login from '@plone-collective/volto-authomatic/components/Login/Login.jsx';
+import Login from '@eeacms/volto-eea-website-policy/components/AzureLogin/Login.jsx';
 import Logout from '@plone-collective/volto-authomatic/components/Logout/Logout.jsx';
 import { Login as VoltoLogin } from '@plone/volto/components';
 
@@ -42,8 +42,7 @@ const overrideBlocks = {
 
 const applyConfig = (config) => {
   // #158717#note-25 any path that isn't static, en or controlpanel is treated as external
-  const notInEN =
-    /^(?!(#|\/en|\/login-authomatic|\/fallback_login|\/static|\/controlpanel|\/cypress|\/login|\/logout|\/contact-form|\/passwordreset)).*$/;
+  const notInEN = /^(?!(#|\/en|\/login-authomatic|\/fallback_login|\/static|\/controlpanel|\/cypress|\/login|\/logout|\/contact-form|\/passwordreset)).*$/;
   config.settings.externalRoutes = [
     ...(config.settings.externalRoutes || []),
     {
@@ -64,7 +63,7 @@ const applyConfig = (config) => {
 
   config.addonRoutes.push(
     {
-      path: '/**/azure_login',
+      path: '/azure_login',
       component: Login,
     },
     { path: '/**/azure_login', component: Login },
