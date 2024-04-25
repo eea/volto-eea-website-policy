@@ -59,7 +59,7 @@ const applyConfig = (config) => {
 
   config.addonRoutes = config.addonRoutes.filter(
     (route) =>
-      !route.path.includes('/login') && !route.path.includes('/logout'),
+      (!route.path.includes('/login') || route.path.includes('/login-authomatic')) && !route.path.includes('/logout'),
   );
 
   config.addonRoutes.push(
