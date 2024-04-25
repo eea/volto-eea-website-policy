@@ -56,25 +56,15 @@ const applyConfig = (config) => {
   ];
 
   //Make azure login to be at route azure_login, and ldap login to be at /login
-
-  config.addonRoutes = config.addonRoutes.filter(
-    (route) =>
-      (!route.path.includes('/login') ||
-        route.path.includes('/login-authomatic')) &&
-      !route.path.includes('/logout'),
-  );
-
-  config.addonRoutes.push(
-    {
-      path: '/azure_login',
-      component: Login,
-    },
+  config.addonRoutes = [
+    { path: '/azure_login', component: Login },
     { path: '/**/azure_login', component: Login },
     { path: '/login', component: VoltoLogin },
     { path: '/**/login', component: VoltoLogin },
     { path: '/logout', component: Logout },
     { path: '/**/logout', component: Logout },
-  );
+    ...(config.addonRoutes || []),
+  ];
 
   // #160689 Redirect contact-form to contact-us
   config.settings.contactForm = '/en/about/contact-us';
