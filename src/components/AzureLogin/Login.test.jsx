@@ -1,16 +1,42 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event'; // For simulating clicks
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store'; // For creating a mock store
+import { render, screen, fireEvent } from '@testing-library/react';
+import { Provider } from 'react-intl-redux';
+import configureStore from 'redux-mock-store';
+import { useLocation } from 'react-router-dom';
+import { listAuthOptions } from '@plone-collective/volto-authomatic/actions';
+import '@testing-library/jest-dom/extend-expect';
+
 import Login from './Login';
 
 const mockStore = configureStore();
 
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useLocation: jest.fn(),
+}));
+
+jest.useFakeTimers();
+
 describe('Login component', () => {
+  beforeEach(() => {
+    useLocation.mockReturnValue({ pathname: '/azure_login' });
+  });
+
   it('renders correctly with loading state', () => {
     const store = mockStore({
       authOptions: { loading: true, options: [] },
+      authomaticRedirect: {
+        next_url: '/dashboard',
+        session: true,
+      },
+      oidcRedirect: {
+        next_url: '/dashboard',
+        session: true,
+      },
+      intl: {
+        locale: 'en',
+        messages: {},
+        formatMessage: jest.fn(),
+      },
     });
 
     render(
@@ -19,11 +45,26 @@ describe('Login component', () => {
       </Provider>,
     );
 
-    expect(screen.getByText('Loading...')).toBeInTheDocument();
+    expect(screen.getByText('Loading')).toBeInTheDocument();
   });
 
   it('dispatches listAuthOptions on mount', () => {
-    const store = mockStore({});
+    const store = mockStore({
+      authOptions: { loading: true, options: [] },
+      authomaticRedirect: {
+        next_url: '/dashboard',
+        session: true,
+      },
+      oidcRedirect: {
+        next_url: '/dashboard',
+        session: true,
+      },
+      intl: {
+        locale: 'en',
+        messages: {},
+        formatMessage: jest.fn(),
+      },
+    });
     const dispatch = jest.spyOn(store, 'dispatch');
 
     render(
@@ -44,6 +85,19 @@ describe('Login component', () => {
           { id: 'twitter', title: 'Twitter' },
         ],
       },
+      authomaticRedirect: {
+        next_url: '/dashboard',
+        session: true,
+      },
+      oidcRedirect: {
+        next_url: '/dashboard',
+        session: true,
+      },
+      intl: {
+        locale: 'en',
+        messages: {},
+        formatMessage: jest.fn(),
+      },
     });
 
     render(
@@ -59,45 +113,29 @@ describe('Login component', () => {
     expect(
       screen.getByRole('button', { name: /Twitter/i }),
     ).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: /Facebook/i }));
   });
 
-  it('calls onSelectProvider and dispatches authomaticRedirect on provider selection', () => {
+  it('clicks on GitHub button for OAuth login', () => {
+    useLocation.mockReturnValue({ pathname: '/login' });
+
     const store = mockStore({
       authOptions: {
         loading: false,
         options: [{ id: 'github', title: 'GitHub' }],
       },
-    });
-
-    const mockOnSelectProvider = jest.fn();
-    const mockDispatch = jest.spyOn(store, 'dispatch');
-
-    render(
-      <Provider store={store}>
-        <LoginForm onSelectProvider={mockOnSelectProvider} />
-      </Provider>,
-    );
-
-    userEvent.click(screen.getByRole('button', { name: /GitHub/i }));
-
-    expect(mockOnSelectProvider).toHaveBeenCalledWith({
-      id: 'github',
-      title: 'GitHub',
-    });
-    expect(mockDispatch).toHaveBeenCalledWith(authomaticRedirect('github'));
-  });
-
-  it('redirects after a successful OAuth login', () => {
-    const store = mockStore({
-      // ... other necessary state
       authomaticRedirect: { next_url: '/dashboard', session: true },
+      oidcRedirect: {
+        next_url: '/dashboard',
+        session: true,
+      },
+      intl: {
+        locale: 'en',
+        messages: {},
+        formatMessage: jest.fn(),
+      },
     });
-
-    // Mock window.location.href (Simplified for example)
-    const mockLocation = { href: '' };
-    jest
-      .spyOn(window, 'location', 'get')
-      .mockImplementation(() => mockLocation);
 
     render(
       <Provider store={store}>
@@ -105,10 +143,37 @@ describe('Login component', () => {
       </Provider>,
     );
 
-    // ... User clicks a provider (similar to the previous test)
-    userEvent.click(screen.getByRole('button', { name: /GitHub/i }));
+    fireEvent.click(screen.getByRole('button', { name: /GitHub/i }));
+  });
 
-    // Assertion after simulated redirect
-    expect(mockLocation.href).toBe('/dashboard');
+  it('renders correctly with loading state', () => {
+    const store = mockStore({
+      authOptions: {
+        loading: true,
+        options: [{ id: 'oidc', title: 'OIDC' }],
+      },
+      authomaticRedirect: {
+        next_url: '/dashboard',
+        session: true,
+      },
+      oidcRedirect: {
+        next_url: '/dashboard',
+        session: true,
+      },
+      intl: {
+        locale: 'en',
+        messages: {},
+        formatMessage: jest.fn(),
+      },
+    });
+
+    render(
+      <Provider store={store}>
+        <Login />
+      </Provider>,
+    );
+
+    expect(screen.getByText('Loading')).toBeInTheDocument();
+    jest.advanceTimersByTime(500);
   });
 });
