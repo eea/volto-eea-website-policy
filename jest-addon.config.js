@@ -1,4 +1,4 @@
-require('dotenv').config({ path: __dirname + '/.env' })
+require('dotenv').config({ path: __dirname + '/.env' });
 
 module.exports = {
   testMatch: ['**/src/addons/**/?(*.)+(spec|test).[jt]s?(x)'],
@@ -8,6 +8,8 @@ module.exports = {
   ],
   moduleNameMapper: {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
+    '@plone-collective/volto-authomatic/(.*)$':
+      '<rootDir>/node_modules/@plone-collective/volto-authomatic/src/$1',
     '@plone/volto/cypress': '<rootDir>/node_modules/@plone/volto/cypress',
     '@plone/volto/babel': '<rootDir>/node_modules/@plone/volto/babel',
     '@plone/volto/(.*)$': '<rootDir>/node_modules/@plone/volto/src/$1',
@@ -26,7 +28,7 @@ module.exports = {
       '<rootDir>/node_modules/@plone/volto/jest-addons-loader.js',
   },
   transformIgnorePatterns: [
-    '/node_modules/(?!(@plone|@root|@package|@eeacms)/).*/',
+    '/node_modules/(?!(@plone|@root|@package|@eeacms|@plone-collective)/).*/',
   ],
   transform: {
     '^.+\\.js(x)?$': 'babel-jest',
@@ -48,4 +50,4 @@ module.exports = {
       '<rootDir>/node_modules/@eeacms/volto-eea-website-policy/jest.setup.js',
     ],
   }),
-}
+};
