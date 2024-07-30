@@ -2,6 +2,7 @@ import codeSVG from '@plone/volto/icons/code.svg';
 import ContextNavigationEdit from './ContextNavigationEdit';
 import ContextNavigationView from './ContextNavigationView';
 import BlockSettingsSchema from '@plone/volto/components/manage/Blocks/Block/Schema';
+import variations from './variations';
 
 const applyConfig = (config) => {
   config.blocks.blocksConfig.contextNavigation = {
@@ -13,6 +14,7 @@ const applyConfig = (config) => {
     edit: ContextNavigationEdit,
     schema: BlockSettingsSchema,
     restricted: true,
+    variations,
     mostUsed: true,
     blockHasOwnFocusManagement: true,
     sidebarTab: 1,

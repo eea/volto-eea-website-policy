@@ -135,6 +135,10 @@ const applyConfig = (config) => {
     }
   });
 
+  if (config.blocks.blocksConfig.contextNavigation) {
+    config.blocks.blocksConfig.contextNavigation.restricted = false;
+  }
+
   // Override blocks config
   Object.keys(overrideBlocks).forEach((block) => {
     if (config.blocks.blocksConfig[block]) {
