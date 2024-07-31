@@ -9,9 +9,10 @@ const ContextNavigationView = (props) => {
   const root_path = data?.root_node?.[0]?.['@id'];
   if (root_path) navProps['root_path'] = flattenToAppURL(root_path);
   const Renderer = variation?.view;
+  delete navProps.variation;
   return (
     <>
-      <Renderer {...props} params={navProps} />
+      <Renderer params={navProps} />
     </>
   );
 };
