@@ -42,7 +42,12 @@ function renderItems({
     ...rest
   } = item;
 
-  const isActive = is_current || !!activeItems[normalized_id];
+  const computeActive = () => {
+    const hasIsCurrent = childItems.some((child) => child.is_current);
+    return is_current || !!activeItems[normalized_id] || hasIsCurrent;
+  };
+
+  const isActive = computeActive();
   const hasChildItems = childItems && childItems.length > 0;
   return (
     <React.Fragment key={index}>
@@ -58,7 +63,11 @@ function renderItems({
           <p>{title}</p>
         </Accordion.Title>
       ) : (
-        <div className="title">
+        <div
+          className={cx('title', {
+            active: is_current,
+          })}
+        >
           <p>
             {type !== 'link' ? (
               <Link
@@ -70,13 +79,6 @@ function renderItems({
               >
                 {thumb ? <Image src={flattenToAppURL(thumb)} /> : ''}
                 {title}
-                {is_current ? (
-                  <div className="active-indicator">
-                    <Icon name={rightIcon} size="30px" />
-                  </div>
-                ) : (
-                  ''
-                )}
               </Link>
             ) : (
               <UniversalLink href={flattenToAppURL(href)}>
@@ -86,21 +88,25 @@ function renderItems({
           </p>
         </div>
       )}
-      <Accordion.Content active={isActive}>
-        {hasChildItems && (
-          <Accordion className="default">
-            {childItems.map((item, index) =>
-              renderItems({
-                item,
-                index,
-                activeItems,
-                handleTitleClick,
-                parentLevel: level,
-              }),
-            )}
-          </Accordion>
-        )}
-      </Accordion.Content>
+      {hasChildItems ? (
+        <Accordion.Content active={isActive}>
+          {hasChildItems && (
+            <Accordion className="default">
+              {childItems.map((item, index) =>
+                renderItems({
+                  item,
+                  index,
+                  activeItems,
+                  handleTitleClick,
+                  parentLevel: level,
+                }),
+              )}
+            </Accordion>
+          )}
+        </Accordion.Content>
+      ) : (
+        ''
+      )}
     </React.Fragment>
   );
 }
