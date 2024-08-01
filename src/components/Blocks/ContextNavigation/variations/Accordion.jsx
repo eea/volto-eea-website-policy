@@ -42,12 +42,14 @@ function renderItems({
     ...rest
   } = item;
 
-  const computeActive = () => {
-    const hasIsCurrent = childItems.some((child) => child.is_current);
+  const computeActive = (childItems) => {
+    const hasIsCurrent = childItems.some(
+      (child) => child.is_current || computeActive(child.items),
+    );
     return is_current || !!activeItems[normalized_id] || hasIsCurrent;
   };
 
-  const isActive = computeActive();
+  const isActive = computeActive(childItems);
   const hasChildItems = childItems && childItems.length > 0;
   return (
     <React.Fragment key={index}>
