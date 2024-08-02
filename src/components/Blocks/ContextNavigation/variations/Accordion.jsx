@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Accordion } from 'semantic-ui-react';
+import { Accordion, Icon as SemanticIcon } from 'semantic-ui-react';
 import cx from 'classnames';
 import { Link } from 'react-router-dom';
 import { compose } from 'redux';
@@ -13,6 +13,7 @@ import { withContentNavigation } from '@plone/volto/components/theme/Navigation/
 
 import upIcon from '@plone/volto/icons/up-key.svg';
 import rightIcon from '@plone/volto/icons/right-key.svg';
+import downIcon from '@plone/volto/icons/down-key.svg';
 
 const messages = defineMessages({
   navigation: {
@@ -56,6 +57,10 @@ function renderItems({
       {hasChildItems ? (
         <Accordion.Title
           active={isActive}
+          index={index}
+          role="button"
+          tabIndex={0}
+          aria-expanded={isActive}
           onClick={() => handleTitleClick(normalized_id, hasChildItems)}
         >
           {hasChildItems && (
@@ -93,7 +98,7 @@ function renderItems({
       {hasChildItems ? (
         <Accordion.Content active={isActive}>
           {hasChildItems && (
-            <Accordion className="default">
+            <Accordion className="default" key={index} id={index}>
               {childItems.map((item, index) =>
                 renderItems({
                   item,
@@ -119,6 +124,8 @@ const AccordionNavigation = (props) => {
   const intl = useIntl();
   const [activeItems, setActiveItems] = React.useState({});
 
+  const [isNavOpen, setNavOpen] = React.useState(true);
+
   const handleTitleClick = (index, hasChildItems) => {
     if (hasChildItems) {
       setActiveItems((prevActiveItems) => ({
@@ -128,30 +135,46 @@ const AccordionNavigation = (props) => {
     }
   };
 
+  const onClickSummary = (e) => {
+    e.preventDefault();
+    setNavOpen(!isNavOpen);
+  };
+
   return items.length ? (
     <nav className="context-navigation">
-      {navigation.has_custom_name ? (
-        <div className="context-navigation-header">
-          <Link to={flattenToAppURL(navigation.url || '')}>
+      <details open={isNavOpen}>
+        {navigation.has_custom_name ? (
+          <summary
+            className="context-navigation-header"
+            onClick={onClickSummary}
+          >
             {navigation.title}
-          </Link>
-        </div>
-      ) : (
-        <div className="context-navigation-header">
-          {intl.formatMessage(messages.navigation)}
-        </div>
-      )}
-      <Accordion className="default">
-        {items.map((item, index) =>
-          renderItems({
-            item,
-            index,
-            activeItems,
-            handleTitleClick,
-            parentLevel: 0,
-          }),
+            <Icon
+              name={isNavOpen ? upIcon : downIcon}
+              size="40px"
+              style={{ marginLeft: 'auto' }}
+            />
+          </summary>
+        ) : (
+          <summary
+            className="context-navigation-header"
+            onClick={onClickSummary}
+          >
+            {intl.formatMessage(messages.navigation)}
+          </summary>
         )}
-      </Accordion>
+        <Accordion className="default">
+          {items.map((item, index) =>
+            renderItems({
+              item,
+              index,
+              activeItems,
+              handleTitleClick,
+              parentLevel: 0,
+            }),
+          )}
+        </Accordion>
+      </details>
     </nav>
   ) : (
     ''
