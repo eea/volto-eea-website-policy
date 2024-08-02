@@ -58,6 +58,12 @@ function renderItems({
         <Accordion.Title
           active={isActive}
           index={index}
+          onKeyDown={(e) => {
+            if (e.keyCode === 13 || e.keyCode === 32) {
+              e.preventDefault();
+              handleTitleClick(normalized_id, hasChildItems);
+            }
+          }}
           role="button"
           tabIndex={0}
           aria-expanded={isActive}
