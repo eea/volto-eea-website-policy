@@ -43,14 +43,7 @@ function renderItems({
     ...rest
   } = item;
 
-  const computeActive = (childItems) => {
-    const hasIsCurrent = childItems.some(
-      (child) => child.is_current || computeActive(child.items),
-    );
-    return is_current || !!activeItems[normalized_id] || hasIsCurrent;
-  };
-
-  const isActive = computeActive(childItems);
+  const isActive = is_current || !!activeItems[normalized_id];
   const hasChildItems = childItems && childItems.length > 0;
   return (
     <React.Fragment key={index}>
@@ -124,6 +117,26 @@ function renderItems({
   );
 }
 
+const findTopLevelParentWithCurrent = (items) => {
+  const resultParents = new Set();
+  const computeIsCurrent = (items, parent = null) => {
+    for (const item of items) {
+      resultParents.add(parent);
+      if (item.is_current) {
+        return resultParents;
+      }
+      if (item.items && item.items.length > 0) {
+        const foundParents = computeIsCurrent(item.items, item);
+        if (foundParents) return foundParents;
+      }
+    }
+    return null;
+  };
+
+  computeIsCurrent(items);
+  return Array.from(resultParents);
+};
+
 const AccordionNavigation = (props) => {
   const { navigation = {} } = props;
   const { items = [] } = navigation;
@@ -140,6 +153,20 @@ const AccordionNavigation = (props) => {
       }));
     }
   };
+
+  React.useEffect(() => {
+    const parents = findTopLevelParentWithCurrent(items);
+    if (parents.length) {
+      const idMapping = parents
+        .filter(Boolean)
+        .reduce((acc, item) => ({ ...acc, [item?.normalized_id]: true }), {});
+
+      setActiveItems((prevActiveItems) => ({
+        ...prevActiveItems,
+        ...idMapping,
+      }));
+    }
+  }, [items]);
 
   const onClickSummary = (e) => {
     e.preventDefault();
