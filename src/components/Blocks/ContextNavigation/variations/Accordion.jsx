@@ -180,6 +180,7 @@ const AccordionNavigation = (props) => {
             className="context-navigation-header"
             onClick={onClickSummary}
             role="button"
+            tabIndex={0}
             onKeyDown={(e) => {
               if (e.keyCode === 13 || e.keyCode === 32) {
                 e.preventDefault();
@@ -199,6 +200,7 @@ const AccordionNavigation = (props) => {
             className="context-navigation-header"
             onClick={onClickSummary}
             role="button"
+            tabIndex={0}
             onKeyDown={(e) => {
               if (e.keyCode === 13 || e.keyCode === 32) {
                 e.preventDefault();
