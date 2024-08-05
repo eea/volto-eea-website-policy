@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Accordion, Icon as SemanticIcon } from 'semantic-ui-react';
+import { Accordion } from 'semantic-ui-react';
 import cx from 'classnames';
 import { Link } from 'react-router-dom';
 import { compose } from 'redux';
@@ -40,7 +40,6 @@ function renderItems({
     normalized_id,
     is_in_path,
     items: childItems,
-    ...rest
   } = item;
 
   const isActive = is_current || !!activeItems[normalized_id];
@@ -180,6 +179,13 @@ const AccordionNavigation = (props) => {
           <summary
             className="context-navigation-header"
             onClick={onClickSummary}
+            role="button"
+            onKeyDown={(e) => {
+              if (e.keyCode === 13 || e.keyCode === 32) {
+                e.preventDefault();
+                onClickSummary(e);
+              }
+            }}
           >
             {navigation.title}
             <Icon
@@ -192,6 +198,13 @@ const AccordionNavigation = (props) => {
           <summary
             className="context-navigation-header"
             onClick={onClickSummary}
+            role="button"
+            onKeyDown={(e) => {
+              if (e.keyCode === 13 || e.keyCode === 32) {
+                e.preventDefault();
+                onClickSummary(e);
+              }
+            }}
           >
             {intl.formatMessage(messages.navigation)}
           </summary>
