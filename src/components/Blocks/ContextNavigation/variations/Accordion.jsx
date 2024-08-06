@@ -201,6 +201,11 @@ const AccordionNavigation = (props) => {
             }}
           >
             {intl.formatMessage(messages.navigation)}
+            <Icon
+              name={isNavOpen ? upIcon : downIcon}
+              size="40px"
+              style={{ marginLeft: 'auto' }}
+            />
           </summary>
         )}
         <Accordion className="default">
