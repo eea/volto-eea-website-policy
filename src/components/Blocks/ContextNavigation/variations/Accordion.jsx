@@ -117,23 +117,15 @@ function renderItems({
 }
 
 const findTopLevelParentWithCurrent = (items) => {
-  const resultParents = new Set();
-  const computeIsCurrent = (items, parent = null) => {
-    for (const item of items) {
-      resultParents.add(parent);
-      if (item.is_current) {
-        return resultParents;
-      }
-      if (item.items && item.items.length > 0) {
-        const foundParents = computeIsCurrent(item.items, item);
-        if (foundParents) return foundParents;
-      }
-    }
-    return null;
+  const inPathItems = [];
+  const computeActive = (items) => {
+    items.forEach((item) => {
+      if (item.is_in_path) inPathItems.push(item);
+      if (item.items && item.items.length > 0) computeActive(item.items);
+    });
   };
-
-  computeIsCurrent(items);
-  return Array.from(resultParents);
+  computeActive(items || []);
+  return inPathItems;
 };
 
 const AccordionNavigation = (props) => {
