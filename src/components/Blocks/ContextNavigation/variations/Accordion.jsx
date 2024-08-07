@@ -12,6 +12,7 @@ import { withContentNavigation } from '@plone/volto/components/theme/Navigation/
 
 import upIcon from '@plone/volto/icons/up-key.svg';
 import downIcon from '@plone/volto/icons/down-key.svg';
+import { has } from 'cypress/types/lodash';
 
 const messages = defineMessages({
   navigation: {
@@ -60,7 +61,14 @@ const AccordionNavigation = ({ navigation = {} }) => {
     };
 
     return (
-      <li className={cx({ title: true, is_in_path })} key={href}>
+      <li
+        className={cx({
+          is_in_path,
+          title: !hasChildItems,
+          accordion_list_item: hasChildItems,
+        })}
+        key={href}
+      >
         {hasChildItems ? (
           <Accordion className="default">
             <Accordion.Title
@@ -75,7 +83,7 @@ const AccordionNavigation = ({ navigation = {} }) => {
               <span className="title-text">{title}</span>
             </Accordion.Title>
             <Accordion.Content active={isActive}>
-              <ul>
+              <ul className="accordion-list">
                 {childItems.map((child) =>
                   renderItems({ item: child, level: level + 1 }),
                 )}
@@ -109,7 +117,9 @@ const AccordionNavigation = ({ navigation = {} }) => {
             style={{ marginLeft: 'auto' }}
           />
         </summary>
-        <ul>{items.map((item, index) => renderItems({ item }))}</ul>
+        <ul className="accordion-list">
+          {items.map((item, index) => renderItems({ item }))}
+        </ul>
       </details>
     </nav>
   ) : null;
