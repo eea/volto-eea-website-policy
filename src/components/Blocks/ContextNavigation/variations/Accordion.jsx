@@ -12,7 +12,6 @@ import { withContentNavigation } from '@plone/volto/components/theme/Navigation/
 
 import upIcon from '@plone/volto/icons/up-key.svg';
 import downIcon from '@plone/volto/icons/down-key.svg';
-import { has } from 'cypress/types/lodash';
 
 const messages = defineMessages({
   navigation: {
