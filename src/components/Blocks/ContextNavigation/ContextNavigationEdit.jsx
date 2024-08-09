@@ -5,7 +5,7 @@ import BlockDataForm from '@plone/volto/components/manage/Form/BlockDataForm';
 
 import ContextNavigationView from './ContextNavigationView';
 
-const ContextNavigationFillView = (props) => {
+const ContextNavigationFillEdit = (props) => {
   const schema = EditSchema();
   return (
     <>
@@ -32,4 +32,4 @@ const ContextNavigationFillView = (props) => {
   );
 };
 
-export default ContextNavigationFillView;
+export default ContextNavigationFillEdit;

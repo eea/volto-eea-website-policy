@@ -13,7 +13,7 @@ const ContextNavigationView = (props = {}) => {
   delete navProps.variation;
   return Renderer ? (
     <>
-      <Renderer params={navProps} />
+      <Renderer params={navProps} data={data} />
     </>
   ) : (
     ''
