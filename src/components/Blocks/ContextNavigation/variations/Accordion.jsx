@@ -20,9 +20,8 @@ const messages = defineMessages({
   },
 });
 
-const AccordionNavigation = ({ navigation = {}, data = {} }) => {
+const AccordionNavigation = ({ navigation = {} }) => {
   const { items = [], title, has_custom_name } = navigation;
-  const { portal_types = [] } = data;
   const intl = useIntl();
   const [isNavOpen, setNavOpen] = React.useState(true);
   const [activeItems, setActiveItems] = React.useState({});
@@ -84,15 +83,9 @@ const AccordionNavigation = ({ navigation = {}, data = {} }) => {
             </Accordion.Title>
             <Accordion.Content active={isActive}>
               <ul className="accordion-list">
-                {childItems
-                  .filter((item) =>
-                    portal_types.length
-                      ? portal_types.includes(item['type'])
-                      : item,
-                  )
-                  .map((child) =>
-                    renderItems({ item: child, level: level + 1 }),
-                  )}
+                {childItems.map((child) =>
+                  renderItems({ item: child, level: level + 1 }),
+                )}
               </ul>
             </Accordion.Content>
           </Accordion>
@@ -124,11 +117,7 @@ const AccordionNavigation = ({ navigation = {}, data = {} }) => {
           />
         </summary>
         <ul className="accordion-list">
-          {items
-            .filter((item) =>
-              portal_types.length ? portal_types.includes(item['type']) : item,
-            )
-            .map((item, index) => renderItems({ item }))}
+          {items.map((item) => renderItems({ item }))}
         </ul>
       </details>
     </nav>

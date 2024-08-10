@@ -6,7 +6,17 @@ import BlockDataForm from '@plone/volto/components/manage/Form/BlockDataForm';
 import ContextNavigationView from './ContextNavigationView';
 
 const ContextNavigationFillEdit = (props) => {
-  const schema = EditSchema();
+  const contentTypes = props.properties?.['@components']?.types;
+  const availableTypes = React.useMemo(
+    () => contentTypes?.map((type) => [type.id, type.title || type.name]),
+    [contentTypes],
+  );
+
+  const schema = React.useMemo(
+    () => EditSchema({ availableTypes }),
+    [availableTypes],
+  );
+
   return (
     <>
       <h3>Context navigation</h3>
