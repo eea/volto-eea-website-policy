@@ -1,17 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Accordion } from 'semantic-ui-react';
 import cx from 'classnames';
-import { compose } from 'redux';
-import { withRouter } from 'react-router';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { defineMessages, useIntl } from 'react-intl';
+import { withRouter } from 'react-router';
+import { compose } from 'redux';
+import { Accordion } from 'semantic-ui-react';
 
-import { flattenToAppURL } from '@plone/volto/helpers';
 import { Icon, UniversalLink } from '@plone/volto/components';
 import { withContentNavigation } from '@plone/volto/components/theme/Navigation/withContentNavigation';
+import { flattenToAppURL } from '@plone/volto/helpers';
 
-import upIcon from '@plone/volto/icons/up-key.svg';
 import downIcon from '@plone/volto/icons/down-key.svg';
+import upIcon from '@plone/volto/icons/up-key.svg';
+
+import { BodyClass } from '@plone/volto/helpers';
 
 const messages = defineMessages({
   navigation: {
@@ -92,7 +94,7 @@ const AccordionNavigation = ({ navigation = {} }) => {
         ) : (
           <UniversalLink
             href={flattenToAppURL(href)}
-            className={cx(`contenttype-${type}`, {
+            className={cx(`title-link contenttype-${type}`, {
               current: is_current,
               in_path: is_in_path,
             })}
@@ -105,22 +107,24 @@ const AccordionNavigation = ({ navigation = {} }) => {
   };
 
   return items.length ? (
-    <nav className="context-navigation">
-      <details open={isNavOpen}>
-        {/* eslint-disable-next-line */}
-        <summary className="context-navigation-header" onClick={onClickSummary}>
-          {has_custom_name ? title : intl.formatMessage(messages.navigation)}
-          <Icon
-            name={isNavOpen ? upIcon : downIcon}
-            size="40px"
-            style={{ marginLeft: 'auto' }}
-          />
-        </summary>
-        <ul className="accordion-list">
-          {items.map((item) => renderItems({ item }))}
-        </ul>
-      </details>
-    </nav>
+    <>
+      <BodyClass className={'has-side-toc'} />
+      <nav className="context-navigation eea-side-menu">
+        <details open={isNavOpen}>
+          {/* eslint-disable-next-line */}
+          <summary
+            className="context-navigation-header accordion-header"
+            onClick={onClickSummary}
+          >
+            {has_custom_name ? title : intl.formatMessage(messages.navigation)}
+            <Icon name={isNavOpen ? upIcon : downIcon} size="40px" />
+          </summary>
+          <ul className="context-navigation-list accordion-list">
+            {items.map((item) => renderItems({ item }))}
+          </ul>
+        </details>
+      </nav>
+    </>
   ) : null;
 };
 
