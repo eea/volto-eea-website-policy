@@ -80,7 +80,7 @@ const AccordionNavigation = ({ navigation = {} }) => {
               onKeyDown={handleKeyDown}
               className={cx({ active: is_in_path })}
             >
-              <Icon name={isActive ? upIcon : downIcon} size="24px" />
+              <Icon name={isActive ? upIcon : downIcon} size="32px" />
               <span className="title-text">{title}</span>
             </Accordion.Title>
             <Accordion.Content active={isActive}>
