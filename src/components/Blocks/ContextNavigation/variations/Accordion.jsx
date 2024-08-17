@@ -6,6 +6,8 @@ import { withRouter } from 'react-router';
 import { compose } from 'redux';
 import { Accordion } from 'semantic-ui-react';
 
+import Slugger from 'github-slugger';
+
 import { Icon, UniversalLink } from '@plone/volto/components';
 import { withContentNavigation } from '@plone/volto/components/theme/Navigation/withContentNavigation';
 import { flattenToAppURL } from '@plone/volto/helpers';
@@ -43,6 +45,7 @@ const AccordionNavigation = ({ navigation = {} }) => {
       type,
     } = item;
     const hasChildItems = childItems && childItems.length > 0;
+    const normalizedTitle = Slugger.slug(title);
 
     const checkIfActive = () => {
       return activeItems[href] !== undefined ? activeItems[href] : is_in_path;
@@ -78,12 +81,19 @@ const AccordionNavigation = ({ navigation = {} }) => {
               aria-expanded={isActive}
               onClick={handleTitleClick}
               onKeyDown={handleKeyDown}
+              aria-controls={`accordion-content-${normalizedTitle}`}
+              id={`accordion-title-${normalizedTitle}`}
               className={cx({ active: is_in_path })}
             >
               <Icon name={isActive ? upIcon : downIcon} size="32px" />
               <span className="title-text">{title}</span>
             </Accordion.Title>
-            <Accordion.Content active={isActive}>
+            <Accordion.Content
+              active={isActive}
+              id={`accordion-content-${normalizedTitle}`}
+              aria-labelledby={`accordion-title-${normalizedTitle}`}
+              role="region"
+            >
               <ul className="accordion-list">
                 {childItems.map((child) =>
                   renderItems({ item: child, level: level + 1 }),
@@ -137,6 +147,11 @@ AccordionNavigation.propTypes = {
       PropTypes.shape({
         title: PropTypes.string,
         url: PropTypes.string,
+        href: PropTypes.string,
+        is_current: PropTypes.bool,
+        is_in_path: PropTypes.bool,
+        items: PropTypes.array,
+        type: PropTypes.string,
       }),
     ),
     has_custom_name: PropTypes.bool,
