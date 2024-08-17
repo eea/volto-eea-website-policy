@@ -68,8 +68,8 @@ const AccordionNavigation = ({ navigation = {} }) => {
       <li
         className={cx({
           is_in_path,
-          title: !hasChildItems,
-          accordion_list_item: hasChildItems,
+          'accordion-list-title': !hasChildItems,
+          'accordion-list-item': hasChildItems,
         })}
         key={href}
       >
@@ -83,7 +83,6 @@ const AccordionNavigation = ({ navigation = {} }) => {
               onKeyDown={handleKeyDown}
               aria-controls={`accordion-content-${normalizedTitle}`}
               id={`accordion-title-${normalizedTitle}`}
-              className={cx({ active: is_in_path })}
             >
               <Icon name={isActive ? upIcon : downIcon} size="32px" />
               <span className="title-text">{title}</span>
