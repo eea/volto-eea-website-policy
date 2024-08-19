@@ -23,10 +23,11 @@ const messages = defineMessages({
   },
 });
 
-const AccordionNavigation = ({ navigation = {} }) => {
+const AccordionNavigation = ({ navigation = {}, device }) => {
   const { items = [], title, has_custom_name } = navigation;
   const intl = useIntl();
-  const [isNavOpen, setIsNavOpen] = React.useState(true);
+  const navOpen = ['mobile', 'tablet'].includes(device) ? false : true;
+  const [isNavOpen, setIsNavOpen] = React.useState(navOpen);
   const [activeItems, setActiveItems] = React.useState({});
 
   const onClickSummary = React.useCallback((e) => {
