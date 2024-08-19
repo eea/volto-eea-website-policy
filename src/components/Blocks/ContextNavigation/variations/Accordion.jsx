@@ -10,12 +10,10 @@ import Slugger from 'github-slugger';
 
 import { Icon, UniversalLink } from '@plone/volto/components';
 import { withContentNavigation } from '@plone/volto/components/theme/Navigation/withContentNavigation';
-import { flattenToAppURL } from '@plone/volto/helpers';
+import { flattenToAppURL, BodyClass } from '@plone/volto/helpers';
 
 import downIcon from '@plone/volto/icons/down-key.svg';
 import upIcon from '@plone/volto/icons/up-key.svg';
-
-import { BodyClass } from '@plone/volto/helpers';
 
 const messages = defineMessages({
   navigation: {
@@ -27,12 +25,12 @@ const messages = defineMessages({
 const AccordionNavigation = ({ navigation = {} }) => {
   const { items = [], title, has_custom_name } = navigation;
   const intl = useIntl();
-  const [isNavOpen, setNavOpen] = React.useState(true);
+  const [isNavOpen, setIsNavOpen] = React.useState(true);
   const [activeItems, setActiveItems] = React.useState({});
 
   const onClickSummary = React.useCallback((e) => {
     e.preventDefault();
-    setNavOpen((prev) => !prev);
+    setIsNavOpen((prev) => !prev);
   }, []);
   const onKeyDownSummary = React.useCallback(
     (e) => {

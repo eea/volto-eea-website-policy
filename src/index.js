@@ -112,7 +112,7 @@ const applyConfig = (config) => {
     ...config.settings.eea,
     rolesWhoCanChangeLayout: ['Manager'],
   };
-  // config.settings.eea.rolesWhoCanChangeLayout = ['Manager'];
+  config.settings.eea.rolesWhoCanChangeLayout = ['Manager'];
 
   // Custom blocks
   // context navigation

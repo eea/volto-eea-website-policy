@@ -3,11 +3,7 @@ import ConnectedContextNavigation from '@plone/volto/components/theme/Navigation
 
 const Default = (props) => {
   const { params } = props;
-  return (
-    <>
-      <ConnectedContextNavigation params={params} />
-    </>
-  );
+  return <ConnectedContextNavigation params={params} />;
 };
 
 export default Default;

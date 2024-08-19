@@ -1,7 +1,6 @@
 import React from 'react';
 import { injectIntl } from 'react-intl';
-import { flattenToAppURL } from '@plone/volto/helpers';
-import { withBlockExtensions } from '@plone/volto/helpers';
+import { flattenToAppURL, withBlockExtensions } from '@plone/volto/helpers';
 import DefaultTemplate from './variations/Default';
 
 const ContextNavigationView = (props = {}) => {
@@ -11,13 +10,7 @@ const ContextNavigationView = (props = {}) => {
   if (root_path) navProps['root_path'] = flattenToAppURL(root_path);
   const Renderer = variation?.view ?? DefaultTemplate;
   delete navProps.variation;
-  return Renderer ? (
-    <>
-      <Renderer params={navProps} />
-    </>
-  ) : (
-    ''
-  );
+  return Renderer ? <Renderer params={navProps} /> : '';
 };
 
 export default injectIntl(withBlockExtensions(ContextNavigationView));
