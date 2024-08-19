@@ -34,6 +34,15 @@ const AccordionNavigation = ({ navigation = {} }) => {
     e.preventDefault();
     setNavOpen((prev) => !prev);
   }, []);
+  const onKeyDownSummary = React.useCallback(
+    (e) => {
+      if (e.keyCode === 13 || e.keyCode === 32) {
+        e.preventDefault();
+        onClickSummary(e);
+      }
+    },
+    [onClickSummary],
+  );
 
   const renderItems = ({ item, level = 0 }) => {
     const {
@@ -57,13 +66,6 @@ const AccordionNavigation = ({ navigation = {} }) => {
       setActiveItems((prev) => ({ ...prev, [href]: !isActive }));
     };
 
-    const handleKeyDown = (e) => {
-      if (e.keyCode === 13 || e.keyCode === 32) {
-        e.preventDefault();
-        handleTitleClick();
-      }
-    };
-
     return (
       <li
         className={cx({
@@ -80,12 +82,11 @@ const AccordionNavigation = ({ navigation = {} }) => {
               as={'button'}
               aria-expanded={isActive}
               onClick={handleTitleClick}
-              onKeyDown={handleKeyDown}
               aria-controls={`accordion-content-${normalizedTitle}`}
               id={`accordion-title-${normalizedTitle}`}
             >
-              <Icon name={isActive ? upIcon : downIcon} size="32px" />
               <span className="title-text">{title}</span>
+              <Icon name={isActive ? upIcon : downIcon} size="32px" />
             </Accordion.Title>
             <Accordion.Content
               active={isActive}
@@ -124,6 +125,7 @@ const AccordionNavigation = ({ navigation = {} }) => {
           <summary
             className="context-navigation-header accordion-header"
             onClick={onClickSummary}
+            onKeyDown={onKeyDownSummary}
           >
             {has_custom_name ? title : intl.formatMessage(messages.navigation)}
             <Icon name={isNavOpen ? upIcon : downIcon} size="40px" />
