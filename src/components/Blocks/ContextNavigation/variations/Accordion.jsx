@@ -10,7 +10,8 @@ import Slugger from 'github-slugger';
 
 import { Icon, UniversalLink } from '@plone/volto/components';
 import { withContentNavigation } from '@plone/volto/components/theme/Navigation/withContentNavigation';
-import { flattenToAppURL, BodyClass } from '@plone/volto/helpers';
+import withEEASideMenu from '@eeacms/volto-block-toc/hocs/withEEASideMenu';
+import { flattenToAppURL } from '@plone/volto/helpers';
 
 import downIcon from '@plone/volto/icons/down-key.svg';
 import upIcon from '@plone/volto/icons/up-key.svg';
@@ -116,8 +117,7 @@ const AccordionNavigation = ({ navigation = {} }) => {
 
   return items.length ? (
     <>
-      <BodyClass className={'has-side-toc'} />
-      <nav className="context-navigation eea-side-menu">
+      <nav className="context-navigation">
         <details open={isNavOpen}>
           {/* eslint-disable-next-line */}
           <summary
@@ -158,4 +158,8 @@ AccordionNavigation.propTypes = {
   }),
 };
 
-export default compose(withRouter, withContentNavigation)(AccordionNavigation);
+export default compose(
+  withRouter,
+  withContentNavigation,
+  withEEASideMenu,
+)(AccordionNavigation);
