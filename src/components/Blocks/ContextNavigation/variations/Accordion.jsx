@@ -23,7 +23,11 @@ const messages = defineMessages({
   },
 });
 
-const AccordionNavigation = ({ navigation = {}, device }) => {
+const AccordionNavigation = ({
+  navigation = {},
+  device,
+  isMenuOpenOnOutsideClick,
+}) => {
   const { items = [], title, has_custom_name } = navigation;
   const intl = useIntl();
   const navOpen = ['mobile', 'tablet'].includes(device) ? false : true;
@@ -34,6 +38,11 @@ const AccordionNavigation = ({ navigation = {}, device }) => {
     e.preventDefault();
     setIsNavOpen((prev) => !prev);
   }, []);
+
+  React.useEffect(() => {
+    if (isMenuOpenOnOutsideClick === false) setIsNavOpen(false);
+  }, [isMenuOpenOnOutsideClick]);
+
   const onKeyDownSummary = React.useCallback(
     (e) => {
       if (e.keyCode === 13 || e.keyCode === 32) {
