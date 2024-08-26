@@ -112,7 +112,7 @@ const applyConfig = (config) => {
     ...config.settings.eea,
     rolesWhoCanChangeLayout: ['Manager'],
   };
-  // config.settings.eea.rolesWhoCanChangeLayout = ['Manager'];
+  config.settings.eea.rolesWhoCanChangeLayout = ['Manager'];
 
   // Custom blocks
   // context navigation
@@ -134,6 +134,10 @@ const applyConfig = (config) => {
       config.blocks.blocksConfig[block].restricted = true;
     }
   });
+
+  if (config.blocks.blocksConfig.contextNavigation) {
+    config.blocks.blocksConfig.contextNavigation.restricted = false;
+  }
 
   // Override blocks config
   Object.keys(overrideBlocks).forEach((block) => {

@@ -2,6 +2,8 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import ContextNavigationEdit from './ContextNavigationEdit';
 import { Router } from 'react-router-dom';
+import { Provider } from 'react-intl-redux';
+import configureStore from 'redux-mock-store';
 import { createMemoryHistory } from 'history';
 import '@testing-library/jest-dom/extend-expect';
 
@@ -12,12 +14,13 @@ jest.mock('@plone/volto/components', () => ({
       <input id="test" onChange={onChangeField} />
     </div>
   ),
-  SidebarPortal: ({ children }) => (
-    <div>
-      <div>SidebarPortal</div>
-      {children}
-    </div>
-  ),
+  SidebarPortal: ({ children, selected }) =>
+    selected ? (
+      <div>
+        <div>SidebarPortal</div>
+        {children}
+      </div>
+    ) : null,
 }));
 
 jest.mock('@plone/volto/components/theme/Navigation/ContextNavigation', () => {
@@ -29,27 +32,48 @@ jest.mock('@plone/volto/components/theme/Navigation/ContextNavigation', () => {
   };
 });
 
+jest.mock('@plone/volto/helpers', () => ({
+  withBlockExtensions: jest.fn((Component) => Component),
+  emptyBlocksForm: jest.fn(),
+  getBlocksLayoutFieldname: () => 'blocks_layout',
+  withVariationSchemaEnhancer: jest.fn((Component) => Component),
+}));
+
+const mockStore = configureStore();
+const store = mockStore({
+  intl: {
+    locale: 'en',
+    messages: {},
+  },
+});
+
 describe('ContextNavigationEdit', () => {
   it('renders corectly', () => {
     const history = createMemoryHistory();
     const { getByText, queryByText } = render(
-      <Router history={history}>
-        <ContextNavigationEdit />
-      </Router>,
+      <Provider store={store}>
+        <Router history={history}>
+          <ContextNavigationEdit selected={false} />
+        </Router>
+        ,
+      </Provider>,
     );
 
     expect(getByText('Context navigation')).toBeInTheDocument();
     expect(getByText('ConnectedContextNavigation')).toBeInTheDocument();
     expect(queryByText('InlineForm')).toBeNull();
-    expect(getByText('SidebarPortal')).toBeInTheDocument();
+    expect(queryByText('SidebarPortal')).toBeNull();
   });
 
   it('renders corectly', () => {
     const history = createMemoryHistory();
     const { container, getByText } = render(
-      <Router history={history}>
-        <ContextNavigationEdit selected={true} onChangeBlock={() => {}} />
-      </Router>,
+      <Provider store={store}>
+        <Router history={history}>
+          <ContextNavigationEdit selected={true} onChangeBlock={() => {}} />
+        </Router>
+        ,
+      </Provider>,
     );
 
     expect(getByText('Context navigation')).toBeInTheDocument();

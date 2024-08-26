@@ -1,4 +1,4 @@
-export const EditSchema = () => {
+export const EditSchema = ({ availableTypes }) => {
   return {
     title: 'Navigation',
     fieldsets: [
@@ -8,6 +8,7 @@ export const EditSchema = () => {
         fields: [
           'name',
           'root_node',
+          'portal_type',
           'includeTop',
           'currentFolderOnly',
           'topLevel',
@@ -32,6 +33,12 @@ export const EditSchema = () => {
         // TODO: these don't work. Why?
         mode: 'link',
         selectedItemAttrs: ['Title', 'Description'],
+      },
+      portal_type: {
+        title: 'Filter children',
+        description: 'Only show child items of this content type',
+        choices: availableTypes,
+        isMulti: true,
       },
       includeTop: {
         title: 'Include top node',
@@ -61,7 +68,7 @@ export const EditSchema = () => {
         default: 0,
       },
       no_icons: {
-        title: 'Supress icons',
+        title: 'Suppress icons',
         description:
           'If enabled, the portlet will not show document type icons.',
         type: 'boolean',
@@ -72,7 +79,7 @@ export const EditSchema = () => {
           "Enter a valid scale name (see 'Image Handling' control panel) to override (e.g. icon, tile, thumb, mini, preview, ... ). Leave empty to use default (see 'Site' control panel).",
       },
       no_thumbs: {
-        title: 'Supress thumbs',
+        title: 'Suppress thumbs',
         type: 'boolean',
         description: 'If enabled, the portlet will not show thumbs.',
       },
