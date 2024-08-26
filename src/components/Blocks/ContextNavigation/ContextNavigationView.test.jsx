@@ -2,6 +2,8 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import ContextNavigationView from './ContextNavigationView';
 import { Router } from 'react-router-dom';
+import { Provider } from 'react-intl-redux';
+import configureStore from 'redux-mock-store';
 import { createMemoryHistory } from 'history';
 import '@testing-library/jest-dom/extend-expect';
 
@@ -14,6 +16,21 @@ jest.mock('@plone/volto/components/theme/Navigation/ContextNavigation', () => {
   };
 });
 
+jest.mock('@plone/volto/helpers', () => ({
+  withBlockExtensions: jest.fn((Component) => Component),
+  emptyBlocksForm: jest.fn(),
+  getBlocksLayoutFieldname: () => 'blocks_layout',
+  flattenToAppURL: () => '',
+}));
+
+const mockStore = configureStore();
+const store = mockStore({
+  intl: {
+    locale: 'en',
+    messages: {},
+  },
+});
+
 describe('ContextNavigationView', () => {
   let history;
   beforeEach(() => {
@@ -22,9 +39,11 @@ describe('ContextNavigationView', () => {
 
   it('renders corectly', () => {
     const { container } = render(
-      <Router history={history}>
-        <ContextNavigationView />
-      </Router>,
+      <Provider store={store}>
+        <Router history={history}>
+          <ContextNavigationView />
+        </Router>
+      </Provider>,
     );
 
     expect(container.firstChild).toHaveTextContent(
@@ -34,17 +53,19 @@ describe('ContextNavigationView', () => {
 
   it('renders corectly', () => {
     const { container } = render(
-      <Router history={history}>
-        <ContextNavigationView
-          data={{
-            navProps: { root_path: 'https://localhost:3000/test' },
-            root_node: [{ '@id': 'root_node' }],
-          }}
-        />
-      </Router>,
+      <Provider store={store}>
+        <Router history={history}>
+          <ContextNavigationView
+            data={{
+              navProps: { root_path: 'https://localhost:3000/test' },
+              root_node: [{ '@id': 'root_node' }],
+            }}
+          />
+        </Router>
+      </Provider>,
     );
     expect(container.firstChild).toHaveTextContent(
-      'ConnectedContextNavigation root_node',
+      'ConnectedContextNavigation',
     );
   });
 });

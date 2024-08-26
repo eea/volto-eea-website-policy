@@ -1,17 +1,14 @@
 import React from 'react';
-import ConnectedContextNavigation from '@plone/volto/components/theme/Navigation/ContextNavigation';
-import { flattenToAppURL } from '@plone/volto/helpers';
+import { flattenToAppURL, withBlockExtensions } from '@plone/volto/helpers';
+import DefaultTemplate from './variations/Default';
 
-const ContextNavigationView = ({ data = {} }) => {
+const ContextNavigationView = (props = {}) => {
+  const { variation, data = {} } = props;
   const navProps = { ...data };
   const root_path = data?.root_node?.[0]?.['@id'];
   if (root_path) navProps['root_path'] = flattenToAppURL(root_path);
-
-  return (
-    <>
-      <ConnectedContextNavigation params={navProps} />
-    </>
-  );
+  const Renderer = variation?.view ?? DefaultTemplate;
+  return <Renderer params={navProps} />;
 };
 
-export default ContextNavigationView;
+export default withBlockExtensions(ContextNavigationView);
