@@ -20,7 +20,7 @@ const ContextNavigationFillEdit = (props) => {
   return (
     <>
       <h3>Context navigation</h3>
-      <ContextNavigationView {...props} />{' '}
+      <ContextNavigationView {...props} mode="edit" />{' '}
       <SidebarPortal selected={props.selected}>
         <BlockDataForm
           schema={schema}
