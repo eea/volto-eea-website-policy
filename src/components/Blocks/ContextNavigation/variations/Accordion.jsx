@@ -127,7 +127,7 @@ const AccordionNavigation = ({
 
   return items.length ? (
     <>
-      <nav className="context-navigation">
+      <nav className="context-navigation" aria-label={title}>
         <details open={isNavOpen}>
           {/* eslint-disable-next-line */}
           <summary
