@@ -8,7 +8,7 @@ import { Accordion } from 'semantic-ui-react';
 
 import Slugger from 'github-slugger';
 
-import { Icon, UniversalLink } from '@plone/volto/components';
+import { Icon, UniversalLink, MaybeWrap } from '@plone/volto/components';
 import { withContentNavigation } from '@plone/volto/components/theme/Navigation/withContentNavigation';
 import withEEASideMenu from '@eeacms/volto-block-toc/hocs/withEEASideMenu';
 import { flattenToAppURL } from '@plone/volto/helpers';
@@ -135,12 +135,24 @@ const AccordionNavigation = ({
             onClick={onClickSummary}
             onKeyDown={onKeyDownSummary}
           >
-            {has_custom_name ? title : intl.formatMessage(messages.navigation)}
-            <Icon name={isNavOpen ? upIcon : downIcon} size="40px" />
+            <MaybeWrap
+              condition={device === 'tablet'}
+              className="ui container d-flex flex-items-center"
+            >
+              {has_custom_name
+                ? title
+                : intl.formatMessage(messages.navigation)}
+              <Icon name={isNavOpen ? upIcon : downIcon} size="40px" />
+            </MaybeWrap>
           </summary>
-          <ul className="context-navigation-list accordion-list">
-            {items.map((item) => renderItems({ item }))}
-          </ul>
+          <MaybeWrap
+            condition={device === 'tablet'}
+            className="ui container d-flex flex-items-center"
+          >
+            <ul className="context-navigation-list accordion-list">
+              {items.map((item) => renderItems({ item }))}
+            </ul>
+          </MaybeWrap>
         </details>
       </nav>
     </>
