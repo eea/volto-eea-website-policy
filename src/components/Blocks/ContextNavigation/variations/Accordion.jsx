@@ -15,6 +15,7 @@ import { flattenToAppURL } from '@plone/volto/helpers';
 
 import downIcon from '@plone/volto/icons/down-key.svg';
 import upIcon from '@plone/volto/icons/up-key.svg';
+import { sum } from 'cypress/types/lodash';
 
 const messages = defineMessages({
   navigation: {
@@ -33,6 +34,8 @@ const AccordionNavigation = ({
   const navOpen = ['mobile', 'tablet'].includes(device) ? false : true;
   const [isNavOpen, setIsNavOpen] = React.useState(navOpen);
   const [activeItems, setActiveItems] = React.useState({});
+  const contextNavigationListRef = React.useRef(null);
+  const summaryRef = React.useRef(null);
 
   const onClickSummary = React.useCallback((e) => {
     e.preventDefault();
@@ -42,6 +45,25 @@ const AccordionNavigation = ({
   React.useEffect(() => {
     if (isMenuOpenOnOutsideClick === false) setIsNavOpen(false);
   }, [isMenuOpenOnOutsideClick]);
+
+  React.useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (
+        !navOpen &&
+        summaryRef.current &&
+        contextNavigationListRef.current &&
+        !summaryRef.current.contains(event.target) &&
+        !contextNavigationListRef.current.contains(event.target)
+      ) {
+        setIsNavOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleOutsideClick);
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
+  }, [summaryRef, navOpen]);
 
   const onKeyDownSummary = React.useCallback(
     (e) => {
@@ -134,6 +156,7 @@ const AccordionNavigation = ({
             className="context-navigation-header accordion-header"
             onClick={onClickSummary}
             onKeyDown={onKeyDownSummary}
+            ref={summaryRef}
           >
             <MaybeWrap
               condition={device === 'tablet'}
@@ -149,7 +172,10 @@ const AccordionNavigation = ({
             condition={device === 'tablet'}
             className="ui container d-flex flex-items-center"
           >
-            <ul className="context-navigation-list accordion-list">
+            <ul
+              className="context-navigation-list accordion-list"
+              ref={contextNavigationListRef}
+            >
               {items.map((item) => renderItems({ item }))}
             </ul>
           </MaybeWrap>
