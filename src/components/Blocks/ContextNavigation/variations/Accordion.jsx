@@ -15,7 +15,6 @@ import { flattenToAppURL } from '@plone/volto/helpers';
 
 import downIcon from '@plone/volto/icons/down-key.svg';
 import upIcon from '@plone/volto/icons/up-key.svg';
-import { sum } from 'cypress/types/lodash';
 
 const messages = defineMessages({
   navigation: {
@@ -47,22 +46,23 @@ const AccordionNavigation = ({
   }, [isMenuOpenOnOutsideClick]);
 
   React.useEffect(() => {
-    const handleOutsideClick = (event) => {
-      if (
-        !navOpen &&
-        summaryRef.current &&
-        contextNavigationListRef.current &&
-        !summaryRef.current.contains(event.target) &&
-        !contextNavigationListRef.current.contains(event.target)
-      ) {
-        setIsNavOpen(false);
-      }
-    };
+    if (!navOpen) {
+      const handleOutsideClick = (event) => {
+        if (
+          summaryRef.current &&
+          contextNavigationListRef.current &&
+          !summaryRef.current.contains(event.target) &&
+          !contextNavigationListRef.current.contains(event.target)
+        ) {
+          setIsNavOpen(false);
+        }
+      };
 
-    document.addEventListener('click', handleOutsideClick);
-    return () => {
-      document.removeEventListener('click', handleOutsideClick);
-    };
+      document.addEventListener('click', handleOutsideClick);
+      return () => {
+        document.removeEventListener('click', handleOutsideClick);
+      };
+    }
   }, [summaryRef, navOpen]);
 
   const onKeyDownSummary = React.useCallback(
@@ -159,7 +159,7 @@ const AccordionNavigation = ({
             ref={summaryRef}
           >
             <MaybeWrap
-              condition={device === 'tablet'}
+              condition={!navOpen}
               className="ui container d-flex flex-items-center"
             >
               {has_custom_name
@@ -169,7 +169,7 @@ const AccordionNavigation = ({
             </MaybeWrap>
           </summary>
           <MaybeWrap
-            condition={device === 'tablet'}
+            condition={!navOpen}
             className="ui container d-flex flex-items-center"
           >
             <ul
