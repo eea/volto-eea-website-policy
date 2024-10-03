@@ -1,5 +1,4 @@
 import { runtimeConfig } from '@plone/volto/runtime_config';
-import installContextNavigationBlock from '@eeacms/volto-eea-website-policy/components/Blocks/ContextNavigation';
 import { appendGroup } from './helpers';
 import { FrequencyOfDissemination } from '@eeacms/volto-eea-website-policy/components/Widgets/FrequencyOfDissemination';
 
@@ -99,13 +98,6 @@ const applyConfig = (config) => {
     rolesWhoCanChangeLayout: ['Manager'],
   };
   config.settings.eea.rolesWhoCanChangeLayout = ['Manager'];
-
-  // Custom blocks
-  // context navigation
-  config = [installContextNavigationBlock].reduce(
-    (acc, apply) => apply(acc),
-    config,
-  );
 
   // Add groups
   config.blocks.groupBlocksOrder = appendGroup(

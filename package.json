@@ -17,12 +17,10 @@
     "url": "git@github.com:eea/volto-eea-website-policy.git"
   },
   "addons": [
-    "@eeacms/volto-block-toc",
     "@eeacms/volto-widget-dataprovenance",
     "@plone-collective/volto-authomatic"
   ],
   "dependencies": {
-    "@eeacms/volto-block-toc": "*",
     "@eeacms/volto-widget-dataprovenance": "*",
     "@plone-collective/volto-authomatic": "*"
   },
