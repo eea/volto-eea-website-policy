@@ -51,7 +51,7 @@ describe('Blocks Tests', () => {
     cy.url().should('eq', Cypress.config().baseUrl + '/cypress/my-page');
 
     // then the page view should contain our changes
-    cy.get('.accordion-header').contains('Nav title');
-    cy.get('.accordion-header').click();
+    cy.contains('My Add-on Page');
+    cy.get('.block.image');
   });
 });

@@ -1,10 +1,6 @@
 import { runtimeConfig } from '@plone/volto/runtime_config';
-import installContextNavigationBlock from '@eeacms/volto-eea-website-policy/components/Blocks/ContextNavigation';
 import { appendGroup } from './helpers';
 import { FrequencyOfDissemination } from '@eeacms/volto-eea-website-policy/components/Widgets/FrequencyOfDissemination';
-import Login from '@eeacms/volto-eea-website-policy/components/AzureLogin/Login.jsx';
-import Logout from '@plone-collective/volto-authomatic/components/Logout/Logout.jsx';
-import { Login as VoltoLogin } from '@plone/volto/components';
 
 const restrictedBlocks = [
   'imagecards',
@@ -43,7 +39,7 @@ const overrideBlocks = {
 const applyConfig = (config) => {
   // #158717#note-25 any path that isn't static, en or controlpanel is treated as external
   const notInEN =
-    /^(?!(#|\/en|\/login-authomatic|\/azure_login|\/fallback_login|\/static|\/controlpanel|\/cypress|\/login|\/logout|\/contact-form|\/passwordreset)).*$/;
+    /^(?!(#|\/en|\/login-authomatic|\/personal-information|\/azure_login|\/fallback_login|\/static|\/controlpanel|\/cypress|\/login|\/logout|\/contact-form|\/passwordreset)).*$/;
   config.settings.externalRoutes = [
     ...(config.settings.externalRoutes || []),
     {
@@ -53,17 +49,6 @@ const applyConfig = (config) => {
         strict: false,
       },
     },
-  ];
-
-  // #258877 Make Azure AD login to be at route /azure_login and EIONET LDAP login to be at /login
-  config.addonRoutes = [
-    { path: '/azure_login', component: Login },
-    { path: '/**/azure_login', component: Login },
-    { path: '/login', component: VoltoLogin },
-    { path: '/**/login', component: VoltoLogin },
-    { path: '/logout', component: Logout },
-    { path: '/**/logout', component: Logout },
-    ...(config.addonRoutes || []),
   ];
 
   // #160689 Redirect contact-form to contact-us
@@ -113,13 +98,6 @@ const applyConfig = (config) => {
     rolesWhoCanChangeLayout: ['Manager'],
   };
   config.settings.eea.rolesWhoCanChangeLayout = ['Manager'];
-
-  // Custom blocks
-  // context navigation
-  config = [installContextNavigationBlock].reduce(
-    (acc, apply) => apply(acc),
-    config,
-  );
 
   // Add groups
   config.blocks.groupBlocksOrder = appendGroup(
