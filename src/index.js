@@ -97,7 +97,6 @@ const applyConfig = (config) => {
     ...config.settings.eea,
     rolesWhoCanChangeLayout: ['Manager'],
   };
-  config.settings.eea.rolesWhoCanChangeLayout = ['Manager'];
 
   // Add groups
   config.blocks.groupBlocksOrder = appendGroup(
