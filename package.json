@@ -1,6 +1,6 @@
 {
   "name": "@eeacms/volto-eea-website-policy",
-  "version": "2.2.3",
+  "version": "2.3.0",
   "description": "@eeacms/volto-eea-website-policy: Volto add-on",
   "main": "src/index.js",
   "author": "European Environment Agency: IDM2 A-Team",
@@ -17,12 +17,10 @@
     "url": "git@github.com:eea/volto-eea-website-policy.git"
   },
   "addons": [
-    "@eeacms/volto-block-toc",
     "@eeacms/volto-widget-dataprovenance",
     "@plone-collective/volto-authomatic"
   ],
   "dependencies": {
-    "@eeacms/volto-block-toc": "*",
     "@eeacms/volto-widget-dataprovenance": "*",
     "@plone-collective/volto-authomatic": "*"
   },
