@@ -75,6 +75,18 @@ const applyConfig = (config) => {
     ];
   }
 
+  config.settings.initialReducersBlacklist = [
+    ...config.settings.initialReducersBlacklist,
+    'reduxAsyncConnect',
+    'intl',
+    'data_visualizations',
+    'datafigure',
+    'rawdata',
+    'data_providers',
+    'connected_data_parameters',
+    'content',
+  ];
+
   // Working-copy
   config.settings.hasWorkingCopySupport = true;
 
