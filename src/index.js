@@ -12,6 +12,9 @@ const restrictedBlocks = [
   'dataqueryfilter',
   'dottedTableChart',
   'simpleDataConnectedTable',
+  'video',
+  'maps',
+  'html',
 ];
 
 const overrideBlocks = {
