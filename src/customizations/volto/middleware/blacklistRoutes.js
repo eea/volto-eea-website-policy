@@ -45,4 +45,3 @@ const blacklistRoutes =
   };
 
 export default blacklistRoutes;
-
