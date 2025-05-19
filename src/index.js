@@ -54,9 +54,14 @@ const applyConfig = (config) => {
   // #160689 Redirect contact-form to contact-us
   config.settings.contactForm = '/en/about/contact-us';
 
-  config.settings.csp = {
-    'script-src': "'self' 'nonce-{nonce}'",
-  };
+  if (__SERVER__) {
+    const devsource = __DEVELOPMENT__
+      ? ` http://localhost:${parseInt(process.env.PORT || '3000') + 1}`
+      : '';
+    config.settings.serverConfig.csp = {
+      'script-src': `'self' {nonce}${devsource}`,
+    };
+  }
 
   // #137187 Keycloak integration
   if (runtimeConfig['RAZZLE_KEYCLOAK'] === 'Yes') {
