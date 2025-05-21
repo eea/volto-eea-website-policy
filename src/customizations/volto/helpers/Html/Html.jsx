@@ -107,17 +107,20 @@ class Html extends Component {
           {React.createElement('script', {
             nonce: nonce,
             dangerouslySetInnerHTML: {
-              __html: `window.env = ${serialize({
-                ...runtimeConfig,
-                // Seamless mode requirement, the client need to know where the API is located
-                // if not set in the API_PATH
-                ...(apiPath && {
-                  apiPath,
-                }),
-                ...(publicURL && {
-                  publicURL,
-                }),
-              })};`,
+              __html: `window.env = ${serialize(
+                {
+                  ...runtimeConfig,
+                  // Seamless mode requirement, the client need to know where the API is located
+                  // if not set in the API_PATH
+                  ...(apiPath && {
+                    apiPath,
+                  }),
+                  ...(publicURL && {
+                    publicURL,
+                  }),
+                },
+                { space: 2 },
+              )};`,
             },
           })}
 
@@ -185,6 +188,7 @@ class Html extends Component {
             dangerouslySetInnerHTML: {
               __html: `window.__data=${serialize(
                 loadReducers(store.getState()),
+                { space: 2 },
               )};`,
             },
             charSet: 'UTF-8',
