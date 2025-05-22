@@ -1,5 +1,5 @@
 import { runtimeConfig } from '@plone/volto/runtime_config';
-import { appendGroup } from './helpers';
+import { appendGroup, getAsyncData } from './helpers';
 import { FrequencyOfDissemination } from '@eeacms/volto-eea-website-policy/components/Widgets/FrequencyOfDissemination';
 
 const restrictedBlocks = [
@@ -73,6 +73,16 @@ const applyConfig = (config) => {
         },
       },
     ];
+  }
+
+  if (config.blocks.blocksConfig.embed_static_content) {
+    //prepopulate data for SSR particularly for history diffs
+    config.blocks.blocksConfig.embed_static_content.getAsyncData = getAsyncData;
+  }
+
+  if (config.blocks.blocksConfig.embed_content) {
+    //prepopulate data for SSR particularly for history diffs
+    config.blocks.blocksConfig.embed_content.getAsyncData = getAsyncData;
   }
 
   // Working-copy
