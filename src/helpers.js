@@ -1,5 +1,7 @@
 import { isArray } from 'lodash';
 import config from '@plone/volto/registry';
+import { getContent } from '@plone/volto/actions';
+import { flattenToAppURL } from '@plone/volto/helpers';
 import { serializeNodes } from '@plone/volto-slate/editor/render';
 
 export const createSlateParagraph = (text) => {
@@ -26,4 +28,13 @@ export const appendGroup = (config, id, title) => {
   }
 
   return config.blocks.groupBlocksOrder;
+};
+
+export const getAsyncData = ({ dispatch, id, data, path }) => {
+  const diffView = path.slice(path.lastIndexOf('/'), path.length) === '/diff';
+  const url = flattenToAppURL(data.url || '');
+  if (!url || !diffView) {
+    return [Promise.resolve()];
+  }
+  return [dispatch(getContent(url, null, id))];
 };
