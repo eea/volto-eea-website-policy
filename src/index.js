@@ -127,7 +127,7 @@ const applyConfig = (config) => {
     '/en/about': {
       hideChildrenFromNavigation: false,
     },
-    '/en/ghg-knowledge-hub/': {
+    '/en/ghg-knowledge-hub': {
       hideChildrenFromNavigation: false,
     },
     // '/en/ghg-knowledge-hub/[^/]+$': {
