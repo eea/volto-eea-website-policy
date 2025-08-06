@@ -121,10 +121,7 @@ const applyConfig = (config) => {
   config.settings.menuItemsLayouts = {
     '/en/topics': {
       menuItemChildrenListColumns: [1, 4],
-      menuItemColumns: [
-        'at-a-glance three wide column',
-        'topics-right-column nine wide column',
-      ],
+      menuItemColumns: ['three wide column', 'nine wide column'],
       hideChildrenFromNavigation: false,
     },
     '/en/countries': {
