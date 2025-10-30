@@ -3,7 +3,7 @@ import { Container } from 'semantic-ui-react';
 
 /**
  * @function ErrorView
- * @returns {string} Markup of the Error page.
+ * @returns {string} Static Markup of the Error page.
  */
 const ErrorView = ({ name, error }) => {
   return (
@@ -16,6 +16,10 @@ const ErrorView = ({ name, error }) => {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#006699',
+        minHeight: '100vh',
+        width: '100%',
+        maxWidth: 'none',
       }}
     >
       {__DEVELOPMENT__ && (
@@ -82,35 +86,105 @@ const ErrorView = ({ name, error }) => {
         </>
       )}
       {!__DEVELOPMENT__ && (
-        <>
-          <p
-            className="description"
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            textAlign: 'center',
+            width: '100%',
+            color: 'white',
+          }}
+        >
+          <div
             style={{
-              textAlign: 'center',
-              margin: '20px auto',
-              width: '475px',
+              marginBottom: '40px',
             }}
           >
-            <FormattedMessage
-              id="Our apologies, our website is not available at the moment."
-              defaultMessage="Our apologies, our website is not available at the moment."
-            />
-          </p>
+            <h1
+              style={{
+                fontSize: '18px',
+                fontWeight: 'normal',
+                margin: '0 0 10px 0',
+                color: 'white',
+              }}
+            >
+              European Environment Agency (EEA)
+            </h1>
+            <a
+              href="https://www.eea.europa.eu"
+              style={{
+                color: 'white',
+                textDecoration: 'underline',
+                fontSize: '16px',
+              }}
+            >
+              www.eea.europa.eu
+            </a>
+          </div>
 
-          <p
-            className="description"
+          <div
             style={{
-              textAlign: 'center',
-              margin: '20px auto',
-              width: '475px',
+              borderTop: '1px solid rgba(255, 255, 255, 0.3)',
+              borderBottom: '1px solid rgba(255, 255, 255, 0.3)',
+              padding: '30px 0',
+              margin: '20px 0',
+              width: '600px',
+              maxWidth: '90%',
             }}
           >
-            <FormattedMessage
-              id="If this problem persists Contact EEA Web Team (web.helpdesk at eea.europa.eu)"
-              defaultMessage="If this problem persists Contact EEA Web Team (web.helpdesk at eea.europa.eu)"
-            />
-          </p>
-        </>
+            <h2
+              style={{
+                fontSize: '24px',
+                fontWeight: 'bold',
+                margin: '0',
+                color: 'white',
+                lineHeight: '1.4',
+              }}
+            >
+              <FormattedMessage
+                id="Our apologies, our website is not available at the moment."
+                defaultMessage="Our apologies, our website is not available at the moment."
+              />
+            </h2>
+          </div>
+
+          <div
+            style={{
+              marginTop: '40px',
+            }}
+          >
+            <p
+              style={{
+                fontSize: '16px',
+                fontStyle: 'italic',
+                margin: '0 0 20px 0',
+                color: 'white',
+              }}
+            >
+              <FormattedMessage
+                id="If this problem persists Contact EEA Web Team (web.helpdesk at eea.europa.eu)"
+                defaultMessage="If this problem persists Contact EEA Web Team (web.helpdesk at eea.europa.eu)"
+              />
+            </p>
+            <p
+              style={{
+                fontSize: '14px',
+                margin: '0',
+                color: 'white',
+                lineHeight: '1.4',
+              }}
+            >
+              <span style={{ textDecoration: 'underline' }}>
+                European Environment Agency
+              </span>
+              , Kongens Nytorv 6, 1050
+              <br />
+              Copenhagen K, Denmark - Phone: +45 3336 7100
+            </p>
+          </div>
+        </div>
       )}
     </Container>
   );
