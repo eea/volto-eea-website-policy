@@ -18,8 +18,14 @@ const ErrorView = ({ name, error }) => {
         alignItems: 'center',
         backgroundColor: '#006699',
         minHeight: '100vh',
-        width: '100%',
-        maxWidth: 'none',
+        width: '100vw',
+        margin: 0,
+        padding: 0,
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
       }}
     >
       {__DEVELOPMENT__ && (
@@ -97,11 +103,7 @@ const ErrorView = ({ name, error }) => {
             color: 'white',
           }}
         >
-          <div
-            style={{
-              marginBottom: '40px',
-            }}
-          >
+          <div>
             <h1
               style={{
                 fontSize: '18px',
@@ -150,11 +152,7 @@ const ErrorView = ({ name, error }) => {
             </h2>
           </div>
 
-          <div
-            style={{
-              marginTop: '40px',
-            }}
-          >
+          <div>
             <p
               style={{
                 fontSize: '16px',
