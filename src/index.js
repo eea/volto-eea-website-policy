@@ -74,6 +74,8 @@ const applyConfig = (config) => {
     (item) => item.code,
   ) || ['en'];
 
+  config.settings.navigationLanguage = 'en';
+
   // Disable languages #158616
   // config.settings.eea?.languages?.map(
   //   (item) => item.code,
