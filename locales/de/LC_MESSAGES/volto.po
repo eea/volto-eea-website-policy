@@ -11,4 +11,12 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+#. Default: "If this problem persists Contact EEA Web Team (web.helpdesk at eea.europa.eu)"
+#: components/ErrorView/ErrorView
+msgid "If this problem persists Contact EEA Web Team (web.helpdesk at eea.europa.eu)"
+msgstr ""
 
+#. Default: "Our apologies, our website is not available at the moment."
+#: components/ErrorView/ErrorView
+msgid "Our apologies, our website is not available at the moment."
+msgstr ""
