@@ -1,6 +1,7 @@
 import { runtimeConfig } from '@plone/volto/runtime_config';
 import { appendGroup, getAsyncData } from './helpers';
 import { FrequencyOfDissemination } from '@eeacms/volto-eea-website-policy/components/Widgets/FrequencyOfDissemination';
+import ErrorView from '@eeacms/volto-eea-website-policy/components/ErrorView/ErrorView';
 
 const restrictedBlocks = [
   'imagecards',
@@ -62,6 +63,12 @@ const applyConfig = (config) => {
       'script-src': `'self' {nonce}${devsource}`,
     };
   }
+
+  //This only works if the component is wrapped in ErrorBoundary from volto
+  config.registerComponent({
+    name: 'ErrorBoundary',
+    component: ErrorView,
+  });
 
   // #137187 Keycloak integration
   if (runtimeConfig['RAZZLE_KEYCLOAK'] === 'Yes') {
