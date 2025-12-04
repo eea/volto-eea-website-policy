@@ -1,6 +1,7 @@
 import { runtimeConfig } from '@plone/volto/runtime_config';
 import { appendGroup, getAsyncData } from './helpers';
 import { FrequencyOfDissemination } from '@eeacms/volto-eea-website-policy/components/Widgets/FrequencyOfDissemination';
+import ErrorView from '@eeacms/volto-eea-website-policy/components/ErrorView/ErrorView';
 
 const restrictedBlocks = [
   'imagecards',
@@ -51,6 +52,12 @@ const applyConfig = (config) => {
 
   // #293749 Language dropdown
   config.settings.hasLanguageDropdown = true;
+
+  //This only works if the component is wrapped in ErrorBoundary from volto
+  config.registerComponent({
+    name: 'ErrorBoundary',
+    component: ErrorView,
+  });
 
   if (config.blocks.blocksConfig.embed_static_content) {
     //prepopulate data for SSR particularly for history diffs
