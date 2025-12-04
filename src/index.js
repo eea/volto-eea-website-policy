@@ -180,6 +180,13 @@ const applyConfig = (config) => {
   // Custom widgets
   config.widgets.views.id.frequency_of_dissemination = FrequencyOfDissemination;
 
+  // Group block: Skip figure-metadata groups when counting characters
+  if (config.blocks.blocksConfig.group) {
+    config.blocks.blocksConfig.group.skipBlocksInGroups = [
+      { className: 'figure-metadata' },
+    ];
+  }
+
   // Subsite
   config.settings.apiExpanders = [
     ...config.settings.apiExpanders,
