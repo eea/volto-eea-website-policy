@@ -1,4 +1,3 @@
-import { runtimeConfig } from '@plone/volto/runtime_config';
 import { appendGroup, getAsyncData } from './helpers';
 import { FrequencyOfDissemination } from '@eeacms/volto-eea-website-policy/components/Widgets/FrequencyOfDissemination';
 import ErrorView from '@eeacms/volto-eea-website-policy/components/ErrorView/ErrorView';
