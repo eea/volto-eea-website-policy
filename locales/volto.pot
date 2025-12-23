@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
-"POT-Creation-Date: 2024-09-02T18:05:47.779Z\n"
+"POT-Creation-Date: 2025-12-04T19:37:35.684Z\n"
 "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -13,9 +13,12 @@ msgstr ""
 "Preferred-Encodings: utf-8\n"
 "Domain: volto\n"
 
-#. Default: "Navigation"
-#: components/Blocks/ContextNavigation/variations/Accordion
-#: components/Blocks/ContextNavigation/variations/AccordionClaude
-#: components/Blocks/ContextNavigation/variations/AccordionOriginal
-msgid "Navigation"
+#. Default: "If this problem persists Contact EEA Web Team (web.helpdesk at eea.europa.eu)"
+#: components/ErrorView/ErrorView
+msgid "If this problem persists Contact EEA Web Team (web.helpdesk at eea.europa.eu)"
+msgstr ""
+
+#. Default: "Our apologies, our website is not available at the moment."
+#: components/ErrorView/ErrorView
+msgid "Our apologies, our website is not available at the moment."
 msgstr ""

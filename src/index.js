@@ -1,4 +1,3 @@
-import { runtimeConfig } from '@plone/volto/runtime_config';
 import { appendGroup, getAsyncData } from './helpers';
 import { FrequencyOfDissemination } from '@eeacms/volto-eea-website-policy/components/Widgets/FrequencyOfDissemination';
 import ErrorView from '@eeacms/volto-eea-website-policy/components/ErrorView/ErrorView';
@@ -38,20 +37,6 @@ const overrideBlocks = {
 };
 
 const applyConfig = (config) => {
-  // #158717#note-25 any path that isn't static, en or controlpanel is treated as external
-  const notInEN =
-    /^(?!(#|\/en|\/login-authomatic|\/personal-information|\/azure_login|\/fallback_login|\/static|\/controlpanel|\/cypress|\/login|\/logout|\/contact-form|\/passwordreset)).*$/;
-  config.settings.externalRoutes = [
-    ...(config.settings.externalRoutes || []),
-    {
-      match: {
-        path: notInEN,
-        exact: false,
-        strict: false,
-      },
-    },
-  ];
-
   // #160689 Redirect contact-form to contact-us
   config.settings.contactForm = '/en/about/contact-us';
 
@@ -64,32 +49,14 @@ const applyConfig = (config) => {
     };
   }
 
+  // #293749 Language dropdown
+  config.settings.hasLanguageDropdown = true;
+
   //This only works if the component is wrapped in ErrorBoundary from volto
   config.registerComponent({
     name: 'ErrorBoundary',
     component: ErrorView,
   });
-
-  // #137187 Keycloak integration
-  if (runtimeConfig['RAZZLE_KEYCLOAK'] === 'Yes') {
-    config.settings.externalRoutes = [
-      ...(config.settings.externalRoutes || []),
-      {
-        match: {
-          path: '/login',
-          exact: true,
-          strict: false,
-        },
-      },
-      {
-        match: {
-          path: '/logout',
-          exact: true,
-          strict: false,
-        },
-      },
-    ];
-  }
 
   if (config.blocks.blocksConfig.embed_static_content) {
     //prepopulate data for SSR particularly for history diffs
@@ -108,7 +75,13 @@ const applyConfig = (config) => {
   config.settings.isMultilingual = true;
   config.settings.defaultLanguage =
     config.settings.eea?.defaultLanguage || 'en';
-  config.settings.supportedLanguages = ['en'];
+
+  config.settings.supportedLanguages = config.settings.eea?.languages?.map(
+    (item) => item.code,
+  ) || ['en'];
+
+  config.settings.navigationLanguage = 'en';
+
   // Disable languages #158616
   // config.settings.eea?.languages?.map(
   //   (item) => item.code,
