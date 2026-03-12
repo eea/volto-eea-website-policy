@@ -23,5 +23,3 @@ exports[`FrequencyOfDissemination renders custom text when children prop is prov
   Frequency: Every 3 years
 </span>
 `;
-
-exports[`FrequencyOfDissemination renders nothing when value is falsy 1`] = ``;
