@@ -16,7 +16,9 @@ describe('Blocks Tests', () => {
     cy.get('.ui.basic.icon.button.block-add-button').first().click();
     cy.get('.blocks-chooser .title').contains('Media').click();
     cy.get('.content.active.media .button.image').contains('Image').click();
-    cy.get('.block.image .ui.input input[type="text"]').type(
+    cy.get('.block-editor-image [tabindex="0"]').last().focus();
+    cy.get('button[aria-label="Enter a URL to an image"]').click();
+    cy.get('input[placeholder="Enter a URL to an image"]').type(
       'https://eea.github.io/volto-eea-design-system/img/eea_icon.png{enter}',
     );
 
