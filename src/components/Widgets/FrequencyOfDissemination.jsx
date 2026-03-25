@@ -3,7 +3,7 @@ import cx from 'classnames';
 
 export const FrequencyOfDissemination = ({ value, children, className }) => {
   if (!value) {
-    return '';
+    return null;
   }
 
   const text = value > 1 ? `Every ${value} years` : 'Once a year';
