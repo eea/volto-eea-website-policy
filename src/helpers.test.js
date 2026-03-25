@@ -2,7 +2,7 @@ import * as helpers from './helpers';
 import config from '@plone/volto/registry';
 import { serializeNodes } from '@plone/volto-slate/editor/render';
 import { isArray } from 'lodash';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 
 jest.mock('@plone/volto/registry', () => ({
   settings: {

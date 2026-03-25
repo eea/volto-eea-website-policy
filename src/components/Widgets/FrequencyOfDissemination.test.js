@@ -24,6 +24,6 @@ describe('FrequencyOfDissemination', () => {
 
   it('renders nothing when value is falsy', () => {
     const { container } = render(<FrequencyOfDissemination value={0} />);
-    expect(container.firstChild).toMatchSnapshot();
+    expect(container.firstChild).toBeNull();
   });
 });
