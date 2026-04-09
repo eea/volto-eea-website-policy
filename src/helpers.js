@@ -1,7 +1,7 @@
-import { isArray } from 'lodash';
+import isArray from 'lodash/isArray';
 import config from '@plone/volto/registry';
-import { getContent } from '@plone/volto/actions';
-import { flattenToAppURL } from '@plone/volto/helpers';
+import { getContent } from '@plone/volto/actions/content/content';
+import { flattenToAppURL } from '@plone/volto/helpers/Url/Url';
 import { serializeNodes } from '@plone/volto-slate/editor/render';
 
 export const createSlateParagraph = (text) => {
