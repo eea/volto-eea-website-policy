@@ -2,6 +2,37 @@ import { appendGroup, getAsyncData } from './helpers';
 import { FrequencyOfDissemination } from '@eeacms/volto-eea-website-policy/components/Widgets/FrequencyOfDissemination';
 import ErrorView from '@eeacms/volto-eea-website-policy/components/ErrorView/ErrorView';
 
+const publicationTypeValues = [
+  'briefing',
+  'report',
+  'corporate-report',
+  'joint-report',
+];
+
+const publicationTypeFacet = {
+  field: 'publication_type.keyword',
+  factory: 'MultiTermFacet',
+  label: 'Publication type',
+  showInFacetsList: true,
+  filterType: 'any',
+  isFilterable: false,
+  isMulti: true,
+  show: 10000,
+  whitelist: publicationTypeValues,
+  facetValues: publicationTypeValues,
+  sortOn: 'custom',
+  sortOrder: 'ascending',
+  showAllOptions: true,
+};
+
+const publicationTypeVocabulary = {
+  briefing: 'Briefing',
+  report: 'Report',
+  'corporate-report': 'Corporate report',
+  'joint-report': 'Joint report',
+  'technical-paper': 'Technical paper',
+};
+
 const restrictedBlocks = [
   'imagecards',
   // TODO: use what is needed from volto-datablocks after clean-up
@@ -170,6 +201,22 @@ const applyConfig = (config) => {
   ];
 
   // Done
+  const { searchui } = config.settings.searchlib;
+
+  ['globalsearch', 'globalsearchbase'].forEach((appName) => {
+    const searchConfig = searchui[appName];
+
+    if (
+      !searchConfig.facets.some(
+        (facet) => facet.field === publicationTypeFacet.field,
+      )
+    ) {
+      searchConfig.facets.push(publicationTypeFacet);
+    }
+
+    searchConfig.vocab[publicationTypeFacet.field] = publicationTypeVocabulary;
+  });
+
   return config;
 };
 
