@@ -24,7 +24,7 @@
   "dependencies": {
     "@eeacms/volto-widget-dataprovenance": "*",
     "@plone-collective/volto-authomatic": "*",
-    "@eeacms/volto-globalsearch:"*"
+    "@eeacms/volto-globalsearch": "*"
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.10.0",
