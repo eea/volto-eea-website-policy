@@ -22,9 +22,9 @@
     "@plone-collective/volto-authomatic"
   ],
   "dependencies": {
+    "@eeacms/volto-globalsearch": "*",
     "@eeacms/volto-widget-dataprovenance": "*",
-    "@plone-collective/volto-authomatic": "*",
-    "@eeacms/volto-globalsearch": "*"
+    "@plone-collective/volto-authomatic": "*"
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.10.0",
