@@ -4,22 +4,24 @@ import { serializeNodes } from '@plone/volto-slate/editor/render';
 import isArray from 'lodash/isArray';
 import '@testing-library/jest-dom';
 
-jest.mock('@plone/volto/registry', () => ({
-  settings: {
-    slate: {
-      defaultValue: jest.fn(),
+vi.mock('@plone/volto/registry', () => ({
+  default: {
+    settings: {
+      slate: {
+        defaultValue: vi.fn(),
+      },
     },
-  },
-  blocks: {
-    groupBlocksOrder: [
-      { id: 'group1', title: 'Group1' },
-      { id: 'group2', title: 'Group2' },
-    ],
+    blocks: {
+      groupBlocksOrder: [
+        { id: 'group1', title: 'Group1' },
+        { id: 'group2', title: 'Group2' },
+      ],
+    },
   },
 }));
 
-jest.mock('@plone/volto-slate/editor/render', () => ({
-  serializeNodes: jest.fn(),
+vi.mock('@plone/volto-slate/editor/render', () => ({
+  serializeNodes: vi.fn(),
 }));
 
 describe('createSlateParagraph', () => {
@@ -38,7 +40,7 @@ describe('createSlateParagraph', () => {
 
 describe('serializeText', () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it('should return the text when it is not an array', () => {
@@ -60,7 +62,7 @@ describe('serializeText', () => {
 
 describe('appendGroup', () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it('should return the text when it is not an array', () => {
