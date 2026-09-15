@@ -1,6 +1,7 @@
 import { appendGroup, getAsyncData } from './helpers';
 import { FrequencyOfDissemination } from '@eeacms/volto-eea-website-policy/components/Widgets/FrequencyOfDissemination';
 import ErrorView from '@eeacms/volto-eea-website-policy/components/ErrorView/ErrorView';
+import routes from './routes';
 
 const restrictedBlocks = [
   'imagecards',
@@ -37,6 +38,8 @@ const overrideBlocks = {
 };
 
 const applyConfig = (config) => {
+  config.addonRoutes = [...routes, ...(config.addonRoutes || [])];
+
   // #160689 Redirect contact-form to contact-us
   config.settings.contactForm = '/en/about/contact-us';
 
