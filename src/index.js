@@ -1,3 +1,4 @@
+import MemberLogoCard from '@eeacms/volto-eea-website-policy/components/manage/Blocks/Listing/MemberLogoCard';
 import { appendGroup, getAsyncData } from './helpers';
 import { FrequencyOfDissemination } from '@eeacms/volto-eea-website-policy/components/Widgets/FrequencyOfDissemination';
 import ErrorView from '@eeacms/volto-eea-website-policy/components/ErrorView/ErrorView';
@@ -171,6 +172,16 @@ const applyConfig = (config) => {
       GET_CONTENT: ['subsite'],
     },
   ];
+
+  // Member logo card template for listing block
+  if (config.blocks.blocksConfig.listing?.extensions?.cardTemplates) {
+    config.blocks.blocksConfig.listing.extensions.cardTemplates.push({
+      id: 'memberLogo',
+      isDefault: false,
+      title: 'Member logo',
+      template: MemberLogoCard,
+    });
+  }
 
   // Done
   return config;
