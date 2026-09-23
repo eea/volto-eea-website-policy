@@ -3,6 +3,7 @@ import cx from 'classnames';
 import { Card as UiCard } from 'semantic-ui-react';
 import ConditionalLink from '@plone/volto/components/manage/ConditionalLink/ConditionalLink';
 import PreviewImage from '@eeacms/volto-listing-block/PreviewImage';
+import './countryCards.less';
 
 const isExternalUrl = (url) => {
   if (!url) return false;
