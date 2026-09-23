@@ -3,6 +3,7 @@ import { appendGroup, getAsyncData } from './helpers';
 import { FrequencyOfDissemination } from '@eeacms/volto-eea-website-policy/components/Widgets/FrequencyOfDissemination';
 import ErrorView from '@eeacms/volto-eea-website-policy/components/ErrorView/ErrorView';
 import routes from './routes';
+import './components/manage/Blocks/Listing/countryCards.less';
 
 const restrictedBlocks = [
   'imagecards',
@@ -180,6 +181,19 @@ const applyConfig = (config) => {
       isDefault: false,
       title: 'Member logo',
       template: MemberLogoCard,
+    });
+  }
+
+  // Country cards: clone of Visualization Cards that fetches full objects,
+  // so custom fields (e.g. data_provenance) are available in listing items.
+  const variations = config.blocks.blocksConfig.listing?.variations;
+  const base = variations?.find(({ id }) => id === 'cardsVisualization');
+  if (base) {
+    variations.push({
+      ...base,
+      id: 'countryCards',
+      title: 'Country cards',
+      fullobjects: true,
     });
   }
 
