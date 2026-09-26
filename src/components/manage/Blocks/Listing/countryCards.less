@@ -1,0 +1,8 @@
+// The Visualization Cards styles are scoped under `.cardsVisualization`, the
+// variation id class Volto adds to the listing block wrapper. Reuse those
+// rules for the countryCards variation so both look identical.
+@import (reference) '~@eeacms/volto-listing-block/less/visualization-cards.less';
+
+.countryCards {
+  &:extend(.cardsVisualization all);
+}

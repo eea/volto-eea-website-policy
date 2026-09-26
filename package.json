@@ -23,6 +23,7 @@
   ],
   "dependencies": {
     "@eeacms/volto-globalsearch": "*",
+    "@eeacms/volto-listing-block": "*",
     "@eeacms/volto-widget-dataprovenance": "*",
     "@plone-collective/volto-authomatic": "*"
   },
