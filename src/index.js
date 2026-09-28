@@ -1,3 +1,7 @@
+import { composeSchema } from '@eeacms/volto-listing-block/schema-utils';
+import TeaserCardExternalLink from '@eeacms/volto-eea-website-policy/components/manage/Blocks/Teaser/TeaserCardExternalLink';
+import { addExternalLinkField } from '@eeacms/volto-eea-website-policy/components/manage/Blocks/Teaser/schema';
+import './components/manage/Blocks/Teaser/TeaserCardExternalLink.less';
 import { appendGroup, getAsyncData } from './helpers';
 import { FrequencyOfDissemination } from '@eeacms/volto-eea-website-policy/components/Widgets/FrequencyOfDissemination';
 import ErrorView from '@eeacms/volto-eea-website-policy/components/ErrorView/ErrorView';
@@ -171,6 +175,32 @@ const applyConfig = (config) => {
       GET_CONTENT: ['subsite'],
     },
   ];
+
+  // Teaser: add an External_link field and link the card to it when set.
+  // The teaser config is registered more than once (standalone and inside a
+  // teaserGrid, which keeps its own copy), so override every registration.
+  const teaserConfigs = new Set(
+    [
+      config.blocks.blocksConfig.teaser,
+      config.blocks.blocksConfig.gridBlock?.blocksConfig?.teaser,
+      config.blocks.blocksConfig.teaserGrid?.blocksConfig?.teaser,
+    ].filter(Boolean),
+  );
+  teaserConfigs.forEach((teaserConfig) => {
+    if (!teaserConfig.variations) return;
+    teaserConfig.variations = teaserConfig.variations.map((variation) =>
+      variation.id === 'card'
+        ? {
+            ...variation,
+            template: TeaserCardExternalLink,
+            schemaEnhancer: composeSchema(
+              variation.schemaEnhancer,
+              addExternalLinkField,
+            ),
+          }
+        : variation,
+    );
+  });
 
   // Done
   return config;
