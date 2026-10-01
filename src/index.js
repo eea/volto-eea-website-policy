@@ -100,6 +100,13 @@ const applyConfig = (config) => {
     rolesWhoCanChangeLayout: ['Manager'],
   };
 
+  // EPANET subsite: hardcoded governance exception, intentionally not
+  // editable from the CMS. The uploaded subsite logo replaces the EEA logo
+  // and the footer only shows the bottom links (Privacy -> subsite privacy).
+  const EPANET_SUBSITE = /^\/[a-z]{2}\/epanet$/;
+  config.settings.eea.subsiteMainLogoPaths = [EPANET_SUBSITE];
+  config.settings.eea.subsiteHideFooterPaths = [EPANET_SUBSITE];
+
   // mega menu layout settings
   config.settings.menuItemsLayouts = {
     '/en/topics': {
