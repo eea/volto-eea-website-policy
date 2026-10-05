@@ -103,7 +103,7 @@ const applyConfig = (config) => {
   // EPANET subsite: hardcoded governance exception, intentionally not
   // editable from the CMS. The uploaded subsite logo replaces the EEA logo,
   // the header top bar is hidden and the footer only shows the bottom links
-  // (Privacy -> subsite privacy).
+  // (Privacy, Accessibility and Legal notice -> the subsite's own pages).
   const EPANET_SUBSITE = /^\/[a-z]{2}\/epanet$/;
   config.settings.eea.subsiteMainLogoPaths = [EPANET_SUBSITE];
   config.settings.eea.subsiteHideTopHeaderPaths = [EPANET_SUBSITE];
