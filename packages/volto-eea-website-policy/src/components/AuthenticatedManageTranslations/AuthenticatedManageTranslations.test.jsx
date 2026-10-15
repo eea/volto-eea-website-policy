@@ -13,9 +13,10 @@ import routes from '../../routes';
 
 vi.mock(
   '@plone/volto/components/manage/Multilingual/ManageTranslations',
-  () => {
-    return vi.fn(() => <div>Translation management</div>);
-  },
+  () => ({
+    __esModule: true,
+    default: vi.fn(() => <div>Translation management</div>),
+  }),
 );
 
 const mockStore = configureStore();
