@@ -1,6 +1,7 @@
 import { appendGroup, getAsyncData } from './helpers';
 import { FrequencyOfDissemination } from '@eeacms/volto-eea-website-policy/components/Widgets/FrequencyOfDissemination';
 import ErrorView from '@eeacms/volto-eea-website-policy/components/ErrorView/ErrorView';
+import routes from './routes';
 
 const restrictedBlocks = [
   'imagecards',
@@ -37,6 +38,8 @@ const overrideBlocks = {
 };
 
 const applyConfig = (config) => {
+  config.addonRoutes = [...routes, ...(config.addonRoutes || [])];
+
   // #160689 Redirect contact-form to contact-us
   config.settings.contactForm = '/en/about/contact-us';
 
@@ -96,6 +99,15 @@ const applyConfig = (config) => {
     ...config.settings.eea,
     rolesWhoCanChangeLayout: ['Manager'],
   };
+
+  // EPANET subsite: hardcoded governance exception, intentionally not
+  // editable from the CMS. The uploaded subsite logo replaces the EEA logo,
+  // the header top bar is hidden and the footer does not show the EEA
+  // branding (EEA and Eionet logos, information systems button).
+  const EPANET_SUBSITE = /^\/[a-z]{2}\/epanet$/;
+  config.settings.eea.subsiteMainLogoPaths = [EPANET_SUBSITE];
+  config.settings.eea.subsiteHideTopHeaderPaths = [EPANET_SUBSITE];
+  config.settings.eea.subsiteHideFooterBrandingPaths = [EPANET_SUBSITE];
 
   // mega menu layout settings
   config.settings.menuItemsLayouts = {
