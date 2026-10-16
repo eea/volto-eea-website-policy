@@ -101,6 +101,7 @@ catalogs:
       version: 5.2.6
 
 overrides:
+  '@eeacms/volto-eea-chatbot': github:eea/volto-eea-chatbot#volto19&path:/packages/volto-eea-chatbot
   '@pmmmwh/react-refresh-webpack-plugin': ^0.5.15
   react-refresh: ^0.14.2
 
@@ -2350,8 +2351,13 @@ packages:
   '@eeacms/volto-design-tokens@2.0.1':
     resolution: {integrity: sha512-M+lz85pohzm73Uwaf+5XKVEzdJVPi+IXngIrjo0HlqDTgan7aci+unqEcfV7r+lIZZ/9AiBTiIV5aaN7EDT/PA==}
 
-  '@eeacms/volto-eea-chatbot@4.1.0':
-    resolution: {integrity: sha512-vMYOTABCL7u1b/mDe5mJlxtgaq/FOjlVPCzmg3fnpKFwST5Aj2Uf9+tUa1tCl3r3L2j04kTUGfHUoAbtjJQ0qg==}
+  '@eeacms/volto-eea-chatbot@https://codeload.github.com/eea/volto-eea-chatbot/tar.gz/720e12486d1e8f55ba3bffa293c03e0cdec7302b#path:/packages/volto-eea-chatbot':
+    resolution: {path: /packages/volto-eea-chatbot, tarball: https://codeload.github.com/eea/volto-eea-chatbot/tar.gz/720e12486d1e8f55ba3bffa293c03e0cdec7302b}
+    version: 4.1.6
+    engines: {node: '>=22.0.0'}
+    peerDependencies:
+      react: ^18.2.0
+      react-dom: ^18.2.0
 
   '@eeacms/volto-globalsearch@4.1.1':
     resolution: {integrity: sha512-CqSOngjR2uk+kU1BrB6S0At2Xtm+NLb52M9gaktgI8IxarqSLbEVxxMCwXmWPel+nISwdbICnFNOsf6f4KgtvA==}
@@ -13710,27 +13716,33 @@ snapshots:
 
   '@eeacms/volto-design-tokens@2.0.1': {}
 
-  '@eeacms/volto-eea-chatbot@4.1.0(@types/react@18.3.31)(react@18.2.0)':
+  '@eeacms/volto-eea-chatbot@https://codeload.github.com/eea/volto-eea-chatbot/tar.gz/720e12486d1e8f55ba3bffa293c03e0cdec7302b#path:/packages/volto-eea-chatbot(@types/react@18.3.31)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@eeacms/volto-design-tokens': 2.0.1
       '@eeacms/volto-matomo': 7.0.1(react@18.2.0)
       '@microsoft/fetch-event-source': 2.0.1
       '@plone-collective/volto-sentry': 1.0.1
+      '@sentry/browser': 7.15.0
       compromise: 14.14.5
+      debug: 4.3.4(supports-color@8.1.1)
+      dequal: 2.0.3
       fast-json-patch: 3.1.1
       highlight.js: 11.10.0
       luxon: 3.5.0
       marked: 13.0.3
       node-fetch: 2.7.0
+      qs: 6.16.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
       react-markdown: 8.0.7(@types/react@18.3.31)(react@18.2.0)
       react-textarea-autosize: 8.5.9(@types/react@18.3.31)(react@18.2.0)
       rehype-prism-plus: 1.6.0
       remark-gfm: 3.0.1
+      superagent: 10.3.0
       uuid: 10.0.0
     transitivePeerDependencies:
       - '@types/react'
       - encoding
-      - react
       - supports-color
 
   '@eeacms/volto-globalsearch@4.1.1(@types/express@4.17.25)(@types/react@18.3.31)(jquery@4.0.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
@@ -13772,7 +13784,7 @@ snapshots:
   '@eeacms/volto-searchlib@5.0.0(@types/express@4.17.25)(@types/react@18.3.31)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@eeacms/volto-design-tokens': 2.0.1
-      '@eeacms/volto-eea-chatbot': 4.1.0(@types/react@18.3.31)(react@18.2.0)
+      '@eeacms/volto-eea-chatbot': https://codeload.github.com/eea/volto-eea-chatbot/tar.gz/720e12486d1e8f55ba3bffa293c03e0cdec7302b#path:/packages/volto-eea-chatbot(@types/react@18.3.31)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@eeacms/volto-matomo': 7.0.1(react@18.2.0)
       '@elastic/react-search-ui': 1.21.2(@types/react@18.3.31)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@elastic/react-search-ui-views': 1.21.2(@types/react@18.3.31)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)

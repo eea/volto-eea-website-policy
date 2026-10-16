@@ -13,7 +13,6 @@
   ],
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "postinstall": "node ./razzle-dev-utils-shim.js",
     "start": "VOLTOCONFIG=$(pwd)/volto.config.js pnpm --filter @plone/volto start",
     "start:prod": "pnpm --filter @plone/volto start:prod",
     "build": "VOLTOCONFIG=$(pwd)/volto.config.js pnpm --filter @plone/volto build",
@@ -45,6 +44,7 @@
   },
   "pnpm": {
     "overrides": {
+      "@eeacms/volto-eea-chatbot": "github:eea/volto-eea-chatbot#volto19&path:/packages/volto-eea-chatbot",
       "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
       "react-refresh": "^0.14.2"
     },
