@@ -102,6 +102,7 @@ catalogs:
 
 overrides:
   '@eeacms/volto-eea-chatbot': github:eea/volto-eea-chatbot#volto19&path:/packages/volto-eea-chatbot
+  '@eeacms/volto-searchlib': github:eea/volto-searchlib#volto19&path:/packages/volto-searchlib
   '@pmmmwh/react-refresh-webpack-plugin': ^0.5.15
   react-refresh: ^0.14.2
 
@@ -1676,13 +1677,6 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
 
-  '@babel/plugin-proposal-object-rest-spread@7.20.7':
-    resolution: {integrity: sha512-d2S98yCiLxDVmBmE8UjGcfPvNEUbA1U5q5WxaWFUGRzJSVAZqm5W6MbPct0jxnegUZ0niLeNX+IOzEs7wYg9Dg==}
-    engines: {node: '>=6.9.0'}
-    deprecated: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-object-rest-spread instead.
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-
   '@babel/plugin-proposal-optional-chaining@7.21.0':
     resolution: {integrity: sha512-p4zeefM72gpmEe2fkUr/OnOXpWEf8nAgk7ZYVqqfFiyIG7oFfVZcCrU64hWn5xp4tQ9LkV4bTIa5rD0KANpKNA==}
     engines: {node: '>=6.9.0'}
@@ -1763,11 +1757,6 @@ packages:
 
   '@babel/plugin-syntax-numeric-separator@7.10.4':
     resolution: {integrity: sha512-9H6YdfkcK/uOnY/K7/aA2xpzaAgkQn37yzWUMRK7OaPOqOpGS1+n0H5hxT9AUw9EsSjPW8SVyMJwYRtWs3X3ug==}
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-
-  '@babel/plugin-syntax-object-rest-spread@7.8.3':
-    resolution: {integrity: sha512-XoqMijGZb9y3y2XskN+P1wUGiVwWZ5JmoDRwx5+3GmEplNyVM2s2Dg8ILFQm8rWM48orGy5YpI5Bl8U1y7ydlA==}
     peerDependencies:
       '@babel/core': ^7.0.0-0
 
@@ -2371,8 +2360,13 @@ packages:
   '@eeacms/volto-object-widget@9.1.1':
     resolution: {integrity: sha512-TcByjzIva4Z/HaOUmOGqTjoC63nQHDkCfIW5OljOnYCcczKdtVDJjeGZ9rYrgkSwMkpOXxGwNiCiMKHkz7xn7g==}
 
-  '@eeacms/volto-searchlib@5.0.0':
-    resolution: {integrity: sha512-NTjpcaMcuB3Fguiq5ld+46OlHR6r2UbHtZKyaRwA7oMLgNBPK6X0H//0WMfWhGPfSbxWTbQh48jMmnE9AfIdug==}
+  '@eeacms/volto-searchlib@https://codeload.github.com/eea/volto-searchlib/tar.gz/2cdbd195518dd5e4627be512c38d5044602727e3#path:/packages/volto-searchlib':
+    resolution: {path: /packages/volto-searchlib, tarball: https://codeload.github.com/eea/volto-searchlib/tar.gz/2cdbd195518dd5e4627be512c38d5044602727e3}
+    version: 5.0.0
+    engines: {node: '>=22.0.0'}
+    peerDependencies:
+      react: ^18.2.0
+      react-dom: ^18.2.0
 
   '@eeacms/volto-widget-dataprovenance@2.0.1':
     resolution: {integrity: sha512-CM7e5tXiqRrc8JH7vgl4drBdo8cxgoGNEw7b8R2aXoaWmyXDU/8vUStBoiJc9askJrkaBAcKExjG9Xp5QCEITA==}
@@ -3551,10 +3545,6 @@ packages:
 
   '@plone-collective/volto-sentry@1.0.1':
     resolution: {integrity: sha512-Y/gUp8IUiEkyMSLfUB3DrWIg6Tk7R/VpzvLZHa076TBpfOyfKNBHJFqIhUEGx/8nXy/VSkjf+1TKKCdZaXFFCw==}
-
-  '@plone/scripts@3.10.7':
-    resolution: {integrity: sha512-LV3xrMoCPS6nI1ap3i8lqs5dIc7dMTFlZmYdvujxSLigd4k2w9pG+4/ttrFAt5Qgt4ywy/rxT38dSPAhx9fP3Q==}
-    hasBin: true
 
   '@pmmmwh/react-refresh-webpack-plugin@0.5.17':
     resolution: {integrity: sha512-tXDyE1/jzFsHXjhRZQ3hMl0IVhYe5qula43LDWIhVfjp9G/nT5OQY5AORVOrkEGAUltBJOfOWeETbmhm6kHhuQ==}
@@ -5393,9 +5383,6 @@ packages:
 
   babel-plugin-transform-react-remove-prop-types@0.4.24:
     resolution: {integrity: sha512-eqj0hVcJUR57/Ug2zE1Yswsw4LhuqqHhD+8v120T1cl3kjg76QwtyBrdIk4WVwK+lAhBJVYCd/v+4nc4y+8JsA==}
-
-  babel-preset-razzle@4.2.17:
-    resolution: {integrity: sha512-Pg0yFCn2uTRBKjdj2pu61JWMcokVdxWNmpeBC2W+fNJ3JFyYP379TMIMmRi84g61snAzmwzwIlKMlVsVZT1IiA==}
 
   babel-preset-react-app@10.1.0:
     resolution: {integrity: sha512-f9B1xMdnkCIqe+2dHrJsoQFRz7reChaAHE/65SdaykPklQqhme2WaC08oD3is77x9ff98/9EazAKFDZv5rFEQg==}
@@ -10704,6 +10691,9 @@ packages:
   regenerator-runtime@0.11.1:
     resolution: {integrity: sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg==}
 
+  regenerator-runtime@0.14.1:
+    resolution: {integrity: sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==}
+
   regex-parser@2.3.1:
     resolution: {integrity: sha512-yXLRqatcCuKtVHsWrNg0JL3l1zGfdXeEvDa0bdu4tCDQw0RpMDZsqbkyRTUnKMR0tXF627V2oEWjBEaEdqTwtQ==}
 
@@ -12874,15 +12864,6 @@ snapshots:
       '@babel/helper-plugin-utils': 7.29.7
       '@babel/plugin-syntax-numeric-separator': 7.10.4(@babel/core@7.29.7)
 
-  '@babel/plugin-proposal-object-rest-spread@7.20.7(@babel/core@7.29.7)':
-    dependencies:
-      '@babel/compat-data': 7.29.7
-      '@babel/core': 7.29.7
-      '@babel/helper-compilation-targets': 7.29.7
-      '@babel/helper-plugin-utils': 7.29.7
-      '@babel/plugin-syntax-object-rest-spread': 7.8.3(@babel/core@7.29.7)
-      '@babel/plugin-transform-parameters': 7.29.7(@babel/core@7.29.7)
-
   '@babel/plugin-proposal-optional-chaining@7.21.0(@babel/core@7.29.7)':
     dependencies:
       '@babel/core': 7.29.7
@@ -12960,11 +12941,6 @@ snapshots:
       '@babel/helper-plugin-utils': 7.29.7
 
   '@babel/plugin-syntax-numeric-separator@7.10.4(@babel/core@7.29.7)':
-    dependencies:
-      '@babel/core': 7.29.7
-      '@babel/helper-plugin-utils': 7.29.7
-
-  '@babel/plugin-syntax-object-rest-spread@7.8.3(@babel/core@7.29.7)':
     dependencies:
       '@babel/core': 7.29.7
       '@babel/helper-plugin-utils': 7.29.7
@@ -13748,7 +13724,7 @@ snapshots:
   '@eeacms/volto-globalsearch@4.1.1(@types/express@4.17.25)(@types/react@18.3.31)(jquery@4.0.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@eeacms/volto-listing-block': 10.0.2(jquery@4.0.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      '@eeacms/volto-searchlib': 5.0.0(@types/express@4.17.25)(@types/react@18.3.31)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@eeacms/volto-searchlib': https://codeload.github.com/eea/volto-searchlib/tar.gz/2cdbd195518dd5e4627be512c38d5044602727e3#path:/packages/volto-searchlib(@types/express@4.17.25)(@types/react@18.3.31)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
     transitivePeerDependencies:
       - '@types/express'
       - '@types/react'
@@ -13781,7 +13757,7 @@ snapshots:
     dependencies:
       jsoneditor: 10.2.0
 
-  '@eeacms/volto-searchlib@5.0.0(@types/express@4.17.25)(@types/react@18.3.31)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@eeacms/volto-searchlib@https://codeload.github.com/eea/volto-searchlib/tar.gz/2cdbd195518dd5e4627be512c38d5044602727e3#path:/packages/volto-searchlib(@types/express@4.17.25)(@types/react@18.3.31)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@eeacms/volto-design-tokens': 2.0.1
       '@eeacms/volto-eea-chatbot': https://codeload.github.com/eea/volto-eea-chatbot/tar.gz/720e12486d1e8f55ba3bffa293c03e0cdec7302b#path:/packages/volto-eea-chatbot(@types/react@18.3.31)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -13789,7 +13765,6 @@ snapshots:
       '@elastic/react-search-ui': 1.21.2(@types/react@18.3.31)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@elastic/react-search-ui-views': 1.21.2(@types/react@18.3.31)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@elastic/search-ui': 1.21.2
-      '@plone/scripts': 3.10.7
       '@visx/group': 1.17.1(react@18.2.0)
       '@visx/responsive': 1.10.1(react@18.2.0)
       '@visx/scale': 1.14.0
@@ -13807,17 +13782,22 @@ snapshots:
       jotai: 2.0.3(react@18.2.0)
       lodash: 4.17.21
       lodash.clonedeep: 4.5.0
+      lodash.debounce: 4.0.8
       lodash.isfunction: 3.0.9
       lodash.uniq: 4.5.0
       luxon: 1.28.1
       node-fetch: 2.7.0
+      qs: 6.16.0
       re-resizable: 6.11.2(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      react: 18.2.0
       react-compound-slider: 3.4.0(react@18.2.0)
+      react-dom: 18.2.0(react@18.2.0)
       react-masonry-component: 6.3.0(react@18.2.0)
       react-motion: 0.5.2(react@18.2.0)
       react-speech-recognition: 3.10.0(react@18.2.0)
       react-toastify: 5.4.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       redux: 4.1.0
+      regenerator-runtime: 0.14.1
       semantic-ui-react: 2.0.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       superagent: 3.8.2
       svg-loader: 0.0.2
@@ -13827,8 +13807,6 @@ snapshots:
       - '@types/react'
       - debug
       - encoding
-      - react
-      - react-dom
       - supports-color
 
   '@eeacms/volto-widget-dataprovenance@2.0.1': {}
@@ -14947,27 +14925,6 @@ snapshots:
       '@sentry/webpack-plugin': 1.19.1
     transitivePeerDependencies:
       - encoding
-      - supports-color
-
-  '@plone/scripts@3.10.7':
-    dependencies:
-      '@babel/core': 7.29.7
-      babel-plugin-react-intl: 5.1.17
-      babel-preset-razzle: 4.2.17
-      chalk: 4.1.2
-      commander: 8.2.0
-      comment-json: 4.6.2
-      execa: 9.6.0
-      find-parent-dir: 0.3.1
-      fs-extra: 10.1.0
-      git-url-parse: 13.1.1
-      glob: 10.5.0
-      lodash: 4.18.1
-      mrs-developer: 2.3.2
-      pofile: 1.0.10
-      wait-on: 9.1.0
-    transitivePeerDependencies:
-      - debug
       - supports-color
 
   '@pmmmwh/react-refresh-webpack-plugin@0.5.17(react-refresh@0.14.2)(type-fest@2.19.0)(webpack-dev-server@5.2.6(webpack@5.105.4(esbuild@0.25.12)))(webpack-hot-middleware@2.26.1)(webpack@5.105.4(esbuild@0.25.12))':
@@ -17138,28 +17095,6 @@ snapshots:
       traverse: 0.6.6
 
   babel-plugin-transform-react-remove-prop-types@0.4.24: {}
-
-  babel-preset-razzle@4.2.17:
-    dependencies:
-      '@babel/core': 7.29.7
-      '@babel/plugin-proposal-class-properties': 7.18.6(@babel/core@7.29.7)
-      '@babel/plugin-proposal-nullish-coalescing-operator': 7.18.6(@babel/core@7.29.7)
-      '@babel/plugin-proposal-numeric-separator': 7.18.6(@babel/core@7.29.7)
-      '@babel/plugin-proposal-object-rest-spread': 7.20.7(@babel/core@7.29.7)
-      '@babel/plugin-proposal-optional-chaining': 7.21.0(@babel/core@7.29.7)
-      '@babel/plugin-syntax-bigint': 7.8.3(@babel/core@7.29.7)
-      '@babel/plugin-syntax-dynamic-import': 7.8.3(@babel/core@7.29.7)
-      '@babel/plugin-transform-modules-commonjs': 7.29.7(@babel/core@7.29.7)
-      '@babel/plugin-transform-runtime': 7.29.7(@babel/core@7.29.7)
-      '@babel/preset-env': 7.29.7(@babel/core@7.29.7)
-      '@babel/preset-react': 7.29.7(@babel/core@7.29.7)
-      '@babel/preset-typescript': 7.29.7(@babel/core@7.29.7)
-      '@babel/runtime': 7.29.7
-      babel-plugin-syntax-jsx: 6.18.0
-      babel-plugin-transform-react-remove-prop-types: 0.4.24
-      chalk: 4.1.2
-    transitivePeerDependencies:
-      - supports-color
 
   babel-preset-react-app@10.1.0:
     dependencies:
@@ -23396,6 +23331,8 @@ snapshots:
   regenerate@1.4.2: {}
 
   regenerator-runtime@0.11.1: {}
+
+  regenerator-runtime@0.14.1: {}
 
   regex-parser@2.3.1: {}
 
