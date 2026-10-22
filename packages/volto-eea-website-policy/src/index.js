@@ -74,6 +74,12 @@ const applyConfig = (config) => {
   // Working-copy
   config.settings.hasWorkingCopySupport = true;
 
+  // Autosave the edit forms in the browser (opt-in in Volto 19, which is the
+  // only version that defines `experimental.saveAsDraft`)
+  if (config.experimental?.saveAsDraft) {
+    config.experimental.saveAsDraft.enabled = true;
+  }
+
   // Multi-lingual
   config.settings.isMultilingual = true;
   config.settings.defaultLanguage =
