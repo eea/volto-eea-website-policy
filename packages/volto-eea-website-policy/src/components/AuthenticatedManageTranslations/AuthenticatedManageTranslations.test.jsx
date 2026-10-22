@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
@@ -10,11 +11,12 @@ import ManageTranslations from '@plone/volto/components/manage/Multilingual/Mana
 import AuthenticatedManageTranslations from './AuthenticatedManageTranslations';
 import routes from '../../routes';
 
-jest.mock(
+vi.mock(
   '@plone/volto/components/manage/Multilingual/ManageTranslations',
-  () => {
-    return jest.fn(() => <div>Translation management</div>);
-  },
+  () => ({
+    __esModule: true,
+    default: vi.fn(() => <div>Translation management</div>),
+  }),
 );
 
 const mockStore = configureStore();
@@ -22,7 +24,7 @@ const url = '/en/about/manage-translations?language=ro#translations';
 const loginUrl = `/login?return_url=${encodeURIComponent(url)}`;
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });
 
 it('redirects anonymous server requests without rendering translation management', () => {

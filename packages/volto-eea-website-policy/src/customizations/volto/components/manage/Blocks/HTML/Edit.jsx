@@ -250,6 +250,7 @@ class Edit extends Component {
             {/* <Popup
               trigger={
                 <Button
+                  type="button"
                   icon
                   basic
                   aria-label={this.props.intl.formatMessage(messages.source)}
@@ -266,6 +267,7 @@ class Edit extends Component {
             <Popup
               trigger={
                 <Button
+                  type="button"
                   icon
                   basic
                   aria-label={this.props.intl.formatMessage(messages.preview)}
@@ -283,6 +285,7 @@ class Edit extends Component {
             {/* <Popup
               trigger={
                 <Button
+                  type="button"
                   icon
                   basic
                   aria-label={this.props.intl.formatMessage(messages.prettier)}
@@ -299,7 +302,12 @@ class Edit extends Component {
             <Popup
               trigger={
                 <Button.Group>
-                  <Button icon basic onClick={() => this.onChangeCode('')}>
+                  <Button
+                    type="button"
+                    icon
+                    basic
+                    onClick={() => this.onChangeCode('')}
+                  >
                     <Icon name={clearSVG} size="24px" color="#e40166" />
                   </Button>
                 </Button.Group>
