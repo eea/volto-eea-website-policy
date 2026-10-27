@@ -1,4 +1,4 @@
-import { appendGroup, getAsyncData } from './helpers';
+import { appendGroup, getAsyncData, isVolto18 } from './helpers';
 import { FrequencyOfDissemination } from '@eeacms/volto-eea-website-policy/components/Widgets/FrequencyOfDissemination';
 import ErrorView from '@eeacms/volto-eea-website-policy/components/ErrorView/ErrorView';
 import routes from './routes';
@@ -74,16 +74,22 @@ const applyConfig = (config) => {
   // Working-copy
   config.settings.hasWorkingCopySupport = true;
 
+  // Volto 19 shows the related items below the content by default
+  config.settings.showRelatedItems = false;
+
   // Autosave the edit forms in the browser (opt-in in Volto 19, which is the
   // only version that defines `experimental.saveAsDraft`)
   if (config.experimental?.saveAsDraft) {
     config.experimental.saveAsDraft.enabled = true;
   }
 
-  // Multi-lingual
-  config.settings.isMultilingual = true;
-  config.settings.defaultLanguage =
-    config.settings.eea?.defaultLanguage || 'en';
+  // Multi-lingual: Volto 19 reads `isMultilingual` and `defaultLanguage` from
+  // the backend `@site` endpoint
+  if (isVolto18) {
+    config.settings.isMultilingual = true;
+    config.settings.defaultLanguage =
+      config.settings.eea?.defaultLanguage || 'en';
+  }
 
   config.settings.supportedLanguages = config.settings.eea?.languages?.map(
     (item) => item.code,

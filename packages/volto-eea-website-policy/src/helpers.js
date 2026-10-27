@@ -3,6 +3,11 @@ import config from '@plone/volto/registry';
 import { getContent } from '@plone/volto/actions/content/content';
 import { flattenToAppURL } from '@plone/volto/helpers/Url/Url';
 import { serializeNodes } from '@plone/volto-slate/editor/render';
+import voltoPackageJson from '@plone/volto/../package.json';
+
+// Volto 19 dropped some settings in favour of backend data, so keep them only
+// for Volto 18. Remove once Volto 18 is no longer supported.
+export const isVolto18 = `${voltoPackageJson.version}`.startsWith('18.');
 
 export const createSlateParagraph = (text) => {
   return isArray(text) ? text : config.settings.slate.defaultValue();
