@@ -1,0 +1,45 @@
+import isArray from 'lodash/isArray';
+import config from '@plone/volto/registry';
+import { getContent } from '@plone/volto/actions/content/content';
+import { flattenToAppURL } from '@plone/volto/helpers/Url/Url';
+import { serializeNodes } from '@plone/volto-slate/editor/render';
+import voltoPackageJson from '@plone/volto/../package.json';
+
+// Volto 19 dropped some settings in favour of backend data, so keep them only
+// for Volto 18. Remove once Volto 18 is no longer supported.
+export const isVolto18 = `${voltoPackageJson.version}`.startsWith('18.');
+
+export const createSlateParagraph = (text) => {
+  return isArray(text) ? text : config.settings.slate.defaultValue();
+};
+
+export const serializeText = (text) => {
+  return isArray(text) ? serializeNodes(text) : text;
+};
+
+export const appendGroup = (config, id, title) => {
+  const groupExists =
+    config.blocks.groupBlocksOrder.filter((group) => group.id === id).length >
+    0;
+
+  if (!groupExists) {
+    config.blocks.groupBlocksOrder = [
+      ...config.blocks.groupBlocksOrder,
+      {
+        id,
+        title,
+      },
+    ];
+  }
+
+  return config.blocks.groupBlocksOrder;
+};
+
+export const getAsyncData = ({ dispatch, id, data, path }) => {
+  const diffView = path.slice(path.lastIndexOf('/'), path.length) === '/diff';
+  const url = flattenToAppURL(data.url || '');
+  if (!url || !diffView) {
+    return [Promise.resolve()];
+  }
+  return [dispatch(getContent(url, null, id))];
+};
