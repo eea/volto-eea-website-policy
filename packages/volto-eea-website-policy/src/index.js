@@ -112,6 +112,20 @@ const applyConfig = (config) => {
     rolesWhoCanChangeLayout: ['Manager'],
   };
 
+  // PWA: browser UI color and iOS home screen title, rendered as meta tags
+  // by the theme's Html.jsx. Keep in sync with public/site.webmanifest.
+  config.settings.eea.themeColor = '#004B7F';
+  config.settings.eea.appTitle = 'EEA';
+
+  // Legacy Plone routes: /@@search and /search land on the EEA search page,
+  // Plone view/file suffixes (/view, /@@view, /folder_listing, /at_download)
+  // are stripped to the parent object. See the theme's middleware/legacyRoutes.js
+  config.settings.eea.legacyRoutes = {
+    ...config.settings.eea.legacyRoutes,
+    views: true,
+    search: '/en/advanced-search',
+  };
+
   // EPANET subsite: hardcoded governance exception, intentionally not
   // editable from the CMS. The uploaded subsite logo replaces the EEA logo,
   // the header top bar is hidden and the footer does not show the EEA
