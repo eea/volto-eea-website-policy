@@ -117,6 +117,15 @@ const applyConfig = (config) => {
     gone: ['/RSS', '/atom.xml', '/mail_password_form'],
   };
 
+  // RSS autodiscovery: advertise `<content>/rss.xml` in the head of every
+  // content that has a listing block in its layout. Opt-in in
+  // volto-rss-provider, enabled here. See its helpers/getFeedListing.js for
+  // the rule shared with the middleware that serves the feed.
+  config.settings.rssFeed = {
+    ...config.settings.rssFeed,
+    autoDiscovery: true,
+  };
+
   // EPANET subsite: hardcoded governance exception, intentionally not
   // editable from the CMS. The uploaded subsite logo replaces the EEA logo,
   // the header top bar is hidden and the footer does not show the EEA
