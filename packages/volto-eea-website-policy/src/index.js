@@ -118,12 +118,24 @@ const applyConfig = (config) => {
   config.settings.eea.appTitle = 'EEA';
 
   // Legacy Plone routes: /@@search and /search land on the EEA search page,
-  // Plone view/file suffixes (/view, /@@view, /folder_listing, /at_download)
-  // are stripped to the parent object. See the theme's middleware/legacyRoutes.js
+  // Plone view/file suffixes (/view, /@@view, /folder_listing,
+  // /folder_contents, /at_download) are stripped to the parent object, and the
+  // dead Plone root paths Volto cannot render (feeds, the old password form)
+  // are answered with 410. See the theme's middleware/legacyRoutes.js
   config.settings.eea.legacyRoutes = {
     ...config.settings.eea.legacyRoutes,
     views: true,
     search: '/en/advanced-search',
+    gone: ['/RSS', '/atom.xml', '/mail_password_form'],
+  };
+
+  // RSS autodiscovery: advertise `<content>/rss.xml` in the head of every
+  // content that has a listing block in its layout. Opt-in in
+  // volto-rss-provider, enabled here. See its helpers/getFeedListing.js for
+  // the rule shared with the middleware that serves the feed.
+  config.settings.rssFeed = {
+    ...config.settings.rssFeed,
+    autoDiscovery: true,
   };
 
   // EPANET subsite: hardcoded governance exception, intentionally not
