@@ -6,6 +6,26 @@
 
 EEA Main Website (Plone 6) [Volto](https://github.com/plone/volto) Frontend Policy
 
+## Upgrade
+
+### Upgrading to 5.x
+
+> This version requires `Volto 18` or `Volto 19` and Node.js 22.
+
+The routes, the `manage-translations` view, the error view and the `eea.*` settings are unchanged. The published package now lives in `packages/volto-eea-website-policy`.
+
+#### Changes on Volto 19
+
+- **Related items stay hidden** below the body (`showRelatedItems: false`), which is the Volto 18 default; Volto 19 turns them on.
+- **Autosave is enabled** for edit forms in the browser (`experimental.saveAsDraft`), which Volto 19 ships disabled.
+- **Multilingual settings are read from the backend**; `isMultilingual` and `defaultLanguage` are only set on Volto 18.
+- The HTML block's buttons declare `type="button"`, so they no longer submit the surrounding form.
+
+#### Breaking changes
+
+- **Node.js 22 or newer is required** (`engines.node >= 22`).
+- **React 18 is required.** The package declares `react` and `react-dom` as `^18.2.0` peers.
+
 ## Features
 
 * Policy Volto add-on for EEA Main Website
