@@ -101,7 +101,7 @@ catalogs:
       version: 5.2.6
 
 overrides:
-  '@eeacms/volto-eea-chatbot': github:eea/volto-eea-chatbot#83065e7d483c9a1853ec76ac6d301997578e4396&path:/packages/volto-eea-chatbot
+  '@eeacms/volto-eea-chatbot': ^5.0.0
   '@eeacms/volto-searchlib': ^8.0.0
   '@pmmmwh/react-refresh-webpack-plugin': ^0.5.15
   react-refresh: ^0.14.2
@@ -1356,10 +1356,10 @@ importers:
     dependencies:
       '@eeacms/volto-globalsearch':
         specifier: '*'
-        version: 4.1.1(@types/express@4.17.25)(@types/react@18.3.31)(jquery@4.0.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 5.0.0(@types/express@4.17.25)(@types/react@18.3.31)(jquery@4.0.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@eeacms/volto-widget-dataprovenance':
         specifier: '*'
-        version: 2.0.1
+        version: 3.0.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -2340,16 +2340,19 @@ packages:
   '@eeacms/volto-design-tokens@2.0.1':
     resolution: {integrity: sha512-M+lz85pohzm73Uwaf+5XKVEzdJVPi+IXngIrjo0HlqDTgan7aci+unqEcfV7r+lIZZ/9AiBTiIV5aaN7EDT/PA==}
 
-  '@eeacms/volto-eea-chatbot@https://codeload.github.com/eea/volto-eea-chatbot/tar.gz/83065e7d483c9a1853ec76ac6d301997578e4396#path:/packages/volto-eea-chatbot':
-    resolution: {path: /packages/volto-eea-chatbot, tarball: https://codeload.github.com/eea/volto-eea-chatbot/tar.gz/83065e7d483c9a1853ec76ac6d301997578e4396}
-    version: 5.0.0
+  '@eeacms/volto-eea-chatbot@5.0.0':
+    resolution: {integrity: sha512-FjL04bSp1VUacrY5shwk/aAlt2Z9xNVPgWMETVdR8RoC16wTc3j0qeJgK9kR5wTlOOnhweE8f2O44SEqrYfXug==}
     engines: {node: '>=22.0.0'}
     peerDependencies:
       react: ^18.2.0
       react-dom: ^18.2.0
 
-  '@eeacms/volto-globalsearch@4.1.1':
-    resolution: {integrity: sha512-CqSOngjR2uk+kU1BrB6S0At2Xtm+NLb52M9gaktgI8IxarqSLbEVxxMCwXmWPel+nISwdbICnFNOsf6f4KgtvA==}
+  '@eeacms/volto-globalsearch@5.0.0':
+    resolution: {integrity: sha512-tItGaDnIql8v6Tjjct6MjV9B3xKEr03iU8aPsuFUwWraAFrgBrEuJVW6Wpzeh5JFtO0n101mQ5zmM4R/N4l8QA==}
+    engines: {node: '>=22.0.0'}
+    peerDependencies:
+      react: ^18.2.0
+      react-dom: ^18.2.0
 
   '@eeacms/volto-listing-block@10.0.2':
     resolution: {integrity: sha512-vySV2FuXKnahi9IG5psRf3XzvuFoz0Ihk3PczCTNItzP5xSQtqybUFEqIQyx6DVNReoKaxs+c0y4LywWxj4bDA==}
@@ -2367,8 +2370,12 @@ packages:
       react: ^18.2.0
       react-dom: ^18.2.0
 
-  '@eeacms/volto-widget-dataprovenance@2.0.1':
-    resolution: {integrity: sha512-CM7e5tXiqRrc8JH7vgl4drBdo8cxgoGNEw7b8R2aXoaWmyXDU/8vUStBoiJc9askJrkaBAcKExjG9Xp5QCEITA==}
+  '@eeacms/volto-widget-dataprovenance@3.0.0':
+    resolution: {integrity: sha512-MHlelYRqIN8hV3TcJYtFrev39Nnye8lvcMOrtoCRgkw+P3b/5AXoIJ78IFiRU3A44O+AeCcMpG5dBl5fUuL0kg==}
+    engines: {node: '>=22.0.0'}
+    peerDependencies:
+      react: ^18.2.0
+      react-dom: ^18.2.0
 
   '@eeacms/volto-widget-theme-picker@3.0.1':
     resolution: {integrity: sha512-f6JHJwWtCXYnrvPfrAjWKT96OHPOyU8izjqjvtTP1w4liez1qZcSkVVhKsPOcGDAXHCAKko4rxTQ0Rm4pvE2wQ==}
@@ -7696,6 +7703,7 @@ packages:
   image-size@0.5.5:
     resolution: {integrity: sha512-6TDAlDPZxUFCv+fuOkIoXT/V/f3Qbq8e37p+YOiYrUv3v9cc3/6x78VdfPgFVaB9dZYeLUfKgHRebpkm/oP2VQ==}
     engines: {node: '>=0.10.0'}
+    deprecated: Please migrate to image-size@2.x
     hasBin: true
 
   imagesloaded@4.1.4:
@@ -10370,8 +10378,8 @@ packages:
   react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
 
-  react-is@19.2.8:
-    resolution: {integrity: sha512-s5un28nYxKJw5gvUHyW5PCC28CvBqLu9r3cWgzHT4Vo/5fqqkFcdRYsGcKf50WMPpjjFZS5d76fn3YCo2njKwQ==}
+  react-is@19.3.1:
+    resolution: {integrity: sha512-RRieF6IyxQBkcK6pP8xOHprLTPW6QjRkbGdImtqNme+/hYVwCZkLQLdlZGOhUqXwkS9IEynaGvPJtv6XB/cz0Q==}
 
   react-lifecycles-compat@3.0.4:
     resolution: {integrity: sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==}
@@ -13679,7 +13687,7 @@ snapshots:
 
   '@eeacms/volto-design-tokens@2.0.1': {}
 
-  '@eeacms/volto-eea-chatbot@https://codeload.github.com/eea/volto-eea-chatbot/tar.gz/83065e7d483c9a1853ec76ac6d301997578e4396#path:/packages/volto-eea-chatbot(@types/react@18.3.31)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@eeacms/volto-eea-chatbot@5.0.0(@types/react@18.3.31)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@eeacms/volto-design-tokens': 2.0.1
       '@eeacms/volto-matomo': 7.0.1(react@18.2.0)
@@ -13708,18 +13716,20 @@ snapshots:
       - encoding
       - supports-color
 
-  '@eeacms/volto-globalsearch@4.1.1(@types/express@4.17.25)(@types/react@18.3.31)(jquery@4.0.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@eeacms/volto-globalsearch@5.0.0(@types/express@4.17.25)(@types/react@18.3.31)(jquery@4.0.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@eeacms/volto-listing-block': 10.0.2(jquery@4.0.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@eeacms/volto-searchlib': 8.0.0(@types/express@4.17.25)(@types/react@18.3.31)(jquery@4.0.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      lodash.clonedeep: 4.5.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-masonry-component: 6.3.0(react@18.2.0)
     transitivePeerDependencies:
       - '@types/express'
       - '@types/react'
       - debug
       - encoding
       - jquery
-      - react
-      - react-dom
       - supports-color
 
   '@eeacms/volto-listing-block@10.0.2(jquery@4.0.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
@@ -13747,7 +13757,7 @@ snapshots:
   '@eeacms/volto-searchlib@8.0.0(@types/express@4.17.25)(@types/react@18.3.31)(jquery@4.0.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@eeacms/volto-design-tokens': 2.0.1
-      '@eeacms/volto-eea-chatbot': https://codeload.github.com/eea/volto-eea-chatbot/tar.gz/83065e7d483c9a1853ec76ac6d301997578e4396#path:/packages/volto-eea-chatbot(@types/react@18.3.31)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@eeacms/volto-eea-chatbot': 5.0.0(@types/react@18.3.31)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@eeacms/volto-listing-block': 10.0.2(jquery@4.0.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@eeacms/volto-matomo': 7.0.1(react@18.2.0)
       '@elastic/react-search-ui': 1.21.2(@types/react@18.3.31)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -13798,7 +13808,10 @@ snapshots:
       - jquery
       - supports-color
 
-  '@eeacms/volto-widget-dataprovenance@2.0.1': {}
+  '@eeacms/volto-widget-dataprovenance@3.0.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
 
   '@eeacms/volto-widget-theme-picker@3.0.1': {}
 
@@ -22385,7 +22398,7 @@ snapshots:
   pretty-format@30.5.1:
     dependencies:
       '@jest/react-is-18': react-is@18.3.1
-      '@jest/react-is-19': react-is@19.2.8
+      '@jest/react-is-19': react-is@19.3.1
       '@jest/schemas': 30.5.0
       ansi-styles: 5.2.0
 
@@ -22885,7 +22898,7 @@ snapshots:
 
   react-is@18.3.1: {}
 
-  react-is@19.2.8: {}
+  react-is@19.3.1: {}
 
   react-lifecycles-compat@3.0.4: {}
 
