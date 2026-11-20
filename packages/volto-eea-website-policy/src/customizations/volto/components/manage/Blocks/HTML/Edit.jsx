@@ -158,9 +158,9 @@ class Edit extends Component {
         })
       ).trim();
       this.setState(
-        {
-          isPreview: !this.state.isPreview,
-        },
+        (prev) => ({
+          isPreview: !prev.isPreview,
+        }),
         () => this.onChangeCode(code),
       );
     } catch (ex) {
@@ -195,7 +195,7 @@ class Edit extends Component {
    * @returns {undefined}
    */
   onCodeEditor() {
-    this.setState({ isPreview: !this.state.isPreview });
+    this.setState((prev) => ({ isPreview: !prev.isPreview }));
   }
 
   getSelection = (editor) => {
